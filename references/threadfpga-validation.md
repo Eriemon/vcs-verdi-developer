@@ -4,7 +4,7 @@ Use `erie-remote-ssh` for every ThreadFPGA operation.
 
 ## Order
 
-1. Discover configured servers and select `ThreadFPGA-Server`.
+1. Discover configured servers and select the default ThreadFPGA server for the current validation task.
 2. Run `check` before any remote command.
 3. Run read-only environment discovery first: `python scripts/check_env.py --json` in the remote validation bundle.
 4. Upload only explicit fixtures or validation bundles, never the whole local skill-development tree.

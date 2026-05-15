@@ -97,6 +97,15 @@ VCS Verdi Developer 的边界是刻意收窄的：
 - 不应暴露真实 license 值、内部服务器细节、私有路径或私有基础设施信息。
 - 它支持受控子集的 import、coverage、URG、FSDB 和远程验证流程，而不是全部 Synopsys 特性。
 
+## 机构说明
+
+Jiyuan Liu 和 He Li 隶属于东南大学电子科学与工程学院。
+两位作者所在团队为东南大学电子科学与工程学院异构智能与量子计算实验室（HIQC课题组），相关工作面向异构智能、量子计算及相关计算系统研究。
+
+## 联系方式
+
+问题、合作或学术使用，请联系：[erie@seu.edu.cn](mailto:erie@seu.edu.cn)。
+
 ## 安全与敏感信息
 
 - 不要提交真实 license 文件、secret token、私钥或内部主机信息。
@@ -105,18 +114,20 @@ VCS Verdi Developer 的边界是刻意收窄的：
 
 ## 引用
 
-如果这个 skill 对你的工作流有帮助，请使用 [CITATION.cff](CITATION.cff) 中的元数据进行引用。
+本 skill 由东南大学电子科学与工程学院异构智能与量子计算实验室（HIQC课题组）相关作者维护。
+
+如果本 skill 对你的研究、教学或工程流程有帮助，请引用。规范引用元数据以 [CITATION.cff](CITATION.cff) 为准。
 
 ```bibtex
-@software{eriemon_2026_vcs_verdi_developer,
-  author       = {Eriemon},
+@software{liu_2026_vcs_verdi_developer,
+  author       = {Jiyuan Liu and He Li},
   title        = {{VCS Verdi Developer}: An Agent Skill for Synopsys VCS and Verdi Workflows},
   year         = {2026},
   version      = {0.4.8},
   date         = {2026-05-15},
   url          = {https://github.com/Eriemon/vcs-verdi-developer},
   license      = {Apache-2.0},
-  note         = {面向 Synopsys VCS 仿真、项目导入、FSDB 工具、coverage 诊断和 Verdi 波形调试的 agent skill package}
+  note         = {Agent skill package for Synopsys VCS simulation, project import, FSDB tooling, coverage diagnostics, and Verdi waveform-debug workflows}
 }
 ```
 

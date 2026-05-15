@@ -9,6 +9,10 @@ description = "Codex-ready skill for Synopsys VCS simulation, project import, FS
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
+authors = [
+  { name = "Jiyuan Liu", email = "erie@seu.edu.cn" },
+  { name = "He Li" },
+]
 keywords = ["codex-skill", "agent-skill", "vcs", "verdi", "fsdb", "coverage", "regression", "rtl-simulation", "eda"]
 classifiers = [
   "Development Status :: 3 - Alpha",

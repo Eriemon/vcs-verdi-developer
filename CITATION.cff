@@ -3,9 +3,13 @@ message: "If you use this agent skill, please cite it using the metadata below."
 title: "VCS Verdi Developer: An Agent Skill for Synopsys VCS and Verdi Workflows"
 type: software
 authors:
-  - family-names: "Eriemon"
-    given-names: ""
-    email: "1767712085@qq.com"
+  - family-names: "Liu"
+    given-names: "Jiyuan"
+    email: "erie@seu.edu.cn"
+    affiliation: "Southeast University"
+  - family-names: "Li"
+    given-names: "He"
+    affiliation: "Southeast University"
 abstract: "VCS Verdi Developer is a Codex-ready agent skill package for Synopsys VCS simulation, project import, FSDB generation and readback, coverage diagnostics, regression orchestration, Verdi waveform-debug workflows, RC layout generation, and remote validation gates."
 keywords:
   - agent skill

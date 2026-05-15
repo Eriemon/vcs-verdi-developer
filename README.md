@@ -97,6 +97,15 @@ VCS Verdi Developer is intentionally narrow:
 - It should not expose real license values, internal server details, private paths, or private infrastructure data.
 - It supports a guarded subset of import, coverage, URG, FSDB, and remote validation workflows rather than the full Synopsys feature surface.
 
+## Affiliation
+
+Jiyuan Liu and He Li are with the School of Electronic Science and Engineering, Southeast University.
+They are affiliated with the Heterogeneous Intelligence and Quantum Computing Laboratory (HIQC), which works on heterogeneous intelligence, quantum computing, and related computing systems research.
+
+## Contact
+
+For questions, collaboration, or academic use, contact: [erie@seu.edu.cn](mailto:erie@seu.edu.cn).
+
 ## Security and Sensitive Data
 
 - Do not commit real license files, secret tokens, private keys, or internal host details.
@@ -105,11 +114,13 @@ VCS Verdi Developer is intentionally narrow:
 
 ## Citation
 
-If this skill helps your workflow, please cite it using the metadata in [CITATION.cff](CITATION.cff).
+This skill is maintained by authors from the Heterogeneous Intelligence and Quantum Computing Laboratory(HIQC), School of Electronic Science and Engineering, Southeast University.
+
+If this skill helps your research, teaching, or engineering workflow, please cite it. The canonical citation metadata is maintained in [CITATION.cff](CITATION.cff).
 
 ```bibtex
-@software{eriemon_2026_vcs_verdi_developer,
-  author       = {Eriemon},
+@software{liu_2026_vcs_verdi_developer,
+  author       = {Jiyuan Liu and He Li},
   title        = {{VCS Verdi Developer}: An Agent Skill for Synopsys VCS and Verdi Workflows},
   year         = {2026},
   version      = {0.4.8},

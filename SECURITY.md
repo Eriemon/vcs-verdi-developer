@@ -13,7 +13,7 @@ Please use GitHub private vulnerability reporting if it is enabled for this repo
 - Secret exposure, credential leakage, or unsafe logging.
 - Publication of private hostnames, internal paths, or license details.
 - Unsafe command construction or archive handling in helper scripts.
-- Validation logic that can falsely report VCS, Verdi, or remote ThreadFPGA acceptance.
+- Validation logic that can falsely report VCS, Verdi, or default remote EDA server acceptance.
 - Documentation that encourages unsafe handling of SSH, tokens, proprietary tools, or private environment data.
 
 ## Handling Expectations

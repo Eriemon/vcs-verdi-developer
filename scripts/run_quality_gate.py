@@ -20,7 +20,7 @@ REQUIRED_SKILL_FILES = (
     "references/capability-matrix.md",
     "references/third-party-extraction.md",
     "references/review-checklist.md",
-    "references/threadfpga-gate.md",
+    "references/remote-gate.md",
     "scripts/check_env.py",
     "scripts/smoke_vcs_verdi.py",
     "scripts/analyze_logs.py",
@@ -35,7 +35,7 @@ REQUIRED_SKILL_FILES = (
     "scripts/fpgen_vcs_flow.py",
     "scripts/collect_evidence.py",
     "scripts/run_regression.py",
-    "scripts/remote_threadfpga_gate.py",
+    "scripts/remote_eda_gate.py",
     "scripts/run_quality_gate.py",
     "assets/minimal_vcs/top.sv",
     "assets/minimal_vcs/coverage_top.sv",
@@ -60,7 +60,7 @@ SCRIPT_MATRIX = (
     "fpgen_vcs_flow.py",
     "collect_evidence.py",
     "run_regression.py",
-    "remote_threadfpga_gate.py",
+    "remote_eda_gate.py",
     "run_quality_gate.py",
 )
 
@@ -74,7 +74,7 @@ CAPABILITY_MATRIX_TERMS = (
     "regression",
     "import",
     "evidence",
-    "threadfpga",
+    "remote_eda",
     "riscv-dv",
     "kvips",
     "fp-gen",
@@ -728,8 +728,8 @@ def _json_from_step(step: dict) -> dict:
 def load_remote_evidence(path: Path, *, max_age_hours: int | None) -> dict:
     import importlib.util
 
-    gate_path = Path(__file__).resolve().parent / "remote_threadfpga_gate.py"
-    spec = importlib.util.spec_from_file_location("remote_threadfpga_gate", gate_path)
+    gate_path = Path(__file__).resolve().parent / "remote_eda_gate.py"
+    spec = importlib.util.spec_from_file_location("remote_eda_gate", gate_path)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     spec.loader.exec_module(module)
@@ -793,7 +793,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--timeout", type=int, default=300)
-    parser.add_argument("--remote-evidence", type=Path, help="Fresh ThreadFPGA/equivalent evidence JSON.")
+    parser.add_argument("--remote-evidence", type=Path, help="Fresh remote EDA/equivalent evidence JSON.")
     parser.add_argument("--remote-max-age-hours", type=int, default=24)
     args = parser.parse_args()
 

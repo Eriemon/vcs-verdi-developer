@@ -7,8 +7,8 @@ RUN_DIR="$BUNDLE_ROOT/run"
 mkdir -p "$RUN_DIR"
 cd "$BUNDLE_ROOT"
 
-: "${VCS_HOME:?VCS_HOME must be set by the ThreadFPGA login shell}"
-: "${VERDI_HOME:?VERDI_HOME must be set by the ThreadFPGA login shell}"
+: "${VCS_HOME:?VCS_HOME must be set by the remote EDA login shell}"
+: "${VERDI_HOME:?VERDI_HOME must be set by the remote EDA login shell}"
 
 bash "$SCRIPT_DIR/make_shell_overlay.sh" "$VCS_HOME" "$RUN_DIR/vcs_overlay"
 bash "$SCRIPT_DIR/make_shell_overlay.sh" "$VERDI_HOME" "$RUN_DIR/verdi_overlay"
@@ -158,7 +158,7 @@ python3 "$SCRIPT_DIR/collect_evidence.py" \
   --check-env "$RUN_DIR/check_env.json" \
   --report "$RUN_DIR/smoke/report.txt" \
   --job-exit-code "$job_rc" \
-  --output "$RUN_DIR/threadfpga_evidence.json" \
+  --output "$RUN_DIR/remote_eda_evidence.json" \
   --json
 
 exit "$job_rc"

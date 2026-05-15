@@ -8,7 +8,7 @@ Thank you for improving VCS Verdi Developer. This repository is an agent skill f
 - Move detailed workflow notes, capability boundaries, command nuances, and format rules into `references/`.
 - Keep deterministic helper logic in `scripts/`.
 - Keep minimal reusable fixtures, manifests, and include files in `assets/`, and behavior expectations in `evals/`.
-- Do not claim VCS, Verdi, or ThreadFPGA validation passed unless the exact flow actually ran and left evidence.
+- Do not claim VCS, Verdi, or default remote EDA server validation passed unless the exact flow actually ran and left evidence.
 - Keep generated outputs, wave dumps, coverage reports, local logs, machine-specific paths, license values, and private infrastructure details out of commits.
 
 ## Suggested Workflow

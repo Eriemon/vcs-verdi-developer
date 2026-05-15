@@ -3,8 +3,8 @@
   "skill": "vcs-verdi-developer",
   "evals": [
     {
-      "id": "env-probe-threadfpga",
-      "prompt": "Check whether ThreadFPGA is ready for VCS and Verdi smoke validation.",
+      "id": "env-probe-remote-eda",
+      "prompt": "Check whether the default remote EDA server is ready for VCS and Verdi smoke validation.",
       "without_skill_expected_risk": "Reports only which vcs/verdi paths exist and misses DISPLAY, PLI, license, and /bin/sh -h wrapper blockers.",
       "with_skill_expected_behavior": "Runs check_env.py, reports ready/degraded/blocker fields, and separates non-GUI Verdi readiness from GUI load readiness.",
       "acceptance": "Output includes vlogan, vcs, verdi, VCS_HOME, VERDI_HOME, license hint, DISPLAY, SHELL, sh compatibility, and novas/PLI hint."
@@ -24,10 +24,10 @@
       "acceptance": "Dry-run exits 0 and includes compile, elaborate, simulate, verdi-load-check, diagnostics, and status=dry-run."
     },
     {
-      "id": "threadfpga-full-flow",
-      "prompt": "Validate the minimal fixture on ThreadFPGA end to end.",
+      "id": "remote-eda-full-flow",
+      "prompt": "Validate the minimal fixture on the default remote EDA server end to end.",
       "without_skill_expected_risk": "Treats vlogan success as complete validation and overlooks FSDB or Verdi GUI failures.",
-      "with_skill_expected_behavior": "Runs the fixed ThreadFPGA gate: dry-run, execute, nonzero waves.fsdb, Verdi load, and failure evidence collection.",
+      "with_skill_expected_behavior": "Runs the fixed remote EDA gate: dry-run, execute, nonzero waves.fsdb, Verdi load, and failure evidence collection.",
       "acceptance": "Full pass has return code 0 for all four steps and waves.fsdb is present with bytes > 0; failures include wrapper, shell, logs, DISPLAY/VNC, and artifact evidence."
     },
     {

@@ -23,7 +23,7 @@ This skill supports a scripted non-GUI flow:
 15. Plan guarded KVIPS APB/AHB/AXI4 UVM VCS, FSDB, fsdbreport, and regression flows with `scripts/kvips_vcs_flow.py`; do not count UVM as core low-dependency support.
 16. Plan FP-Gen Genesis2, VCS/VPD, SAIF, and guarded gate-level simulation flows with `scripts/fpgen_vcs_flow.py`.
 17. Collect one JSON evidence bundle with `scripts/collect_evidence.py`.
-18. Validate ThreadFPGA detached evidence with `scripts/remote_threadfpga_gate.py`.
+18. Validate default remote EDA server detached evidence with `scripts/remote_eda_gate.py`.
 
 The skill does not claim complete coverage of every official Synopsys VCS or Verdi option. Unsupported or unverified options must be reported as outside the current scripted scope.
 

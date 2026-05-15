@@ -26,7 +26,7 @@
   <rect x="848" y="280" width="236" height="44" rx="22" fill="#10283c" stroke="#f59e0b" stroke-opacity="0.5"/>
   <text x="880" y="309" fill="#fff1d8" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="600">Verdi Load Check</text>
   <rect x="1108" y="280" width="246" height="44" rx="22" fill="#10283c" stroke="#c084fc" stroke-opacity="0.45"/>
-  <text x="1140" y="309" fill="#f2e8ff" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="600">ThreadFPGA Gate</text>
+  <text x="1140" y="309" fill="#f2e8ff" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="600">Remote EDA Gate</text>
   <path d="M120 372H1448" stroke="#4dd4bf" stroke-opacity="0.25" stroke-width="2"/>
   <text x="120" y="408" fill="#88a6c2" font-size="20" font-family="Segoe UI, Arial, sans-serif">Repeatable artifacts, explicit environment findings, and guarded proprietary-tool workflows.</text>
 </svg>

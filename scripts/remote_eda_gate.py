@@ -18,7 +18,7 @@ MINIMAL_BUNDLE_FILES = (
     "scripts/urg_coverage_matrix.py",
     "scripts/collect_evidence.py",
     "scripts/make_shell_overlay.sh",
-    "scripts/run_threadfpga_smoke.sh",
+    "scripts/run_remote_eda_smoke.sh",
     "assets/minimal_vcs/top.sv",
     "assets/minimal_vcs/coverage_top.sv",
     "assets/minimal_vcs/core.vhd",
@@ -48,8 +48,8 @@ def build_bundle_plan(skill_dir: Path | str, *, remote_dir: str) -> dict:
             missing.append(rel)
     remote_commands = [
         f"mkdir -p {remote_dir}",
-        f"unzip -o threadfpga-vcs-verdi-bundle.zip -d {remote_dir}",
-        f"cd {remote_dir} && chmod +x scripts/*.sh && bash scripts/run_threadfpga_smoke.sh",
+        f"unzip -o remote-eda-vcs-verdi-bundle.zip -d {remote_dir}",
+        f"cd {remote_dir} && chmod +x scripts/*.sh && bash scripts/run_remote_eda_smoke.sh",
     ]
     return {
         "status": "ready" if not missing else "blocked",
@@ -192,7 +192,7 @@ def validate_evidence(evidence: dict, *, max_age_hours: int | None = None, now_u
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Plan or validate the minimal ThreadFPGA VCS/Verdi gate.")
+    parser = argparse.ArgumentParser(description="Plan or validate the minimal default remote EDA server VCS/Verdi gate.")
     parser.add_argument("--skill-dir", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--remote-dir", default="validation/vcs-verdi-nongui")
     parser.add_argument("--bundle-zip", type=Path)

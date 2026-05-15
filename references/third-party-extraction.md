@@ -7,7 +7,7 @@ Use this reference when mining public or local VCS/Verdi examples during skill d
 - Clone third-party material only under `ref/third_party/<repo-name>-<short-sha>/`.
 - Record the source URL, commit, license, and extracted lessons in this file or a governed development note.
 - Do not copy third-party source code into `scripts/`, `assets/`, or generated release packages.
-- Distill command patterns into our own scripts and tests, then validate them through local gates and ThreadFPGA or equivalent EDA evidence.
+- Distill command patterns into our own scripts and tests, then validate them through local gates and default remote EDA server evidence or equivalent EDA evidence.
 - Keep GUI/Tk examples classified as guarded optional unless a live DISPLAY/VNC/Tk route has been verified.
 
 ## Current Inputs

@@ -4,7 +4,7 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 
 ## Scope Gate
 
-- Confirm the request is within the skill promise: environment probe, RC generation, non-GUI VCS smoke flow, VHDL compile planning, FSDB artifact check, fsdbreport check, guarded Verdi load check, Tk/IPython command construction, or ThreadFPGA validation.
+- Confirm the request is within the skill promise: environment probe, RC generation, non-GUI VCS smoke flow, VHDL compile planning, FSDB artifact check, fsdbreport check, guarded Verdi load check, Tk/IPython command construction, or default remote EDA server validation.
 - Do not claim complete coverage of every Synopsys VCS or Verdi option. Report unsupported official-tool features as outside the current skill scope.
 - Confirm no runtime step depends on the temporary reference directory or local absolute development paths.
 
@@ -56,7 +56,7 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - The local gate includes `ref/12-CSCD` and `ref/13-Computer-Organization` mp_setup, mp_pipeline, mp_cache, and mp_verif importer dry-runs for course-style VCS/Verdi Makefile patterns.
 - `scripts/collect_evidence.py` builds a single JSON evidence bundle from smoke, coverage, conversion, env, report, and artifact outputs.
 - `scripts/run_regression.py` batches manifest flows and reports JSON/JUnit-style results with per-case missing tool and artifact summaries.
-- `scripts/remote_threadfpga_gate.py` validates detached ThreadFPGA evidence, timestamp freshness, environment hints, step commands, matrix checks, and artifacts without syncing the local skill tree.
+- `scripts/remote_eda_gate.py` validates detached remote EDA evidence, timestamp freshness, environment hints, step commands, matrix checks, and artifacts without syncing the local skill tree.
 
 ## Quality Gate
 
@@ -65,9 +65,9 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - The local skill audit must target `vcs-verdi-developer`, not another installed skill's resource inventory.
 - The script matrix audit must pass; new supported capabilities require tests or dry-run coverage.
 
-## ThreadFPGA Gate
+## Remote EDA Gate
 
-- Follow `references/threadfpga-gate.md`.
+- Follow `references/remote-gate.md`.
 - Upload only a minimal runtime fixture or validation bundle into a named remote test directory.
 - Fresh factual EDA confidence requires the remote matrix to pass: minimal smoke, mixed VHDL/SV, coverage/URG, and FSDB conversion.
 - If full flow fails, collect wrapper shebangs, shell choice, return codes, logs, artifact status, and `DISPLAY`/VNC state before proposing fixes.

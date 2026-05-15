@@ -38,7 +38,7 @@ EDA 工作流很容易因为环境判断、GUI 假设或 dump/debug 步骤处理
 - 支持回归批量执行与证据收集；
 - 校验 Verdi 加载；
 - 生成可复用的 signal-restore RC 布局；
-- 提供面向 ThreadFPGA 的远程验证门禁。
+- 提供面向默认远程 EDA 服务器的验证门禁。
 
 ## Skill 架构
 

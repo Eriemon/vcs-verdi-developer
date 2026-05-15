@@ -2,11 +2,10 @@
   "skill_name": "vcs-verdi-developer",
   "version": "v0.4.8",
   "source_path": "skills/vcs-verdi-developer",
-  "generated_at": "2026-05-15T22:28:06",
-  "current_branch": "master",
+  "generated_at": "2026-05-15T22:56:58",
+  "current_branch": "main",
   "local_branches": [
-    "master",
-    "release"
+    "main"
   ],
   "worktree_clean": true,
   "phase_results": {
@@ -17,9 +16,9 @@
   "validation_level": "strong",
   "provenance_mode": "repository-dist",
   "sanitization": {
-    "enabled": false,
-    "scope": "not-configured",
-    "mode": "not-configured",
+    "enabled": true,
+    "scope": "public-naming-sanitized",
+    "mode": "repository-update",
     "files": []
   },
   "files": [
@@ -77,31 +76,31 @@
     },
     {
       "path": "evals/evals.json",
-      "sha256": "53af45ba6af24714f117a1f69a56a515527c3f2510e407a074d85cd377bcc4d8"
+      "sha256": "639a7f7624830759261a9b14950c959ed35ca0e80ce5e411c5b506101e58ea2a"
     },
     {
       "path": "references/capability-matrix.md",
-      "sha256": "1f80fa975804a1b40f8a2bb4107020306ca8ea5921769ecf5b335788a7884aa7"
+      "sha256": "fdb8a427baad348bdd287843b31f9ca96905ddeaefbc2bbf60d6d78ad4b5b483"
     },
     {
       "path": "references/non-gui-flow.md",
-      "sha256": "81b2d3deddb989498d36e4d0fe04809fc872e3006eeb990def662b1bcc53abd7"
+      "sha256": "808b1fc0b4f6500a4d6ea65b72283d272e939abc28abea547dd0c8e1022fb7bf"
+    },
+    {
+      "path": "references/remote-gate.md",
+      "sha256": "78903597e915b31e12f4385ae69646bc5f6b36b6644f50d150528bf897e1e240"
+    },
+    {
+      "path": "references/remote-validation.md",
+      "sha256": "f47a53d2480ebd9607687fd16caeda7b9e529b9dd01235945f160a90daeaaea5"
     },
     {
       "path": "references/review-checklist.md",
-      "sha256": "934f294d398c907d2d7ca6ad99fcf43f22b1f18eb8a454cdb9d3981458990911"
+      "sha256": "3f5a3337f335ba8f282a31832b6b340dc096661d80647ec55c38b5122e6ccac3"
     },
     {
       "path": "references/third-party-extraction.md",
-      "sha256": "e161cf1d99df6186d33e7d65c5b5422f5fc0a7d8537bf0b0a205717c7ba11c79"
-    },
-    {
-      "path": "references/threadfpga-gate.md",
-      "sha256": "35ed12b336b7ebaf909f82380c6cd119e4a27ba8736dc4ac4151a72b490603db"
-    },
-    {
-      "path": "references/threadfpga-validation.md",
-      "sha256": "78e23cf5b5c43815efec1ae581e2e0d7e82569b365ffc007a273705b0a96bd3d"
+      "sha256": "8ad14962b8ba018f46673582d07d28b64772633d2c72a4d02566f62612c2e106"
     },
     {
       "path": "references/vcs-verdi-flow.md",
@@ -160,8 +159,8 @@
       "sha256": "6d8551f0bba9a1a3c11fd81f79a4f93b696727fff28cf063db70a696a3704f6e"
     },
     {
-      "path": "scripts/remote_threadfpga_gate.py",
-      "sha256": "b22150978e44d4098e09d78d932bd4c164d51d7fbdbb668c2fa438b098397a4a"
+      "path": "scripts/remote_eda_gate.py",
+      "sha256": "8c3180446e003cf73c14747cf01a544f3b44e709e86e047d8c25bb7ead427d20"
     },
     {
       "path": "scripts/riscv_dv_flow.py",
@@ -169,15 +168,15 @@
     },
     {
       "path": "scripts/run_quality_gate.py",
-      "sha256": "7cfe3daccc312c99638b6937cd37f5bc85cbed4f825969ae7db32f0d89469749"
+      "sha256": "7323507d4bf02e50bb99bc1020b6383b4165ceb459e213e01f7aa857e5b4955e"
     },
     {
       "path": "scripts/run_regression.py",
       "sha256": "c0c6f265fc694bd51f06a2b2a4db056c60f62936eeebb54c36ca8a67e099cc2e"
     },
     {
-      "path": "scripts/run_threadfpga_smoke.sh",
-      "sha256": "8fea85729806cf1e7e172136757d32df39a8775849eef0eb1cb38c3c35c3dd73"
+      "path": "scripts/run_remote_eda_smoke.sh",
+      "sha256": "e119f10e8b442d6bb9e59d83d5aa819a56101a6af31b7759cfbebf7c3664e713"
     },
     {
       "path": "scripts/smoke_vcs_verdi.py",
@@ -193,7 +192,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "94945818733c3fd7c4fe3385acb2d1bbe4b129f593086ca59ce125d83c5f0c71"
+      "sha256": "9ec817071b6ab51ced0648102d0567a1c50b46478ee3d2a11ce78e2ffbc5bb29"
     },
     {
       "path": "VERSION",

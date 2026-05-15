@@ -38,7 +38,7 @@ EDA workflows are easy to mis-handle when an agent guesses environment readiness
 - regression batching and evidence collection,
 - guarded Verdi load verification,
 - generated signal-restore RC layouts,
-- ThreadFPGA-oriented remote validation gates.
+- default remote EDA server validation gates.
 
 ## Skill Architecture
 

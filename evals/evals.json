@@ -29,6 +29,69 @@
       "without_skill_expected_risk": "Treats vlogan success as complete validation and overlooks FSDB or Verdi GUI failures.",
       "with_skill_expected_behavior": "Runs the fixed ThreadFPGA gate: dry-run, execute, nonzero waves.fsdb, Verdi load, and failure evidence collection.",
       "acceptance": "Full pass has return code 0 for all four steps and waves.fsdb is present with bytes > 0; failures include wrapper, shell, logs, DISPLAY/VNC, and artifact evidence."
+    },
+    {
+      "id": "manifest-nongui-flow",
+      "prompt": "Plan a non-GUI mixed VHDL/SystemVerilog VCS simulation with defines, include dirs, plusargs, seed, FSDB, and fsdbreport.",
+      "without_skill_expected_risk": "Hand-assembles commands, omits vhdlan or fsdbreport, and claims GUI readiness from a dry-run.",
+      "with_skill_expected_behavior": "Uses a JSON manifest with smoke_vcs_verdi.py --dry-run --json, checks vhdlan/vlogan/vcs/simv/fsdbreport order, and reports missing tools as blockers.",
+      "acceptance": "Dry-run includes compile-vhdl, compile-verilog, elaborate, simulate, verdi-fsdbreport-check, plusargs, seed, command file, logs, and artifact targets."
+    },
+    {
+      "id": "log-analysis-diagnosis",
+      "prompt": "Diagnose VCS and Verdi logs that include syntax errors, license checkout failures, unsupported kernel warnings, missing novas PLI, and FSDB failures.",
+      "without_skill_expected_risk": "Reports every line as a generic compile failure and misses license or FSDB root causes.",
+      "with_skill_expected_behavior": "Uses analyze_logs.py to classify compile_error, license, platform, pli, and fsdb issues with source line evidence.",
+      "acceptance": "JSON result includes failed status, error/warning counts, and the expected issue categories."
+    },
+    {
+      "id": "coverage-regression-plan",
+      "prompt": "Plan a non-GUI VCS coverage regression over several manifests and produce machine-readable results.",
+      "without_skill_expected_risk": "Runs one command by hand, skips timeout/failure collection, or treats dry-run as executed coverage.",
+      "with_skill_expected_behavior": "Uses coverage_flow.py for -cm/urg planning and run_regression.py for manifest batching with JSON or JUnit-style output.",
+      "acceptance": "Plan includes -cm metrics, urg -dir/-report command, regression case names, timeout, jobs, and failure collection."
+    },
+    {
+      "id": "fsdb-utility-check",
+      "prompt": "Verify a generated FSDB and plan non-GUI readback or conversion commands.",
+      "without_skill_expected_risk": "Assumes a waveform exists from a log message or tries to open GUI Verdi over SSH.",
+      "with_skill_expected_behavior": "Uses fsdb_tools.py to require nonzero FSDB bytes, build fsdbreport/fsdb2vcd/vcd2fsdb commands, and parse report samples.",
+      "acceptance": "Zero-byte FSDB is rejected; fsdbreport command includes the requested signal; parsed output identifies sampled values."
+    },
+    {
+      "id": "fsdb-npi-edalize-import",
+      "prompt": "Plan FSDB signal readback with Verdi NPI when available and convert an Edalize VCS EDAM file into a non-GUI manifest.",
+      "without_skill_expected_risk": "Uses only GUI Verdi or creates a second incompatible Edalize execution path.",
+      "with_skill_expected_behavior": "Uses fsdb_tools.py read-plan for NPI-first readback with CLI fallback and import_vcs_project.py --edalize-json to produce the existing manifest shape.",
+      "acceptance": "Output identifies VCS_BIN/VERDI_PYTHON readiness, rejects zero-byte FSDB, normalizes NPI and CLI signal paths, preserves Edalize file_type/toplevel/plusarg/vlogdefine/vlogparam/vcs_options/run_options, and does not claim real EDA execution without fresh evidence."
+    },
+    {
+      "id": "ref6-riscv-dv-plan",
+      "prompt": "Import a PicoRV32 RISCV-DV VCS Makefile and plan a non-GUI riscv_arithmetic_basic_test run.",
+      "without_skill_expected_risk": "Treats +define and -sverilog filelist flags as source paths or skips the RISCV-DV generator and URG steps.",
+      "with_skill_expected_behavior": "Uses import_vcs_project.py for the VCS filelist and riscv_dv_flow.py for generator, VCS compile, simv +hex/+trace, URG, and trace compare planning.",
+      "acceptance": "Dry-run identifies defines, -sverilog, coverage metrics, dv workdir, simv output, RISCV-DV dependencies, and does not claim EDA execution without remote evidence."
+    },
+    {
+      "id": "ref7-modelsim-icarus-import",
+      "prompt": "Convert a MIPSfpga-plus ModelSim Tcl or Icarus Makefile simulation flow into a VCS/Verdi non-GUI manifest candidate.",
+      "without_skill_expected_risk": "Returns an empty manifest, ignores pre-sim hex artifacts, or hides missing RTL glob failures.",
+      "with_skill_expected_behavior": "Uses import_vcs_project.py to extract top, SIMULATION define, include dirs, source globs, VCD dump expectations, missing source diagnostics, and optional MIPS toolchain dependencies.",
+      "acceptance": "Manifest includes mfp_testbench, expected include dirs and testbench source, pre-sim hex artifacts, and explicit missing core/toolchain diagnostics."
+    },
+    {
+      "id": "ref8-kvips-guarded-uvm-plan",
+      "prompt": "Plan a KVIPS APB or AXI4 VCS run with FSDB reporting without treating UVM as a core requirement.",
+      "without_skill_expected_risk": "Claims UVM VIP support as complete, omits -ntb_opts uvm-1.2, or tries to run GUI Verdi.",
+      "with_skill_expected_behavior": "Uses kvips_vcs_flow.py to produce a guarded_optional dry-run with filelist expansion, UVM plusargs, regression tests, FSDB PLI, fsdbreport, and verdi -ssf -nologo -exit load checks.",
+      "acceptance": "Plan includes uvm in optional_external_dependencies, VCS compile args, +UVM_TESTNAME, regression tests, fsdbreport config, and does not upgrade EDA confidence from dry-run evidence."
+    },
+    {
+      "id": "ref9-fpgen-genesis-vcs-plan",
+      "prompt": "Plan an FP-Gen Genesis2 plus VCS/VPD/SAIF non-GUI simulation flow.",
+      "without_skill_expected_risk": "Treats generated filelists as present, hides Genesis2 or DesignWare dependencies, or mixes gate-level flows into core support.",
+      "with_skill_expected_behavior": "Uses fpgen_vcs_flow.py to separate Genesis2 generation, VCS compile, simv VPD run, SAIF runtime, and guarded DC/ICC gate-level commands.",
+      "acceptance": "Plan includes top_FPGen, genesis_vlog.vf diagnostics, Genesis2.pl and DesignWare dependencies, +vpdbufsize+100, +SAIF, and guarded gate-level commands when requested."
     }
   ]
 }

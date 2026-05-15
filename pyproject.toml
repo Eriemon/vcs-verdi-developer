@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vcs-verdi-developer-skill"
-version = "0.1.0"
-description = "Codex-ready skill for Synopsys VCS simulation and Verdi waveform-debug workflows."
+version = "0.4.8"
+description = "Codex-ready skill for Synopsys VCS simulation, project import, FSDB tooling, coverage diagnostics, and Verdi workflows."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
-keywords = ["codex-skill", "agent-skill", "vcs", "verdi", "fsdb", "rtl-simulation", "eda"]
+keywords = ["codex-skill", "agent-skill", "vcs", "verdi", "fsdb", "coverage", "regression", "rtl-simulation", "eda"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",

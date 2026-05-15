@@ -1,0 +1,1 @@
+`define VCS_VERDI_SKILL_SMOKE 1

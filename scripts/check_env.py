@@ -4,15 +4,19 @@ from __future__ import annotations
 import argparse
 import json
 import os
+from pathlib import Path
 import shutil
 import subprocess
 from typing import Callable, Mapping
 
 
-TOOLS = ("vlogan", "vcs", "verdi", "python3", "python", "bash", "sh")
+TOOLS = ("vlogan", "vhdlan", "vcs", "verdi", "fsdbreport", "python3", "python", "bash", "sh")
+VERSION_PROBE_TOOLS = {"vlogan", "vhdlan", "vcs", "verdi", "fsdbreport"}
 ENV_VARS = (
     "VCS_HOME",
+    "VCS_BIN",
     "VERDI_HOME",
+    "VERDI_PYTHON",
     "NOVAS_HOME",
     "SNPSLMD_LICENSE_FILE",
     "LM_LICENSE_FILE",
@@ -23,6 +27,29 @@ ENV_VARS = (
     "PATH",
     "LD_LIBRARY_PATH",
 )
+
+
+def detect_tool_version(path: str) -> str:
+    if not path:
+        return ""
+    probes = ([path, "-ID"], [path, "-version"], [path, "-V"])
+    for cmd in probes:
+        try:
+            completed = subprocess.run(
+                cmd,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                timeout=10,
+            )
+        except (OSError, subprocess.SubprocessError):
+            continue
+        output = (completed.stdout or "").strip().splitlines()
+        if output:
+            return output[0].strip()
+    return ""
 
 
 def check_sh_compat(which_func: Callable[[str], str | None] | None = None) -> dict:
@@ -53,13 +80,26 @@ def check_environment(
     which_func: Callable[[str], str | None] | None = None,
     env: Mapping[str, str] | None = None,
     sh_compat_func: Callable[[], dict] | None = None,
+    version_func: Callable[[str], str] | None = None,
+    path_exists_func: Callable[[str], bool] | None = None,
 ) -> dict:
     which = which_func or shutil.which
+    versions = version_func or detect_tool_version
     env_map = env or os.environ
+    path_exists = path_exists_func or (lambda path: Path(path).exists())
     tools = {}
     for tool in TOOLS:
         path = which(tool)
-        tools[tool] = {"available": bool(path), "path": path or ""}
+        source = "PATH"
+        if tool == "vcs" and env_map.get("VCS_BIN") and path_exists(env_map["VCS_BIN"]):
+            path = env_map["VCS_BIN"]
+            source = "VCS_BIN"
+        tools[tool] = {
+            "available": bool(path),
+            "path": path or "",
+            "source": source if path else "",
+            "version": versions(path) if path and tool in VERSION_PROBE_TOOLS else "",
+        }
 
     env_report = {}
     for name in ENV_VARS:
@@ -67,8 +107,12 @@ def check_environment(
         env_report[name] = {"set": bool(value), "value": value}
 
     ready_for_vcs = tools["vlogan"]["available"] and tools["vcs"]["available"] and env_report["VCS_HOME"]["set"]
+    ready_for_vhdl = tools["vhdlan"]["available"] and tools["vcs"]["available"] and env_report["VCS_HOME"]["set"]
     ready_for_verdi = tools["verdi"]["available"] and env_report["VERDI_HOME"]["set"]
+    npi_python = find_npi_python(env_map, path_exists)
+    ready_for_nongui_verdi = (tools["fsdbreport"]["available"] or bool(npi_python)) and env_report["VERDI_HOME"]["set"]
     ready_for_license = env_report["SNPSLMD_LICENSE_FILE"]["set"] or env_report["LM_LICENSE_FILE"]["set"]
+    license_var = "SNPSLMD_LICENSE_FILE" if env_report["SNPSLMD_LICENSE_FILE"]["set"] else "LM_LICENSE_FILE" if env_report["LM_LICENSE_FILE"]["set"] else ""
     display_value = env_map.get("DISPLAY", "")
     display_report = {
         "available": bool(display_value),
@@ -82,6 +126,13 @@ def check_environment(
         "novas_home": novas_home,
         "novas_hint_present": bool(novas_home) or "novas" in ld_library_path.lower() or "pli" in ld_library_path.lower(),
         "ld_library_path_mentions_pli": "pli" in ld_library_path.lower(),
+    }
+    fsdb_report = {
+        "readers": [name for name in ("fsdbreport", "verdi") if tools[name]["available"]] + (["npi"] if npi_python else []),
+        "fsdbreport_available": tools["fsdbreport"]["available"],
+        "verdi_available": tools["verdi"]["available"],
+        "npi_python_available": bool(npi_python),
+        "npi_python": npi_python,
     }
     path_value = env_map.get("PATH", "")
     split_token = os.pathsep
@@ -119,16 +170,41 @@ def check_environment(
         "env": env_report,
         "display": display_report,
         "pli": pli_report,
+        "fsdb": fsdb_report,
         "shell": shell_report,
+        "license": {
+            "hint_present": ready_for_license,
+            "primary_var": license_var,
+            "value": env_map.get(license_var, "") if license_var else "",
+        },
         "overall": {
             "ready_for_vcs": ready_for_vcs,
+            "ready_for_vhdl": ready_for_vhdl,
             "ready_for_verdi": ready_for_verdi,
+            "ready_for_nongui_verdi": ready_for_nongui_verdi,
             "ready_for_gui_verdi": ready_for_verdi and display_report["available"],
             "license_hint_present": ready_for_license,
             "blockers": blockers,
             "warnings": warnings,
         },
     }
+
+
+def find_npi_python(env_map: Mapping[str, str], path_exists: Callable[[str], bool]) -> str:
+    if env_map.get("VERDI_PYTHON") and path_exists(env_map["VERDI_PYTHON"]):
+        return env_map["VERDI_PYTHON"]
+    verdi_home = env_map.get("VERDI_HOME", "")
+    if not verdi_home:
+        return ""
+    candidates = [
+        Path(verdi_home) / "platform" / "linux64" / "Python" / "bin" / "python3.6",
+        Path(verdi_home) / "platform" / "linux64" / "Python" / "bin" / "python3",
+    ]
+    for candidate in candidates:
+        text = str(candidate)
+        if path_exists(text):
+            return text
+    return ""
 
 
 def text_report(report: dict) -> str:
@@ -144,7 +220,9 @@ def text_report(report: dict) -> str:
     lines.append(f"- novas/PLI hint present: {report['pli']['novas_hint_present']}")
     lines.append(f"- /bin/sh supports -h: {report['shell']['sh_compat'].get('supports_dash_h')}")
     lines.append(f"- ready_for_vcs: {report['overall']['ready_for_vcs']}")
+    lines.append(f"- ready_for_vhdl: {report['overall']['ready_for_vhdl']}")
     lines.append(f"- ready_for_verdi: {report['overall']['ready_for_verdi']}")
+    lines.append(f"- ready_for_nongui_verdi: {report['overall']['ready_for_nongui_verdi']}")
     lines.append(f"- ready_for_gui_verdi: {report['overall']['ready_for_gui_verdi']}")
     if report["overall"]["blockers"]:
         lines.append("- blockers: " + ", ".join(report["overall"]["blockers"]))

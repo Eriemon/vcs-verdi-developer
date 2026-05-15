@@ -3,3 +3,18 @@ top = top
 clk = top.clk
 valid = top.valid
 data = top.data[2:0]
+
+[picorv32]
+top = testbench_vcs
+clk = testbench_vcs.clk
+trap = testbench_vcs.trap
+mem_valid = testbench_vcs.mem_valid
+mem_addr = testbench_vcs.mem_addr
+
+[mipsfpga]
+top = mfp_testbench
+clk = mfp_testbench.clk
+pc = mfp_testbench.mfp_ahb_lite_matrix_with_loader.mfp_ahb_lite_matrix.cpu.PC
+instr = mfp_testbench.mfp_ahb_lite_matrix_with_loader.mfp_ahb_lite_matrix.cpu.instr
+data_addr = mfp_testbench.mfp_ahb_lite_matrix_with_loader.mfp_ahb_lite_matrix.cpu.HADDR
+data_wdata = mfp_testbench.mfp_ahb_lite_matrix_with_loader.mfp_ahb_lite_matrix.cpu.HWDATA

@@ -1,4 +1,4 @@
 interface:
   display_name: "VCS Verdi Developer"
-  short_description: "Guide VCS simulation and Verdi waveform debug workflows."
-  default_prompt: "Use $vcs-verdi-developer to validate a VCS simulation and open the FSDB in Verdi."
+  short_description: "Guide scripted non-GUI VCS simulation, Makefile/Edalize import, DPI, FSDB/NPI, coverage, regression, and Verdi checks."
+  default_prompt: "Use $vcs-verdi-developer to validate a scripted non-GUI VCS simulation, Makefile or Edalize import, DPI dry-run, FSDB/NPI readback, and regression gate."

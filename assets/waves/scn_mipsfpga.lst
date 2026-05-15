@@ -1,0 +1,12 @@
+[GROUPS]
+1. CLOCK_RESET gray
+1.1 clk bin cyan 15 CLK
+2. CPU yellow
+2.1 pc hex yellow 20 PC
+2.2 instr hex green 20 INSTR
+3. MEMORY magenta
+3.1 data_addr hex magenta 20 DATA_ADDR
+3.2 data_wdata hex red 20 DATA_WDATA
+
+[MARKERS]
+0 RESET white

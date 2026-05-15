@@ -29,6 +29,16 @@ for file in "$src"/bin/*; do
   if [ -f "$file" ] && head -n 1 "$file" | grep -q '^#!/bin/sh'; then
     {
       printf '#!/usr/bin/env bash\n'
+      if [ "$base" = "urg" ]; then
+        cat <<'SNPS_URG_PATCH_LOADER'
+if [ "${VCS_VERDI_ALLOW_UCAPI_PATCH:-0}" = "1" ] && [ -n "${VCS_HOME:-}" ] && [ -d "$VCS_HOME/ucapi_patch_lib" ]; then
+  case ":${LD_LIBRARY_PATH:-}:" in
+    *":$VCS_HOME/ucapi_patch_lib:"*) ;;
+    *) export LD_LIBRARY_PATH="$VCS_HOME/ucapi_patch_lib:${LD_LIBRARY_PATH:-}" ;;
+  esac
+fi
+SNPS_URG_PATCH_LOADER
+      fi
       tail -n +2 "$file"
     } > "$dst/bin/$base"
     chmod +x "$dst/bin/$base"

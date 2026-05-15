@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {"path": "top.sv", "language": "sv"},
+    {"path": "core.vhd", "language": "vhdl"}
+  ],
+  "include_dirs": ["include"],
+  "defines": {"SIM": "1", "FSDB": ""},
+  "libraries": ["work"],
+  "top": "top",
+  "timescale": "1ns/1ps",
+  "plusargs": ["+testcase=smoke"],
+  "seed": 7,
+  "cmd_file": "dump_ucli.tcl",
+  "dump_name": "waves.fsdb",
+  "verdi_check": "fsdbreport",
+  "report_signal": "/top/clk"
+}

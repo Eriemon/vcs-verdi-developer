@@ -11,9 +11,13 @@ reports/
 build/
 tmp/
 temp/
+urgReport/
+urg_matrix/
+junit/
 
 simv
 simv.daidir/
+simv.vdb/
 csrc/
 DVEfiles/
 ucli.key
@@ -24,6 +28,7 @@ novas_dump.log
 *.vpd
 *.vdb
 *.fsdb
+*.xml
 *.jou
 *.str
 *.log

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760">
+  <rect width="1600" height="760" fill="#f6fbff"/>
+  <text x="90" y="88" fill="#0f172a" font-size="42" font-family="Segoe UI, Arial, sans-serif" font-weight="700">VCS Verdi Developer Skill 架构</text>
+  <rect x="90" y="140" width="320" height="170" rx="24" fill="#dbeafe" stroke="#60a5fa"/>
+  <text x="118" y="188" fill="#0f172a" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700">SKILL 表层</text>
+  <text x="118" y="230" fill="#1e3a5f" font-size="21" font-family="Segoe UI, Arial, sans-serif">任务路由</text>
+  <text x="118" y="260" fill="#1e3a5f" font-size="21" font-family="Segoe UI, Arial, sans-serif">安全边界</text>
+  <text x="118" y="290" fill="#1e3a5f" font-size="21" font-family="Segoe UI, Arial, sans-serif">流程选择</text>
+  <rect x="470" y="140" width="300" height="170" rx="24" fill="#dcfce7" stroke="#4ade80"/>
+  <text x="498" y="188" fill="#0f172a" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700">scripts/</text>
+  <text x="498" y="230" fill="#214a34" font-size="21" font-family="Segoe UI, Arial, sans-serif">环境探测</text>
+  <text x="498" y="260" fill="#214a34" font-size="21" font-family="Segoe UI, Arial, sans-serif">RC 生成</text>
+  <text x="498" y="290" fill="#214a34" font-size="21" font-family="Segoe UI, Arial, sans-serif">smoke 规划</text>
+  <rect x="830" y="140" width="320" height="170" rx="24" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="858" y="188" fill="#0f172a" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700">references/</text>
+  <text x="858" y="230" fill="#5f4314" font-size="21" font-family="Segoe UI, Arial, sans-serif">流程规则</text>
+  <text x="858" y="260" fill="#5f4314" font-size="21" font-family="Segoe UI, Arial, sans-serif">RC 格式</text>
+  <text x="858" y="290" fill="#5f4314" font-size="21" font-family="Segoe UI, Arial, sans-serif">远程验证门禁</text>
+  <rect x="1210" y="140" width="300" height="170" rx="24" fill="#ede9fe" stroke="#a78bfa"/>
+  <text x="1238" y="188" fill="#0f172a" font-size="30" font-family="Segoe UI, Arial, sans-serif" font-weight="700">assets + evals</text>
+  <text x="1238" y="230" fill="#463072" font-size="21" font-family="Segoe UI, Arial, sans-serif">最小夹具</text>
+  <text x="1238" y="260" fill="#463072" font-size="21" font-family="Segoe UI, Arial, sans-serif">波形模板</text>
+  <text x="1238" y="290" fill="#463072" font-size="21" font-family="Segoe UI, Arial, sans-serif">行为评测</text>
+  <path d="M410 225H470" stroke="#64748b" stroke-width="4"/>
+  <path d="M770 225H830" stroke="#64748b" stroke-width="4"/>
+  <path d="M1150 225H1210" stroke="#64748b" stroke-width="4"/>
+  <rect x="270" y="430" width="1060" height="220" rx="28" fill="#0f172a"/>
+  <text x="318" y="486" fill="#f8fafc" font-size="34" font-family="Segoe UI, Arial, sans-serif" font-weight="700">验证结果层</text>
+  <text x="318" y="534" fill="#cbd5e1" font-size="24" font-family="Segoe UI, Arial, sans-serif">输出环境结论、dry-run 命令计划、RC 布局、FSDB 检查结果，以及受控的远程验证证据。</text>
+  <text x="318" y="580" fill="#93c5fd" font-size="22" font-family="Segoe UI, Arial, sans-serif">没有真实执行证据时，不声称专有工具流程通过。</text>
+</svg>

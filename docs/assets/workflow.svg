@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520">
+  <rect width="1600" height="520" fill="#fffdf7"/>
+  <text x="90" y="88" fill="#0f172a" font-size="42" font-family="Segoe UI, Arial, sans-serif" font-weight="700">VCS Verdi Developer Workflow</text>
+  <g>
+    <rect x="100" y="170" width="240" height="132" rx="24" fill="#dbeafe" stroke="#60a5fa"/>
+    <text x="132" y="224" fill="#0f172a" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">1. Probe Env</text>
+    <text x="132" y="262" fill="#1e3a5f" font-size="21" font-family="Segoe UI, Arial, sans-serif">check_env.py</text>
+  </g>
+  <g>
+    <rect x="410" y="170" width="240" height="132" rx="24" fill="#dcfce7" stroke="#4ade80"/>
+    <text x="442" y="224" fill="#0f172a" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">2. Plan Flow</text>
+    <text x="442" y="262" fill="#214a34" font-size="21" font-family="Segoe UI, Arial, sans-serif">smoke_vcs_verdi.py</text>
+  </g>
+  <g>
+    <rect x="720" y="170" width="240" height="132" rx="24" fill="#fef3c7" stroke="#f59e0b"/>
+    <text x="752" y="224" fill="#0f172a" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">3. Generate RC</text>
+    <text x="752" y="262" fill="#5f4314" font-size="21" font-family="Segoe UI, Arial, sans-serif">generate_rc.py</text>
+  </g>
+  <g>
+    <rect x="1030" y="170" width="240" height="132" rx="24" fill="#ede9fe" stroke="#a78bfa"/>
+    <text x="1062" y="224" fill="#0f172a" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700">4. Validate</text>
+    <text x="1062" y="262" fill="#463072" font-size="21" font-family="Segoe UI, Arial, sans-serif">FSDB / Verdi / remote</text>
+  </g>
+  <path d="M340 236H410" stroke="#64748b" stroke-width="4"/>
+  <path d="M650 236H720" stroke="#64748b" stroke-width="4"/>
+  <path d="M960 236H1030" stroke="#64748b" stroke-width="4"/>
+  <text x="100" y="388" fill="#475569" font-size="22" font-family="Segoe UI, Arial, sans-serif">Default posture: dry-run first, explicit environment findings, and no false success claims.</text>
+</svg>

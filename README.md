@@ -5,10 +5,15 @@
 </p>
 
 <p align="center">
+  <img src="docs/assets/hero.svg" alt="VCS Verdi Developer" width="100%">
+</p>
+
+<p align="center">
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-1f6feb"></a>
   <a href="pyproject.toml"><img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-2f81f7"></a>
   <img alt="Version" src="https://img.shields.io/badge/version-v0.1.0-7c3aed">
   <a href="SKILL.md"><img alt="Agent Skill" src="https://img.shields.io/badge/agent-skill-16a34a"></a>
+  <a href="references/vcs-verdi-flow.md"><img alt="Target" src="https://img.shields.io/badge/target-VCS%20%26%20Verdi-f59e0b"></a>
 </p>
 
 <h1 align="center">VCS Verdi Developer</h1>
@@ -30,6 +35,18 @@ EDA workflows are easy to mis-handle when an agent guesses environment readiness
 - FSDB and Verdi load verification,
 - generated signal-restore RC layouts,
 - ThreadFPGA-oriented remote validation gates.
+
+## Skill Architecture
+
+<p align="center">
+  <img src="docs/assets/architecture.svg" alt="VCS Verdi Developer skill architecture" width="100%">
+</p>
+
+## Workflow
+
+<p align="center">
+  <img src="docs/assets/workflow.svg" alt="VCS Verdi Developer workflow" width="100%">
+</p>
 
 ## Repository Map
 
@@ -78,6 +95,19 @@ VCS Verdi Developer is intentionally narrow:
 ## Citation
 
 If this skill helps your workflow, please cite it using the metadata in [CITATION.cff](CITATION.cff).
+
+```bibtex
+@software{eriemon_2026_vcs_verdi_developer,
+  author       = {Eriemon},
+  title        = {{VCS Verdi Developer}: An Agent Skill for Synopsys VCS and Verdi Workflows},
+  year         = {2026},
+  version      = {0.1.0},
+  date         = {2026-05-15},
+  url          = {https://github.com/Eriemon/vcs-verdi-developer},
+  license      = {Apache-2.0},
+  note         = {Agent skill package for Synopsys VCS simulation and Verdi waveform-debug workflows}
+}
+```
 
 ## License
 

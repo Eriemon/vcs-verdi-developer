@@ -13,7 +13,7 @@ Thank you for improving VCS Verdi Developer. This repository is an agent skill f
 
 ## Suggested Workflow
 
-1. Identify whether the change affects environment discovery, RC generation, smoke planning, project import, coverage/FSDB tooling, regression flow, remote validation, or documentation.
+1. Identify whether the change affects environment discovery, RC generation, smoke planning, project import, cocotb planning, coverage/FSDB tooling, regression flow, evidence gating, remote validation, or documentation.
 2. Make a focused change with a clear before/after behavior.
 3. Run the smallest relevant validation or static check.
 4. Include the exact evidence for any claimed VCS/Verdi behavior change.
@@ -27,8 +27,10 @@ python .\scripts\check_env.py --json
 python .\scripts\generate_rc.py --help
 python .\scripts\smoke_vcs_verdi.py --help
 python .\scripts\import_vcs_project.py --help
+python .\scripts\cocotb_vcs_flow.py --help
 python .\scripts\coverage_flow.py --help
 python .\scripts\run_regression.py --help
+python .\scripts\evidence_claim_gate.py --help
 ```
 
 Use dry-run planning by default for VCS/Verdi smoke flows. Do not claim proprietary-tool acceptance from static inspection alone. For coverage, FSDB utilities, regression, or remote evidence flows, keep execution claims separated from local planning claims.

@@ -19,11 +19,13 @@ This skill supports a scripted non-GUI flow:
 11. Plan or execute VCS coverage and URG report generation with `scripts/coverage_flow.py`.
 12. Run multiple manifests through `scripts/run_regression.py`.
 13. Import simple Makefile/filelist or Edalize/CAPI2-style projects with `scripts/import_vcs_project.py` when a real project starts from a VCS, ModelSim, Icarus, or Edalize description instead of a manifest.
-14. Plan PicoRV32/RISCV-DV style generator, VCS, simv, URG, and trace-compare flows with `scripts/riscv_dv_flow.py`.
-15. Plan guarded KVIPS APB/AHB/AXI4 UVM VCS, FSDB, fsdbreport, and regression flows with `scripts/kvips_vcs_flow.py`; do not count UVM as core low-dependency support.
-16. Plan FP-Gen Genesis2, VCS/VPD, SAIF, and guarded gate-level simulation flows with `scripts/fpgen_vcs_flow.py`.
-17. Collect one JSON evidence bundle with `scripts/collect_evidence.py`.
-18. Validate default remote EDA server detached evidence with `scripts/remote_eda_gate.py`.
+14. Plan cocotb VCS/VPI non-GUI Verilog/SystemVerilog flows with `scripts/cocotb_vcs_flow.py`; mark VCS cocotb VHDL/VHPI and GUI requests as unsupported or blocked.
+15. Plan PicoRV32/RISCV-DV style generator, VCS, simv, URG, and trace-compare flows with `scripts/riscv_dv_flow.py`.
+16. Plan guarded KVIPS APB/AHB/AXI4 UVM VCS, FSDB, fsdbreport, and regression flows with `scripts/kvips_vcs_flow.py`; do not count UVM as core low-dependency support.
+17. Plan FP-Gen Genesis2, VCS/VPD, SAIF, and guarded gate-level simulation flows with `scripts/fpgen_vcs_flow.py`.
+18. Collect one JSON evidence bundle with `scripts/collect_evidence.py`.
+19. Validate factual support statements with `scripts/evidence_claim_gate.py`.
+20. Validate remote EDA host detached evidence with `scripts/remote_eda_gate.py`.
 
 The skill does not claim complete coverage of every official Synopsys VCS or Verdi option. Unsupported or unverified options must be reported as outside the current scripted scope.
 
@@ -43,7 +45,7 @@ Use a manifest when project inputs are more complex than a single source file:
   "defines": {"SIM": "1"},
   "libraries": ["work"],
   "tools": {"vlogan": "vlogan", "vcs": "vcs", "simv": "./simv", "fsdbreport": "fsdbreport"},
-  "env": {"SNPSLMD_LICENSE_FILE": "27000@license-host"},
+  "env": {"SNPSLMD_LICENSE_FILE": "27000@<license-server>"},
   "top": "tb_top",
   "timescale": "1ns/1ps",
   "coverage": ["line", "cond"],
@@ -95,6 +97,8 @@ The importer also handles PicoRV32/RISCV-DV style `cd dv && vcs -f cfg/vcs.f` fl
 
 Use `scripts/import_vcs_project.py --edalize-json edam.json --project-root <root> --json` to convert Edalize/CAPI2-style VCS descriptions into the same manifest shape. The importer supports `files[].name`, `file_type`, include paths, `toplevel`, `plusarg`, `vlogdefine`, `vlogparam`, `tool_options.vcs.vcs_options`, and `tool_options.vcs.run_options`. SystemVerilog inputs add `-sverilog`; `verilog2001Source` inputs add `+v2k`; C/C++ files are preserved as VCS-side DPI/support sources rather than treated as standalone GUI work.
 
+Use `scripts/cocotb_vcs_flow.py --makefile <tests/Makefile> --project-root <root> --toplevel-lang verilog --dry-run --json` for cocotb VCS examples. The plan must show VCS VPI access through `+vpi`, `-P <sim_build>/pli.tab`, `+define+COCOTB_SIM=1`, `-load <cocotb VPI library>`, and simulation environment variables `MODULE`, `TOPLEVEL`, and `TOPLEVEL_LANG`. Because the referenced cocotb VCS makeflow is VPI-only, any `VHDL_SOURCES` in this flow must remain `unsupported` with reason `vcs_cocotb_vhdl_unsupported`; this does not change the separate core smoke support for non-cocotb mixed VHDL/SystemVerilog manifests.
+
 Use `scripts/riscv_dv_flow.py --project-root <picorv32-root> --dv-root <picorv32-root>/dv --test <name> --seed <n> --dry-run --json` to plan RISCV-DV generation, test compilation, VCS compile, `simv +hex/+trace`, URG report, and trace compare. Missing RISCV-DV, RISC-V GCC, Spike, VCS, or URG remains an execution blocker and must not be counted as local support failure when the dry-run plan is correct.
 
 Use `scripts/kvips_vcs_flow.py --project-root <kvips-root> --protocol apb|ahb|axi4 --dry-run --json` for KVIPS-style UVM VIP flows. The plan must show `-ntb_opts uvm-1.2`, filelist expansion, UVM test plusargs, seed plusargs, regression list coverage, optional FSDB PLI, `fsdbreport`, and guarded `verdi -ssf ... -nologo -exit`. Because this flow depends on UVM, the plan is `guarded_optional`, not part of the core low-dependency VCS/Verdi confidence target.
@@ -102,3 +106,5 @@ Use `scripts/kvips_vcs_flow.py --project-root <kvips-root> --protocol apb|ahb|ax
 Use `scripts/fpgen_vcs_flow.py --project-root <fpgen-root> --product FPGen --dry-run --json` for FP-Gen-style flows. The plan must separate Genesis2 generation, VCS compile, `simv` VPD run, SAIF runtime args, and guarded gate-level DC/ICC commands. Missing generated `genesis_vlog.vf`, Genesis2, DesignWare/GTech libraries, Synopsys licenses, or DC/ICC inputs are execution blockers and must appear as diagnostics or optional external dependencies.
 
 For DPI-C flows like pysv-generated bindings, add generated SystemVerilog binding files to `sources`, put the compiled shared object in `sv_libs`, and set `LD_LIBRARY_PATH` through `env` when the runtime loader needs the shared-library directory. Dry-run must show `-sverilog -sv_lib <library>` in the VCS step and `./simv` in the simulation step.
+
+Use `scripts/evidence_claim_gate.py --claims-json <claims.json> --json` before release or readiness statements that contain factual capability claims. Factual claims require `support_status` of `supported` or `passed` plus at least one valid `evidence_id`. Recommendations may warn when unverified, but unsupported factual claims must fail the gate.

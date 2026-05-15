@@ -1,4 +1,4 @@
 interface:
   display_name: "VCS Verdi Developer"
-  short_description: "Guide scripted non-GUI VCS simulation, Makefile/Edalize import, DPI, FSDB/NPI, coverage, regression, and Verdi checks."
-  default_prompt: "Use $vcs-verdi-developer to validate a scripted non-GUI VCS simulation, Makefile or Edalize import, DPI dry-run, FSDB/NPI readback, and regression gate."
+  short_description: "Guide scripted non-GUI VCS simulation, Makefile/Edalize/cocotb import, DPI, FSDB/NPI, coverage, evidence, and Verdi checks."
+  default_prompt: "Use $vcs-verdi-developer to validate a scripted non-GUI VCS simulation, Makefile, Edalize, or cocotb import, DPI dry-run, FSDB/NPI readback, evidence, and regression gate."

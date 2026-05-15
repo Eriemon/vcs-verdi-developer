@@ -1,11 +1,12 @@
 {
   "skill_name": "vcs-verdi-developer",
-  "version": "v0.4.8",
+  "version": "v0.5.0",
   "source_path": "skills/vcs-verdi-developer",
-  "generated_at": "2026-05-15T22:56:58",
-  "current_branch": "main",
+  "generated_at": "2026-05-15T23:16:09",
+  "current_branch": "master",
   "local_branches": [
-    "main"
+    "master",
+    "release"
   ],
   "worktree_clean": true,
   "phase_results": {
@@ -16,15 +17,19 @@
   "validation_level": "strong",
   "provenance_mode": "repository-dist",
   "sanitization": {
-    "enabled": true,
-    "scope": "public-naming-sanitized",
-    "mode": "repository-update",
+    "enabled": false,
+    "scope": "not-configured",
+    "mode": "not-configured",
     "files": []
   },
   "files": [
     {
       "path": "agents/openai.yaml",
-      "sha256": "db222e2b3a4a80dd34ae5a4428a18f07357e49f15d002d31b94ed0046f5cce18"
+      "sha256": "7642e09a14509dc622665dc520a6d17b895f41e1d68d10b9f18ae79368bebbb8"
+    },
+    {
+      "path": "assets/evidence/non_gui_claims.json",
+      "sha256": "6cc40666a7b2f586efdba484d4eed64244b53220e873203d73278b2f028edd7f"
     },
     {
       "path": "assets/minimal_vcs/core.vhd",
@@ -40,7 +45,7 @@
     },
     {
       "path": "assets/minimal_vcs/include/.keep",
-      "sha256": "74118b6634c1991726c56fbe4a5df2a3f2b1663829a0b6be21db70a2bcde9b13"
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
     },
     {
       "path": "assets/minimal_vcs/include/sim_defs.svh",
@@ -57,6 +62,30 @@
     {
       "path": "assets/minimal_vcs/top.sv",
       "sha256": "429300b6bab1bc27b2d519bd912809d07e465bb8e8bdb1eb235109d3d09f62b4"
+    },
+    {
+      "path": "assets/templates/evolution/evolution-index.json",
+      "sha256": "0a56ffcf37dd74e0c0cc75ceac34821bcf3df1d87730004f67fad238ac7feb36"
+    },
+    {
+      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/1-workflow.md",
+      "sha256": "d5ca434dc8cd79fb47ed012359deb93f4abf7da4c79f724191422c47aac9676c"
+    },
+    {
+      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/2-scripts.md",
+      "sha256": "d2f27d2169b4852443ffe6c5cf30506516b71546db88dcbec715fcfcae573fa2"
+    },
+    {
+      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/3-plan.md",
+      "sha256": "b8e3eb3ef1b4658f5e5df1f94ab745d515db9578c2db2abc38ea37b357b02117"
+    },
+    {
+      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/4-design-ui.md",
+      "sha256": "349ddf3d61e9a5b208c1ba31feb06c4304e6b1ffc6931f964595eea2bda0f07d"
+    },
+    {
+      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/template-index.json",
+      "sha256": "48d7cdf684b9694273f5981029f7149a8ea66a6e24edb1d0e88ea43e2800ee05"
     },
     {
       "path": "assets/waves/scn_base.lst",
@@ -76,31 +105,31 @@
     },
     {
       "path": "evals/evals.json",
-      "sha256": "639a7f7624830759261a9b14950c959ed35ca0e80ce5e411c5b506101e58ea2a"
+      "sha256": "fd5b4a41072174bf43a705dcbdae85b659e60bfc965447b06666d74038d6befd"
     },
     {
       "path": "references/capability-matrix.md",
-      "sha256": "fdb8a427baad348bdd287843b31f9ca96905ddeaefbc2bbf60d6d78ad4b5b483"
+      "sha256": "4b82bdf54fa280c9a1cbec912c538eddea375c2f082f044b7d34fc0bfc2c5bdf"
     },
     {
       "path": "references/non-gui-flow.md",
-      "sha256": "808b1fc0b4f6500a4d6ea65b72283d272e939abc28abea547dd0c8e1022fb7bf"
+      "sha256": "2bfeb5d72a3e5f62e1498f7b40454971c5e915e6cd04f2805ba3b23d28c2945e"
     },
     {
-      "path": "references/remote-gate.md",
-      "sha256": "78903597e915b31e12f4385ae69646bc5f6b36b6644f50d150528bf897e1e240"
+      "path": "references/remote-eda-gate.md",
+      "sha256": "93edfa8971a3ee6acc96bb85c65de8979769d4d93c5ef4c5bcd6625bc5498568"
     },
     {
-      "path": "references/remote-validation.md",
-      "sha256": "f47a53d2480ebd9607687fd16caeda7b9e529b9dd01235945f160a90daeaaea5"
+      "path": "references/remote-eda-validation.md",
+      "sha256": "72069acd09ebe25d009aa140635751cbb946ee7429374e9c79e1e75249df1238"
     },
     {
       "path": "references/review-checklist.md",
-      "sha256": "3f5a3337f335ba8f282a31832b6b340dc096661d80647ec55c38b5122e6ccac3"
+      "sha256": "ce675937fccef2fb30d9beb10d796cb5d8b24bd7536a52d4f87559cb68bac35e"
     },
     {
       "path": "references/third-party-extraction.md",
-      "sha256": "8ad14962b8ba018f46673582d07d28b64772633d2c72a4d02566f62612c2e106"
+      "sha256": "1bd13369e0a7101133a4931f4b33f3a07264f278b3fff836b3cb1f5646f4a026"
     },
     {
       "path": "references/vcs-verdi-flow.md",
@@ -123,12 +152,20 @@
       "sha256": "5f2639f996fc0dc4b93db7aec4f79cfde3a0038ac1f9df8ec5f0bb2a9a186f10"
     },
     {
+      "path": "scripts/cocotb_vcs_flow.py",
+      "sha256": "7394a65b7eb53d47d9f36b952efffd916c245d4bbda144ddae2231f5470f8528"
+    },
+    {
       "path": "scripts/collect_evidence.py",
       "sha256": "4cf26dcdd570263af13c30c79dd0eff51ce41161ff5f543fc153b8f4849ad554"
     },
     {
       "path": "scripts/coverage_flow.py",
       "sha256": "9c58625c756a20df1530f32ba998e4987fb21570952f87c40f1a07339b6a016a"
+    },
+    {
+      "path": "scripts/evidence_claim_gate.py",
+      "sha256": "2e26f5f57e9572e6690a7426f6afa38b84e30a68f41fa59ea75eff35fefad6d5"
     },
     {
       "path": "scripts/fpgen_vcs_flow.py",
@@ -160,7 +197,7 @@
     },
     {
       "path": "scripts/remote_eda_gate.py",
-      "sha256": "8c3180446e003cf73c14747cf01a544f3b44e709e86e047d8c25bb7ead427d20"
+      "sha256": "408b1c992b26f0e7afe7dce457eefab1b93eda72285c1724509be29c2b3f99d3"
     },
     {
       "path": "scripts/riscv_dv_flow.py",
@@ -168,7 +205,7 @@
     },
     {
       "path": "scripts/run_quality_gate.py",
-      "sha256": "7323507d4bf02e50bb99bc1020b6383b4165ceb459e213e01f7aa857e5b4955e"
+      "sha256": "75f64d966cc16a6ac90054eb99fa91b5b43e94b39a973468af5e89b3a484fecb"
     },
     {
       "path": "scripts/run_regression.py",
@@ -176,7 +213,7 @@
     },
     {
       "path": "scripts/run_remote_eda_smoke.sh",
-      "sha256": "e119f10e8b442d6bb9e59d83d5aa819a56101a6af31b7759cfbebf7c3664e713"
+      "sha256": "63c4c408e428732bd941edcc35059370a949e0d5376320421e4896f5c12128ca"
     },
     {
       "path": "scripts/smoke_vcs_verdi.py",
@@ -184,7 +221,7 @@
     },
     {
       "path": "scripts/urg_coverage_matrix.py",
-      "sha256": "a9227ab81d8cdaac3de2213bbe0e68f1d80672d3a53d01a6db58b79229a6968d"
+      "sha256": "50c60064fe7b07190450c70847f8cd06821104eff57eced2c14de06e52459985"
     },
     {
       "path": "scripts/urg_runtime_probe.py",
@@ -192,11 +229,11 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "9ec817071b6ab51ced0648102d0567a1c50b46478ee3d2a11ce78e2ffbc5bb29"
+      "sha256": "2b3fe2da283c8050188dae267e9223bcdbe3a30d3dcf5dc04783f43d7daae21f"
     },
     {
       "path": "VERSION",
-      "sha256": "f2fd2ee8a7e5444027e7c18b62fdc58058b807a988037cabd3b28f616e29d285"
+      "sha256": "d126dc59d212f56e77cb5d4bbd7bc222a6a6f171160a2330d74e4fd91d6b5442"
     }
   ]
 }

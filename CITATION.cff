@@ -10,21 +10,23 @@ authors:
   - family-names: "Li"
     given-names: "He"
     affiliation: "Southeast University"
-abstract: "VCS Verdi Developer is a Codex-ready agent skill package for Synopsys VCS simulation, project import, FSDB generation and readback, coverage diagnostics, regression orchestration, Verdi waveform-debug workflows, RC layout generation, and remote validation gates."
+abstract: "VCS Verdi Developer is a Codex-ready agent skill package for Synopsys VCS simulation, project import, cocotb VCS/VPI planning, FSDB generation and readback, evidence gating, coverage diagnostics, regression orchestration, Verdi waveform-debug workflows, RC layout generation, and remote validation gates."
 keywords:
   - agent skill
   - Codex
   - Synopsys VCS
   - Verdi
   - FSDB
+  - cocotb
   - coverage
   - regression
   - project import
+  - evidence gate
   - waveform debug
   - RTL simulation
 repository-code: "https://github.com/Eriemon/vcs-verdi-developer"
 url: "https://github.com/Eriemon/vcs-verdi-developer"
-version: "0.4.8"
+version: "0.5.0"
 date-released: "2026-05-15"
 year: 2026
 license: "Apache-2.0"

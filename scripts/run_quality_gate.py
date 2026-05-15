@@ -20,7 +20,7 @@ REQUIRED_SKILL_FILES = (
     "references/capability-matrix.md",
     "references/third-party-extraction.md",
     "references/review-checklist.md",
-    "references/remote-gate.md",
+    "references/remote-eda-gate.md",
     "scripts/check_env.py",
     "scripts/smoke_vcs_verdi.py",
     "scripts/analyze_logs.py",
@@ -33,10 +33,13 @@ REQUIRED_SKILL_FILES = (
     "scripts/riscv_dv_flow.py",
     "scripts/kvips_vcs_flow.py",
     "scripts/fpgen_vcs_flow.py",
+    "scripts/cocotb_vcs_flow.py",
+    "scripts/evidence_claim_gate.py",
     "scripts/collect_evidence.py",
     "scripts/run_regression.py",
     "scripts/remote_eda_gate.py",
     "scripts/run_quality_gate.py",
+    "assets/evidence/non_gui_claims.json",
     "assets/minimal_vcs/top.sv",
     "assets/minimal_vcs/coverage_top.sv",
     "assets/minimal_vcs/core.vhd",
@@ -58,6 +61,8 @@ SCRIPT_MATRIX = (
     "riscv_dv_flow.py",
     "kvips_vcs_flow.py",
     "fpgen_vcs_flow.py",
+    "cocotb_vcs_flow.py",
+    "evidence_claim_gate.py",
     "collect_evidence.py",
     "run_regression.py",
     "remote_eda_gate.py",
@@ -74,7 +79,9 @@ CAPABILITY_MATRIX_TERMS = (
     "regression",
     "import",
     "evidence",
-    "remote_eda",
+    "claim",
+    "cocotb",
+    "remote eda",
     "riscv-dv",
     "kvips",
     "fp-gen",
@@ -181,6 +188,11 @@ def build_local_gate(repo_root: Path, *, skill_dir: Path | None = None) -> dict:
     ref7_modelsim_tcl = ref7_program / "modelsim_script.tcl"
     ref8_root = repo_root / "ref" / "8-kvips"
     ref9_root = repo_root / "ref" / "9-FP-Gen"
+    ref14_adder_root = repo_root / "ref" / "14-cocotb" / "examples" / "adder"
+    ref14_adder_makefile = ref14_adder_root / "tests" / "Makefile"
+    ref14_mixed_root = repo_root / "ref" / "14-cocotb" / "examples" / "mixed_language"
+    ref14_mixed_makefile = ref14_mixed_root / "tests" / "Makefile"
+    evidence_claims = skill_dir / "assets" / "evidence" / "non_gui_claims.json"
     ref12_root = repo_root / "ref" / "12-CSCD"
     ref12_makefile = ref12_root / "sim" / "Makefile"
     ref12_filelist = ref12_root / "rtl" / "filelist.f"
@@ -527,6 +539,68 @@ def build_local_gate(repo_root: Path, *, skill_dir: Path | None = None) -> dict:
             },
         },
         {
+            "name": "ref14_cocotb_adder_vcs_dry_run",
+            "cmd": [
+                sys.executable,
+                str(skill_dir / "scripts" / "cocotb_vcs_flow.py"),
+                "--makefile",
+                str(ref14_adder_makefile),
+                "--project-root",
+                str(ref14_adder_root),
+                "--toplevel-lang",
+                "verilog",
+                "--cocotb-lib",
+                "/path/to/cocotb/libcocotbvpi_vcs.so",
+                "--dry-run",
+                "--json",
+            ],
+            "cwd": str(repo_root),
+            "required": ref14_adder_makefile.exists(),
+            "json_contains": {
+                "status": "dry-run",
+                "top": "adder",
+                "module": "test_adder",
+                "compile.cmd": "+vpi",
+                "sources.verilog": "hdl/adder.sv",
+            },
+        },
+        {
+            "name": "ref14_cocotb_mixed_vhdl_guard",
+            "cmd": [
+                sys.executable,
+                str(skill_dir / "scripts" / "cocotb_vcs_flow.py"),
+                "--makefile",
+                str(ref14_mixed_makefile),
+                "--project-root",
+                str(ref14_mixed_root),
+                "--toplevel-lang",
+                "verilog",
+                "--cocotb-lib",
+                "/path/to/cocotb/libcocotbvpi_vcs.so",
+                "--dry-run",
+                "--json",
+            ],
+            "cwd": str(repo_root),
+            "required": ref14_mixed_makefile.exists(),
+            "json_contains": {
+                "status": "unsupported",
+                "reason": "vcs_cocotb_vhdl_unsupported",
+            },
+        },
+        {
+            "name": "claim_evidence_gate",
+            "cmd": [
+                sys.executable,
+                str(skill_dir / "scripts" / "evidence_claim_gate.py"),
+                "--claims-json",
+                str(evidence_claims),
+                "--json",
+            ],
+            "cwd": str(repo_root),
+            "required": evidence_claims.exists(),
+            "json_contains": {"status": "passed"},
+        },
+        {
             "name": "ref12_cscd_import_dry_run",
             "cmd": [
                 sys.executable,
@@ -793,7 +867,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--timeout", type=int, default=300)
-    parser.add_argument("--remote-evidence", type=Path, help="Fresh remote EDA/equivalent evidence JSON.")
+    parser.add_argument("--remote-evidence", type=Path, help="Fresh remote EDA host/equivalent evidence JSON.")
     parser.add_argument("--remote-max-age-hours", type=int, default=24)
     args = parser.parse_args()
 

@@ -1,13 +1,13 @@
 # Remote EDA Full-Flow Gate
 
-This gate is required before claiming factual confidence for default remote EDA server VCS/Verdi execution.
+This gate is required before claiming factual confidence for VCS/Verdi execution on any selected remote Linux EDA host.
 
 ## Remote Directory
 
 Use a dedicated temporary work directory such as:
 
 ```sh
-mkdir -p ~/workspace/vcs-verdi-smoke
+mkdir -p ~/eda-work/vcs-verdi-smoke
 ```
 
 Upload only the runtime fixture, optional RC file, and the smoke script. Do not synchronize the local skill repository or temporary reference material.
@@ -68,17 +68,17 @@ Strict matrix evidence for `eda_execution_confidence=passed` additionally requir
 
 ## Remote EDA Environment Notes
 
-The default remote EDA server may expose the Synopsys environment only through a login shell. Use `bash -lc` for the reviewed full-flow runner so `VCS_HOME`, `VERDI_HOME`, `LM_LICENSE_FILE`, and `SNPSLMD_LICENSE_FILE` are present.
+A remote EDA host may expose the Synopsys environment only through a login shell. Use `bash -lc` for the reviewed full-flow runner so `VCS_HOME`, `VERDI_HOME`, `LM_LICENSE_FILE`, and `SNPSLMD_LICENSE_FILE` are present.
 
-If Synopsys wrappers start with `#!/bin/sh -h` or a Verdi wrapper fails under `/bin/sh`, create a temporary validation overlay with `scripts/make_shell_overlay.sh`. The overlay must live inside the remote validation directory, symlink unmodified tool files to the original install, and patch only copied shell-wrapper shebangs to bash. Do not modify `/tools/synopsys`.
+If Synopsys wrappers start with `#!/bin/sh -h` or a Verdi wrapper fails under `/bin/sh`, create a temporary validation overlay with `scripts/make_shell_overlay.sh`. The overlay must live inside the remote validation directory, symlink unmodified tool files to the original install, and patch only copied shell-wrapper shebangs to bash. Do not modify a shared vendor install path directly.
 
 For Verdi 2024.09 and newer, prefer the `VERDI_HOME` plus `-debug_access` FSDB flow. Use `--no-auto-pli` when legacy `-P novas.tab pli.a` causes deprecation errors and no FSDB is produced.
 
 If GUI Verdi or `verdi -batch` does not return naturally, keep that as a GUI automation limitation and use `--verdi-check fsdbreport --report-signal /top/clk` for the deterministic CI gate. This proves the FSDB is readable by Verdi tooling; it does not claim Tk/GUI automation is complete.
 
-Current remote EDA evidence from 2026-05-15 proves minimal FSDB smoke, mixed VHDL/SystemVerilog, and FSDB conversion. It does not prove URG report generation: `coverage_urg` fails after building valid pure-SV coverage VDB inputs, and explicit `-full64` did not resolve the internal `urg1` stack trace. The strict runner uses `coverage_top.sv`, propagates `-cm line+cond+tgl -cm_dir <workdir>/simv.vdb` through `vlogan`, elaborate, and simulation, and records `urg_coverage_matrix.json` to separate VDB, wrapper, loader, and internal URG failure modes. Do not pass `-cm` or `-cm_dir` to `vhdlan`; the current default remote EDA server W-2024.09-SP1 environment rejects them as invalid analysis-time options. Treat URG as an EDA execution blocker until the default combined matrix variant produces a nonzero report directory on the default remote EDA server or an equivalent Linux EDA host.
+Known remote evidence from 2026-05-15 proves minimal FSDB smoke, mixed VHDL/SystemVerilog, and FSDB conversion on one Linux EDA host. It does not prove URG report generation: `coverage_urg` fails after building valid pure-SV coverage VDB inputs, and explicit `-full64` did not resolve the internal `urg1` stack trace. The strict runner uses `coverage_top.sv`, propagates `-cm line+cond+tgl -cm_dir <workdir>/simv.vdb` through `vlogan`, elaborate, and simulation, and records `urg_coverage_matrix.json` to separate VDB, wrapper, loader, and internal URG failure modes. Do not pass `-cm` or `-cm_dir` to `vhdlan`; at least one W-2024.09-SP1 host rejects them as invalid analysis-time options. Treat URG as an EDA execution blocker until the default combined matrix variant produces a nonzero report directory on a Linux EDA host.
 
-`scripts/patch_ucapi_overlay.py` is a guarded workaround for the known URG `libucapi.so` crash pattern. The default full-flow runner only scans the VCS overlay and records `ucapi_patch_scan.json`. On the current default remote EDA server W-2024.09-SP1 install, that scan returned `no_match` for the CSDN byte pattern, so the patch path must not be applied. If a future scan returns `match`, apply the patch only when `VCS_VERDI_ALLOW_UCAPI_PATCH=1` is set, and only to copied overlay files or an overlay-local `ucapi_patch_lib` directory. `scripts/urg_runtime_probe.py` must then prove the patched library directory is loader-effective before any patched pass is accepted. Never patch `/tools/synopsys` or any other shared vendor install path.
+`scripts/patch_ucapi_overlay.py` is a guarded workaround for a known URG `libucapi.so` crash pattern. The default full-flow runner only scans the VCS overlay and records `ucapi_patch_scan.json`. If the scan returns `no_match` while URG still emits an internal stack trace, the matrix must report `urg_internal_stack_trace_ucapi_patch_not_applicable` rather than implying a safe local patch exists. If a future scan returns `match`, apply the patch only when `VCS_VERDI_ALLOW_UCAPI_PATCH=1` is set, and only to copied overlay files or an overlay-local `ucapi_patch_lib` directory. `scripts/urg_runtime_probe.py` must then prove the patched library directory is loader-effective before any patched pass is accepted. Never patch a shared vendor install path directly.
 
 ## Failure Evidence
 

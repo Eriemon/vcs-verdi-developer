@@ -4,7 +4,7 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 
 ## Scope Gate
 
-- Confirm the request is within the skill promise: environment probe, RC generation, non-GUI VCS smoke flow, VHDL compile planning, FSDB artifact check, fsdbreport check, guarded Verdi load check, Tk/IPython command construction, or default remote EDA server validation.
+- Confirm the request is within the skill promise: environment probe, RC generation, non-GUI VCS smoke flow, VHDL compile planning, FSDB artifact check, fsdbreport check, guarded Verdi load check, Tk/IPython command construction, or remote EDA validation.
 - Do not claim complete coverage of every Synopsys VCS or Verdi option. Report unsupported official-tool features as outside the current skill scope.
 - Confirm no runtime step depends on the temporary reference directory or local absolute development paths.
 
@@ -27,6 +27,7 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - For real projects, prefer a JSON manifest and verify source lists, multiple filelists, VHDL sources, include dirs, defines, tool overrides, environment injection, stage args, expected artifacts, coverage, plusargs, seeds, and dump command files appear in the dry-run plan.
 - When starting from a Makefile/filelist project, use `scripts/import_vcs_project.py` and review preserved original VCS args before execution. For `VCS_FLAGS`/`SRCS` style projects, confirm the imported manifest is not empty and includes sources, include dirs, top, dump artifact, simulation log args, and diagnostics.
 - When starting from an Edalize/CAPI2-style project, use `scripts/import_vcs_project.py --edalize-json` and confirm `file_type`, `toplevel`, plusargs, vlogdefines, vlogparams, `vcs_options`, and `run_options` are represented in the manifest.
+- When starting from a cocotb Makefile, use `scripts/cocotb_vcs_flow.py` and confirm the plan is non-GUI, VPI-based, and includes `pli.tab`, `+vpi`, `-P`, `+define+COCOTB_SIM=1`, `-load`, `MODULE`, `TOPLEVEL`, and `TOPLEVEL_LANG`; VHDL cocotb inputs must remain `vcs_cocotb_vhdl_unsupported`.
 - For course-style Makefiles, confirm line comments are not included in `original_vcs_args`, caller-required variables are passed with `--make-var`, `-top` is not populated from another flag such as `-R`, `$(shell find ...)` sources resolve to real project paths, `./<simv> -l` simulation args are captured, and `urg -dir` produces explicit VDB/report paths without counting URG as executed.
 - For PicoRV32/RISCV-DV style inputs, confirm `vcs.f` filelist flags are not treated as sources, coverage metrics are captured, `workdir` is the DV directory, and `simv`/coverage outputs are explicit.
 - For ModelSim or Icarus projects, confirm converted manifests include top module, `SIMULATION` define, include dirs, expanded sources, missing source glob diagnostics, and pre-simulation hex artifact diagnostics.
@@ -44,17 +45,20 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - `scripts/analyze_logs.py` classifies compile, license, platform, PLI, and FSDB failures.
 - `scripts/fsdb_tools.py` checks FSDB artifacts, plans NPI-first FSDB info/list/read with CLI fallback, and plans or executes `fsdbreport`, `fsdb2vcd`, `vcd2fsdb`, and `vpd2fsdb`.
 - `scripts/coverage_flow.py` plans `-cm` metrics and URG report commands, and records execution evidence when `--execute` is used.
-- `scripts/patch_ucapi_overlay.py` scans or applies the guarded UCAPI workaround only inside validation overlays and never modifies `/tools/synopsys`.
+- `scripts/patch_ucapi_overlay.py` scans or applies the guarded UCAPI workaround only inside validation overlays and never modifies a shared vendor install path directly.
 - `scripts/urg_runtime_probe.py` records wrapper, `vcs -location`, loader, library hash, and optional strace diagnostics when URG fails.
 - `scripts/urg_coverage_matrix.py` records wrapper/direct `urg1` variants for line, cond, tgl, and line+cond+tgl; only a nonempty default `line+cond+tgl__urg__auto64` report can prove `coverage_urg`.
 - `scripts/import_vcs_project.py` imports simple VCS Makefile/filelist, ModelSim Tcl, and Icarus Makefile command patterns into a manifest candidate.
 - `scripts/import_vcs_project.py` imports Edalize/CAPI2-style VCS descriptions into the same manifest shape without creating a separate execution flow.
+- `scripts/cocotb_vcs_flow.py` plans cocotb VCS/VPI non-GUI Verilog/SystemVerilog runs and explicitly rejects GUI flags plus cocotb VCS VHDL/VHPI inputs.
 - `scripts/riscv_dv_flow.py` plans PicoRV32/RISCV-DV generator, VCS, simv, URG, and trace-compare flows without requiring UVM.
 - `scripts/kvips_vcs_flow.py` plans guarded KVIPS UVM VCS, FSDB, fsdbreport, and regression flows without promoting UVM into core support.
 - `scripts/fpgen_vcs_flow.py` plans FP-Gen Genesis2, VCS/VPD, SAIF, and guarded gate-level flows.
 - The local gate includes non-UVM `ref/4-sigarch-rtl-project-template` importer dry-runs, a UVM-optional diagnostic importer dry-run, a `ref/5-pysv` style DPI `-sv_lib` dry-run, and `ref/6`/`ref/7`/`ref/8`/`ref/9` import or dry-run planning checks.
 - The local gate includes `ref/12-CSCD` and `ref/13-Computer-Organization` mp_setup, mp_pipeline, mp_cache, and mp_verif importer dry-runs for course-style VCS/Verdi Makefile patterns.
+- The local gate includes `ref/14-cocotb` adder VCS/VPI dry-run and mixed-language VHDL guard checks.
 - `scripts/collect_evidence.py` builds a single JSON evidence bundle from smoke, coverage, conversion, env, report, and artifact outputs.
+- `scripts/evidence_claim_gate.py` fails unsupported or unevidenced factual claims and allows unverified recommendations only as warnings.
 - `scripts/run_regression.py` batches manifest flows and reports JSON/JUnit-style results with per-case missing tool and artifact summaries.
 - `scripts/remote_eda_gate.py` validates detached remote EDA evidence, timestamp freshness, environment hints, step commands, matrix checks, and artifacts without syncing the local skill tree.
 
@@ -64,10 +68,11 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - Confirm `local_confidence` and `eda_execution_confidence` are reported separately. A Windows-only local run may pass `local_confidence` while leaving EDA execution blocked by missing proprietary tools.
 - The local skill audit must target `vcs-verdi-developer`, not another installed skill's resource inventory.
 - The script matrix audit must pass; new supported capabilities require tests or dry-run coverage.
+- Factual readiness statements must either cite a supported local or remote evidence record or remain blocked/unsupported.
 
-## Remote EDA Gate
+## remote EDA host Gate
 
-- Follow `references/remote-gate.md`.
+- Follow `references/remote-eda-gate.md`.
 - Upload only a minimal runtime fixture or validation bundle into a named remote test directory.
 - Fresh factual EDA confidence requires the remote matrix to pass: minimal smoke, mixed VHDL/SV, coverage/URG, and FSDB conversion.
 - If full flow fails, collect wrapper shebangs, shell choice, return codes, logs, artifact status, and `DISPLAY`/VNC state before proposing fixes.

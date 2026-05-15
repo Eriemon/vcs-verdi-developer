@@ -61,7 +61,7 @@ def _classify_output(output: str, *, entry: str, ucapi_scan: dict | None = None)
         return "urg_wrapper_loader_failure"
     if "Stack trace follows" in output or "ptrace: Operation not permitted" in output:
         if (ucapi_scan or {}).get("status") == "no_match":
-            return "ucapi_pattern_no_match"
+            return "urg_internal_stack_trace_ucapi_patch_not_applicable"
         return "urg_internal_non_ucapi_failure"
     return "urg_failed"
 
@@ -154,8 +154,8 @@ def _matrix_reason(variants: list[dict], ucapi_scan: dict | None) -> str:
     if not variants:
         return "coverage_vdb_invalid"
     reasons = {str(item.get("reason", "")) for item in variants}
-    if (ucapi_scan or {}).get("status") == "no_match" and "ucapi_pattern_no_match" in reasons:
-        return "ucapi_pattern_no_match"
+    if "urg_internal_stack_trace_ucapi_patch_not_applicable" in reasons:
+        return "urg_internal_stack_trace_ucapi_patch_not_applicable"
     if "urg_wrapper_loader_failure" in reasons:
         return "urg_wrapper_loader_failure"
     if "urg_internal_ucapi_snpsmalloc_failure" in reasons:

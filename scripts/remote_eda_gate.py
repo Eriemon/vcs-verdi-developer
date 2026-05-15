@@ -192,7 +192,7 @@ def validate_evidence(evidence: dict, *, max_age_hours: int | None = None, now_u
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Plan or validate the minimal default remote EDA server VCS/Verdi gate.")
+    parser = argparse.ArgumentParser(description="Plan or validate the minimal remote EDA host VCS/Verdi gate.")
     parser.add_argument("--skill-dir", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--remote-dir", default="validation/vcs-verdi-nongui")
     parser.add_argument("--bundle-zip", type=Path)

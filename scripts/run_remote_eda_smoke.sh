@@ -7,8 +7,8 @@ RUN_DIR="$BUNDLE_ROOT/run"
 mkdir -p "$RUN_DIR"
 cd "$BUNDLE_ROOT"
 
-: "${VCS_HOME:?VCS_HOME must be set by the remote EDA login shell}"
-: "${VERDI_HOME:?VERDI_HOME must be set by the remote EDA login shell}"
+: "${VCS_HOME:?VCS_HOME must be set by the remote EDA host login shell}"
+: "${VERDI_HOME:?VERDI_HOME must be set by the remote EDA host login shell}"
 
 bash "$SCRIPT_DIR/make_shell_overlay.sh" "$VCS_HOME" "$RUN_DIR/vcs_overlay"
 bash "$SCRIPT_DIR/make_shell_overlay.sh" "$VERDI_HOME" "$RUN_DIR/verdi_overlay"
@@ -34,10 +34,16 @@ if [ "${VCS_VERDI_ALLOW_UCAPI_PATCH:-0}" = "1" ]; then
   fi
 fi
 
-for compat_lib_dir in \
-  "$VCS_HOME/vcfca/auxx/monet/lintllm/_internal" \
-  "$VERDI_HOME/share/ugo/linux64/bin/ugo_dist/ugo/_internal" \
-  "/tools/Xilinx/Vivado/2022.2/gnu/microblaze/lin/x86_64-oesdk-linux/lib"; do
+compat_lib_candidates=(
+  "$VCS_HOME/vcfca/auxx/monet/lintllm/_internal"
+  "$VERDI_HOME/share/ugo/linux64/bin/ugo_dist/ugo/_internal"
+)
+if [ -n "${VCS_VERDI_COMPAT_LIB_DIRS:-}" ]; then
+  IFS=':' read -r -a extra_compat_lib_dirs <<< "$VCS_VERDI_COMPAT_LIB_DIRS"
+  compat_lib_candidates+=("${extra_compat_lib_dirs[@]}")
+fi
+
+for compat_lib_dir in "${compat_lib_candidates[@]}"; do
   if [ -f "$compat_lib_dir/libncursesw.so.5" ]; then
     mkdir -p "$RUN_DIR/compat_lib"
     ln -sf "$compat_lib_dir/libncursesw.so.5" "$RUN_DIR/compat_lib/libncursesw.so.5"

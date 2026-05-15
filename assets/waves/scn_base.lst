@@ -1,0 +1,5 @@
+[unit]
+top = top
+clk = top.clk
+valid = top.valid
+data = top.data[2:0]

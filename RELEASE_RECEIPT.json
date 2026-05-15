@@ -1,0 +1,93 @@
+{
+  "skill_name": "vcs-verdi-developer",
+  "version": "v0.1.0",
+  "source_path": "skills/vcs-verdi-developer",
+  "generated_at": "2026-05-14T22:25:46",
+  "current_branch": "master",
+  "local_branches": [
+    "master",
+    "release"
+  ],
+  "worktree_clean": true,
+  "phase_results": {
+    "pre": true,
+    "post": true
+  },
+  "packaging_mode": "repository-dist",
+  "validation_level": "strong",
+  "provenance_mode": "repository-dist",
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "9734736be1737ff85070715f5279603f25f9017063e7462c00870bc369c9a2c6"
+    },
+    {
+      "path": "assets/minimal_vcs/top.sv",
+      "sha256": "429300b6bab1bc27b2d519bd912809d07e465bb8e8bdb1eb235109d3d09f62b4"
+    },
+    {
+      "path": "assets/waves/scn_base.lst",
+      "sha256": "597c67a4f01e2906f628478f19fdebea1e123b554cbdf49cff672fefc90428f5"
+    },
+    {
+      "path": "assets/waves/scn_basic.lst",
+      "sha256": "276207f32fb9da1edc2122e07d822e3cf650de767f874e9648d4587638000e21"
+    },
+    {
+      "path": "evals/evals.json",
+      "sha256": "8ecf6659fbe4590ad4e1f9eb57c233fd3f105353bb08e5baa164b478ed98366a"
+    },
+    {
+      "path": "references/review-checklist.md",
+      "sha256": "1e6cf487d2d75cdcd57fedd8d3ffc917c2802eacd54660767b0fc0892dd8b7ab"
+    },
+    {
+      "path": "references/threadfpga-gate.md",
+      "sha256": "2decec00aa07b50cd167da9c7ba3ebf926a3b3a8644e433f732aa77f71b21f85"
+    },
+    {
+      "path": "references/threadfpga-validation.md",
+      "sha256": "78e23cf5b5c43815efec1ae581e2e0d7e82569b365ffc007a273705b0a96bd3d"
+    },
+    {
+      "path": "references/vcs-verdi-flow.md",
+      "sha256": "cf7db5e2bda1ca47a8ae0962cbec07f26e369969c7a7f4bb6e619f755d4b63ec"
+    },
+    {
+      "path": "references/verdi-interaction.md",
+      "sha256": "e87272d558754bcfb7d4aa598d0c0e36eead5dbd5fb38ae3d92860cfb63971ca"
+    },
+    {
+      "path": "references/verdi-rc-format.md",
+      "sha256": "03f3c689a0d9b2e57d8bbc305587edb5b0ebddb4b0c02a354449f902e18a6a73"
+    },
+    {
+      "path": "scripts/check_env.py",
+      "sha256": "bfe1900b9c74b488dc918cea4135a7894cbc3c5380a71cb2da759f5d0efc57ae"
+    },
+    {
+      "path": "scripts/generate_rc.py",
+      "sha256": "3d06d8a2b52ae6825ceaeb77417db709b4260f12ba92d4d18d7c2f3d0bb233ce"
+    },
+    {
+      "path": "scripts/make_shell_overlay.sh",
+      "sha256": "a4b35132ad503b3b84c728eeef5d87f210b10a497753fc20a5f1b90fcc8b56a5"
+    },
+    {
+      "path": "scripts/run_threadfpga_smoke.sh",
+      "sha256": "55f5d661bcdeac7604257a85b137851f975e7a2ed29b4c431e25397f2d5c44dd"
+    },
+    {
+      "path": "scripts/smoke_vcs_verdi.py",
+      "sha256": "403b5276e65a74654408ea71f6a1cb089d3057c32b87e62bac2ebd6306375282"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "07d8bb52a384f083598d9f1923f5a46a4435235a2e94999a49f8ad4626557950"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "d0b4f9120ba026c00fa23cb84b4e1620a2e6436592e58155a5151653179572c0"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "skill": "vcs-verdi-developer",
+  "evals": [
+    {
+      "id": "env-probe-threadfpga",
+      "prompt": "Check whether ThreadFPGA is ready for VCS and Verdi smoke validation.",
+      "without_skill_expected_risk": "Reports only which vcs/verdi paths exist and misses DISPLAY, PLI, license, and /bin/sh -h wrapper blockers.",
+      "with_skill_expected_behavior": "Runs check_env.py, reports ready/degraded/blocker fields, and separates non-GUI Verdi readiness from GUI load readiness.",
+      "acceptance": "Output includes vlogan, vcs, verdi, VCS_HOME, VERDI_HOME, license hint, DISPLAY, SHELL, sh compatibility, and novas/PLI hint."
+    },
+    {
+      "id": "rc-generate-layout",
+      "prompt": "Generate a Verdi waveform RC with aliases, virtual bus, analog signal, and marker rows.",
+      "without_skill_expected_risk": "Hand-written Tcl silently drops aliases or emits invalid color/radix options.",
+      "with_skill_expected_behavior": "Uses generate_rc.py from documented scenario/base files and validates invalid rows with clear errors.",
+      "acceptance": "Generated RC contains addRenameSig, addBus/addBusSignal, addMarker, analog signal handling, and no unknown color token."
+    },
+    {
+      "id": "smoke-dry-run",
+      "prompt": "Plan a minimal VCS compile, elaborate, simulate, FSDB, and Verdi load check.",
+      "without_skill_expected_risk": "Runs tools immediately or omits logs/artifact checks.",
+      "with_skill_expected_behavior": "Uses smoke_vcs_verdi.py --dry-run by default and prints command plan, cwd, logs, wrapper diagnostics, missing tools, and artifact paths.",
+      "acceptance": "Dry-run exits 0 and includes compile, elaborate, simulate, verdi-load-check, diagnostics, and status=dry-run."
+    },
+    {
+      "id": "threadfpga-full-flow",
+      "prompt": "Validate the minimal fixture on ThreadFPGA end to end.",
+      "without_skill_expected_risk": "Treats vlogan success as complete validation and overlooks FSDB or Verdi GUI failures.",
+      "with_skill_expected_behavior": "Runs the fixed ThreadFPGA gate: dry-run, execute, nonzero waves.fsdb, Verdi load, and failure evidence collection.",
+      "acceptance": "Full pass has return code 0 for all four steps and waves.fsdb is present with bytes > 0; failures include wrapper, shell, logs, DISPLAY/VNC, and artifact evidence."
+    }
+  ]
+}

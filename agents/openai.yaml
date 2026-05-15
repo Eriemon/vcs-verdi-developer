@@ -1,0 +1,4 @@
+interface:
+  display_name: "VCS Verdi Developer"
+  short_description: "Guide VCS simulation and Verdi waveform debug workflows."
+  default_prompt: "Use $vcs-verdi-developer to validate a VCS simulation and open the FSDB in Verdi."

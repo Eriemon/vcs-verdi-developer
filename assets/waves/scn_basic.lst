@@ -1,0 +1,9 @@
+[GROUPS]
+1. TIMING gray
+1.1 clk bin cyan 15 CLK
+1.2 valid bin green 15 VALID
+2. DATA yellow
+2.1 data hex yellow 20 DATA
+
+[MARKERS]
+0 START white

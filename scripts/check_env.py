@@ -27,6 +27,44 @@ ENV_VARS = (
     "PATH",
     "LD_LIBRARY_PATH",
 )
+LICENSE_ENV_VARS = {"SNPSLMD_LICENSE_FILE", "LM_LICENSE_FILE"}
+PATH_LIST_ENV_VARS = {"PATH", "LD_LIBRARY_PATH"}
+PATH_VALUE_ENV_VARS = {"VCS_HOME", "VCS_BIN", "VERDI_HOME", "VERDI_PYTHON", "NOVAS_HOME", "XAUTHORITY"}
+DISPLAY_ENV_VARS = {"DISPLAY", "VNC_DISPLAY"}
+
+
+def _split_path_entries(path_value: str) -> list[str]:
+    split_token = os.pathsep
+    if ":" in path_value and ";" not in path_value:
+        split_token = ":"
+    return [entry for entry in path_value.split(split_token) if entry]
+
+
+def _sanitize_path(path: str, *, expose_paths: bool) -> str:
+    if not path:
+        return ""
+    if expose_paths:
+        return path
+    name = Path(path).name
+    return f"<redacted:{name or 'path'}>"
+
+
+def _sanitize_env_value(name: str, value: str, *, expose_paths: bool, expose_values: bool) -> str:
+    if not value:
+        return ""
+    if expose_values or (expose_paths and name in PATH_VALUE_ENV_VARS):
+        return value
+    if name in LICENSE_ENV_VARS:
+        return "<redacted-license-server>"
+    if name in PATH_LIST_ENV_VARS:
+        return f"<redacted:{len(_split_path_entries(value))} entries>"
+    if name in PATH_VALUE_ENV_VARS:
+        return "<set>"
+    if name in DISPLAY_ENV_VARS:
+        return "<set>"
+    if name == "SHELL":
+        return Path(value).name or "<set>"
+    return "<set>"
 
 
 def detect_tool_version(path: str) -> str:
@@ -82,6 +120,8 @@ def check_environment(
     sh_compat_func: Callable[[], dict] | None = None,
     version_func: Callable[[str], str] | None = None,
     path_exists_func: Callable[[str], bool] | None = None,
+    expose_paths: bool = False,
+    expose_values: bool = False,
 ) -> dict:
     which = which_func or shutil.which
     versions = version_func or detect_tool_version
@@ -96,7 +136,7 @@ def check_environment(
             source = "VCS_BIN"
         tools[tool] = {
             "available": bool(path),
-            "path": path or "",
+            "path": _sanitize_path(path or "", expose_paths=expose_paths),
             "source": source if path else "",
             "version": versions(path) if path and tool in VERSION_PROBE_TOOLS else "",
         }
@@ -104,7 +144,8 @@ def check_environment(
     env_report = {}
     for name in ENV_VARS:
         value = env_map.get(name, "")
-        env_report[name] = {"set": bool(value), "value": value}
+        sanitized = _sanitize_env_value(name, value, expose_paths=expose_paths, expose_values=expose_values)
+        env_report[name] = {"set": bool(value), "value": sanitized, "redacted": bool(value) and sanitized != value}
 
     ready_for_vcs = tools["vlogan"]["available"] and tools["vcs"]["available"] and env_report["VCS_HOME"]["set"]
     ready_for_vhdl = tools["vhdlan"]["available"] and tools["vcs"]["available"] and env_report["VCS_HOME"]["set"]
@@ -116,32 +157,36 @@ def check_environment(
     display_value = env_map.get("DISPLAY", "")
     display_report = {
         "available": bool(display_value),
-        "value": display_value,
+        "value": _sanitize_env_value("DISPLAY", display_value, expose_paths=expose_paths, expose_values=expose_values),
         "xauthority_set": bool(env_map.get("XAUTHORITY", "")),
-        "vnc_display": env_map.get("VNC_DISPLAY", ""),
+        "vnc_display": _sanitize_env_value(
+            "VNC_DISPLAY",
+            env_map.get("VNC_DISPLAY", ""),
+            expose_paths=expose_paths,
+            expose_values=expose_values,
+        ),
     }
     ld_library_path = env_map.get("LD_LIBRARY_PATH", "")
     novas_home = env_map.get("NOVAS_HOME", "")
     pli_report = {
-        "novas_home": novas_home,
+        "novas_home": _sanitize_env_value("NOVAS_HOME", novas_home, expose_paths=expose_paths, expose_values=expose_values),
         "novas_hint_present": bool(novas_home) or "novas" in ld_library_path.lower() or "pli" in ld_library_path.lower(),
         "ld_library_path_mentions_pli": "pli" in ld_library_path.lower(),
     }
+    npi_python_raw = find_npi_python(env_map, path_exists)
     fsdb_report = {
-        "readers": [name for name in ("fsdbreport", "verdi") if tools[name]["available"]] + (["npi"] if npi_python else []),
+        "readers": [name for name in ("fsdbreport", "verdi") if tools[name]["available"]] + (["npi"] if npi_python_raw else []),
         "fsdbreport_available": tools["fsdbreport"]["available"],
         "verdi_available": tools["verdi"]["available"],
-        "npi_python_available": bool(npi_python),
-        "npi_python": npi_python,
+        "npi_python_available": bool(npi_python_raw),
+        "npi_python": _sanitize_path(npi_python_raw, expose_paths=expose_paths),
     }
     path_value = env_map.get("PATH", "")
-    split_token = os.pathsep
-    if ":" in path_value and ";" not in path_value:
-        split_token = ":"
-    path_entries = [entry for entry in path_value.split(split_token) if entry]
+    path_entries = _split_path_entries(path_value)
     shell_report = {
-        "SHELL": env_map.get("SHELL", ""),
-        "PATH_entries": path_entries,
+        "SHELL": _sanitize_env_value("SHELL", env_map.get("SHELL", ""), expose_paths=expose_paths, expose_values=expose_values),
+        "PATH_entries": [_sanitize_path(entry, expose_paths=expose_paths) for entry in path_entries] if expose_paths else [],
+        "PATH_entry_count": len(path_entries),
         "sh_compat": sh_compat_func() if sh_compat_func else check_sh_compat(which),
     }
     blockers: list[str] = []
@@ -175,7 +220,12 @@ def check_environment(
         "license": {
             "hint_present": ready_for_license,
             "primary_var": license_var,
-            "value": env_map.get(license_var, "") if license_var else "",
+            "value": _sanitize_env_value(
+                license_var,
+                env_map.get(license_var, "") if license_var else "",
+                expose_paths=expose_paths,
+                expose_values=expose_values,
+            ),
         },
         "overall": {
             "ready_for_vcs": ready_for_vcs,

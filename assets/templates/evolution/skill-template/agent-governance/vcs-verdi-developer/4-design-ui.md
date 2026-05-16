@@ -13,7 +13,7 @@
 - `docs/experience/history_experience/20260515-231403/4-design-ui.md`
 
 ## Evidence Sources
-SKILL.md wording changes, reference file names, metadata descriptions, and the v0.5.0 payload scan forbidding temporary server branding.
+SKILL.md wording changes, reference file names, metadata descriptions, and the v0.5.1 payload scan forbidding temporary server branding.
 
 ## Applicable Scenario
 Use this content-design pattern when a skill must be reusable across environments and should not expose temporary validation infrastructure as part of its product identity.

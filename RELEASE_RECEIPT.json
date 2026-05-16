@@ -1,8 +1,8 @@
 {
   "skill_name": "vcs-verdi-developer",
-  "version": "v0.5.0",
+  "version": "v0.5.1",
   "source_path": "skills/vcs-verdi-developer",
-  "generated_at": "2026-05-15T23:16:09",
+  "generated_at": "2026-05-16T14:34:46",
   "current_branch": "master",
   "local_branches": [
     "master",
@@ -25,11 +25,11 @@
   "files": [
     {
       "path": "agents/openai.yaml",
-      "sha256": "7642e09a14509dc622665dc520a6d17b895f41e1d68d10b9f18ae79368bebbb8"
+      "sha256": "e76250db85bced94836e30850c57eec280c3e7fd6aadb0641fffe5b4b9a4d6f2"
     },
     {
       "path": "assets/evidence/non_gui_claims.json",
-      "sha256": "6cc40666a7b2f586efdba484d4eed64244b53220e873203d73278b2f028edd7f"
+      "sha256": "f91441c9805b6ab7bba7fd2aab91d580aff42f7d65a4b5107c3042e13b442cf4"
     },
     {
       "path": "assets/minimal_vcs/core.vhd",
@@ -69,19 +69,19 @@
     },
     {
       "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/1-workflow.md",
-      "sha256": "d5ca434dc8cd79fb47ed012359deb93f4abf7da4c79f724191422c47aac9676c"
+      "sha256": "1a5248593583306c0badb6af09ab66058c67148e6214df5efd36b91f67fd2fa7"
     },
     {
       "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/2-scripts.md",
-      "sha256": "d2f27d2169b4852443ffe6c5cf30506516b71546db88dcbec715fcfcae573fa2"
+      "sha256": "bfd6a5592cee9632635bb185fbf8731312246190e762d37b12911bea14be9859"
     },
     {
       "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/3-plan.md",
-      "sha256": "b8e3eb3ef1b4658f5e5df1f94ab745d515db9578c2db2abc38ea37b357b02117"
+      "sha256": "95e590dee621210ba36ab7b9c7424e04201d85f060615c9735a255d5db563762"
     },
     {
       "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/4-design-ui.md",
-      "sha256": "349ddf3d61e9a5b208c1ba31feb06c4304e6b1ffc6931f964595eea2bda0f07d"
+      "sha256": "b2c3ce5639b92535216e791a7467f970e042223255c3eedf3236c3b7e7c21c3c"
     },
     {
       "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/template-index.json",
@@ -109,15 +109,15 @@
     },
     {
       "path": "references/capability-matrix.md",
-      "sha256": "4b82bdf54fa280c9a1cbec912c538eddea375c2f082f044b7d34fc0bfc2c5bdf"
+      "sha256": "88d67a9b93f9e5b09b5b2c63f8e15fda128c066ed1b46c56b3c77c93a10d1303"
     },
     {
       "path": "references/non-gui-flow.md",
-      "sha256": "2bfeb5d72a3e5f62e1498f7b40454971c5e915e6cd04f2805ba3b23d28c2945e"
+      "sha256": "57bf97bc8bfe38f06f1eaedc72b5803aecbab87883582b67568bc78cb5dfd446"
     },
     {
       "path": "references/remote-eda-gate.md",
-      "sha256": "93edfa8971a3ee6acc96bb85c65de8979769d4d93c5ef4c5bcd6625bc5498568"
+      "sha256": "688a9f08d28ea8390dd406e41937cbccac0603c281dfd6439edb456f477a16ce"
     },
     {
       "path": "references/remote-eda-validation.md",
@@ -125,7 +125,7 @@
     },
     {
       "path": "references/review-checklist.md",
-      "sha256": "ce675937fccef2fb30d9beb10d796cb5d8b24bd7536a52d4f87559cb68bac35e"
+      "sha256": "d2cbc2af0d83f62bbcfa9d6af5412ae6b59f896b518134196a1eec1f2c113241"
     },
     {
       "path": "references/third-party-extraction.md",
@@ -144,8 +144,16 @@
       "sha256": "03f3c689a0d9b2e57d8bbc305587edb5b0ebddb4b0c02a354449f902e18a6a73"
     },
     {
+      "path": "scripts/aiss_vcs_flow.py",
+      "sha256": "10e78f83b475c1201ecc15f69b8e83984ff8a3fd04d0c42618a4ebd2e3b9cbca"
+    },
+    {
       "path": "scripts/analyze_logs.py",
       "sha256": "ee53a855be6e50ffc903fcddfc3ca14218d05785a48bb67d4fb48f454617f17e"
+    },
+    {
+      "path": "scripts/autoverifix_vcs_flow.py",
+      "sha256": "7a1eca8743bbef4b3ecc46b4d004f36e64f3a23017ad1b14129efb7852c0d136"
     },
     {
       "path": "scripts/check_env.py",
@@ -157,15 +165,15 @@
     },
     {
       "path": "scripts/collect_evidence.py",
-      "sha256": "4cf26dcdd570263af13c30c79dd0eff51ce41161ff5f543fc153b8f4849ad554"
+      "sha256": "33083357c8669a78735a2a817157ad18fbc3e6eac178e970ddfa531cc429b32c"
     },
     {
       "path": "scripts/coverage_flow.py",
-      "sha256": "9c58625c756a20df1530f32ba998e4987fb21570952f87c40f1a07339b6a016a"
+      "sha256": "4f9b4a1711549f2c65ac7c6561e6829988c62ca52acf85c359fe5a6000085c21"
     },
     {
       "path": "scripts/evidence_claim_gate.py",
-      "sha256": "2e26f5f57e9572e6690a7426f6afa38b84e30a68f41fa59ea75eff35fefad6d5"
+      "sha256": "a7efc35c9a0e091e1cb09a281c9f8c9dc9f2ca35999d6831dfc31e5945416030"
     },
     {
       "path": "scripts/fpgen_vcs_flow.py",
@@ -189,7 +197,7 @@
     },
     {
       "path": "scripts/make_shell_overlay.sh",
-      "sha256": "b08b2ddccd414167b664f3909a8c9df3c698f2ac4fd5d26f80f7f0d47528b4ea"
+      "sha256": "e579f097584498a4fabdda594b81269a8b8e3cbe4e83f4d50d433822826a1538"
     },
     {
       "path": "scripts/patch_ucapi_overlay.py",
@@ -197,7 +205,7 @@
     },
     {
       "path": "scripts/remote_eda_gate.py",
-      "sha256": "408b1c992b26f0e7afe7dce457eefab1b93eda72285c1724509be29c2b3f99d3"
+      "sha256": "78c58d7aea268d3f0542569ecaaffc06bd3bcfa3dc94c1d9f39a461bf3e5f98d"
     },
     {
       "path": "scripts/riscv_dv_flow.py",
@@ -205,7 +213,7 @@
     },
     {
       "path": "scripts/run_quality_gate.py",
-      "sha256": "75f64d966cc16a6ac90054eb99fa91b5b43e94b39a973468af5e89b3a484fecb"
+      "sha256": "ee1ee23a4601ba83fcb86f6d2e81ca39adb9810b1ad58c40984bb05e8509c830"
     },
     {
       "path": "scripts/run_regression.py",
@@ -213,7 +221,7 @@
     },
     {
       "path": "scripts/run_remote_eda_smoke.sh",
-      "sha256": "63c4c408e428732bd941edcc35059370a949e0d5376320421e4896f5c12128ca"
+      "sha256": "838983e8476277c41067987875ad245288612891b78cff672b93ce21dbe347d0"
     },
     {
       "path": "scripts/smoke_vcs_verdi.py",
@@ -221,19 +229,23 @@
     },
     {
       "path": "scripts/urg_coverage_matrix.py",
-      "sha256": "50c60064fe7b07190450c70847f8cd06821104eff57eced2c14de06e52459985"
+      "sha256": "a6e0c190a6c6aa75d3a33200fecdaac8715e9cc7e7d3e269167a08a080e82c90"
     },
     {
       "path": "scripts/urg_runtime_probe.py",
-      "sha256": "9e55fc4a08015a6923bda78732e8f7e7a50a20be7f6ee3b04a0222b3116c849d"
+      "sha256": "c03ad406a57358118ce85f981e9b2d8e5a16d109b3aa5fbbef8da2fa3244ed1b"
+    },
+    {
+      "path": "scripts/urg_troubleshoot.py",
+      "sha256": "dd5ab030291d930d6aca5fe0e5202811bd8b6175402584a21a4da75f79116737"
     },
     {
       "path": "SKILL.md",
-      "sha256": "2b3fe2da283c8050188dae267e9223bcdbe3a30d3dcf5dc04783f43d7daae21f"
+      "sha256": "6d50599911aebe625f58fff09b5c05782f5231304169b58ca7b8ef284dd6e388"
     },
     {
       "path": "VERSION",
-      "sha256": "d126dc59d212f56e77cb5d4bbd7bc222a6a6f171160a2330d74e4fd91d6b5442"
+      "sha256": "eb8d59c0680eb3f8813d4c7254f5cd6dbb0160cb24efa20e92bdda11d548c2e8"
     }
   ]
 }

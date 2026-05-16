@@ -187,7 +187,10 @@ def _split_words(value: str) -> list[str]:
 
 def _rel(path_text: str, project_root: Path) -> str:
     path = Path(path_text)
-    path = path.resolve()
+    if not path.is_absolute():
+        path = (project_root / path).resolve()
+    else:
+        path = path.resolve()
     try:
         return path.relative_to(project_root.resolve()).as_posix()
     except ValueError:

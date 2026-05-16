@@ -23,9 +23,11 @@ This skill supports a scripted non-GUI flow:
 15. Plan PicoRV32/RISCV-DV style generator, VCS, simv, URG, and trace-compare flows with `scripts/riscv_dv_flow.py`.
 16. Plan guarded KVIPS APB/AHB/AXI4 UVM VCS, FSDB, fsdbreport, and regression flows with `scripts/kvips_vcs_flow.py`; do not count UVM as core low-dependency support.
 17. Plan FP-Gen Genesis2, VCS/VPD, SAIF, and guarded gate-level simulation flows with `scripts/fpgen_vcs_flow.py`.
-18. Collect one JSON evidence bundle with `scripts/collect_evidence.py`.
-19. Validate factual support statements with `scripts/evidence_claim_gate.py`.
-20. Validate remote EDA host detached evidence with `scripts/remote_eda_gate.py`.
+18. Plan or execute AutoVeriFix-style VCS compile, `simv`, URG, scoreboard feedback, and optional non-GUI Verdi readback with `scripts/autoverifix_vcs_flow.py`.
+19. Plan AISS-style VCS/VPD simulation and guard incomplete gate-level netlist targets with `scripts/aiss_vcs_flow.py`.
+20. Collect one JSON evidence bundle with `scripts/collect_evidence.py`.
+21. Validate factual support statements with `scripts/evidence_claim_gate.py`.
+22. Validate remote EDA host detached evidence with `scripts/remote_eda_gate.py`.
 
 The skill does not claim complete coverage of every official Synopsys VCS or Verdi option. Unsupported or unverified options must be reported as outside the current scripted scope.
 
@@ -45,7 +47,7 @@ Use a manifest when project inputs are more complex than a single source file:
   "defines": {"SIM": "1"},
   "libraries": ["work"],
   "tools": {"vlogan": "vlogan", "vcs": "vcs", "simv": "./simv", "fsdbreport": "fsdbreport"},
-  "env": {"SNPSLMD_LICENSE_FILE": "27000@<license-server>"},
+  "env": {"SNPSLMD_LICENSE_FILE": "27000@license-host"},
   "top": "tb_top",
   "timescale": "1ns/1ps",
   "coverage": ["line", "cond"],
@@ -79,7 +81,7 @@ python3 scripts/smoke_vcs_verdi.py --manifest manifest.json --execute --clean --
 
 ## Pass Criteria
 
-A non-GUI pass requires all relevant compile steps, `vcs`, `simv`, and `fsdbreport` to return 0. The FSDB file must exist and have bytes greater than 0. Dry-run output, missing tools, GUI launch success, or compile-only success is not a passing non-GUI flow. Local quality gates report `local_confidence`; only fresh remote or equivalent EDA evidence can report `eda_execution_confidence=passed`.
+A non-GUI pass requires all relevant compile steps, `vcs`, `simv`, and `fsdbreport` to return 0. The FSDB file must exist and have bytes greater than 0. Dry-run output, missing tools, GUI launch success, or compile-only success is not a passing non-GUI flow. Local quality gates report `local_confidence`; fresh remote or equivalent EDA evidence may upgrade `delivery_execution_confidence` for the verified non-GUI mainline. `truth_execution_confidence` remains stricter and must stay blocked until URG report generation is factually proven on a supported EDA host.
 
 ## Regression and Diagnosis
 
@@ -104,6 +106,10 @@ Use `scripts/riscv_dv_flow.py --project-root <picorv32-root> --dv-root <picorv32
 Use `scripts/kvips_vcs_flow.py --project-root <kvips-root> --protocol apb|ahb|axi4 --dry-run --json` for KVIPS-style UVM VIP flows. The plan must show `-ntb_opts uvm-1.2`, filelist expansion, UVM test plusargs, seed plusargs, regression list coverage, optional FSDB PLI, `fsdbreport`, and guarded `verdi -ssf ... -nologo -exit`. Because this flow depends on UVM, the plan is `guarded_optional`, not part of the core low-dependency VCS/Verdi confidence target.
 
 Use `scripts/fpgen_vcs_flow.py --project-root <fpgen-root> --product FPGen --dry-run --json` for FP-Gen-style flows. The plan must separate Genesis2 generation, VCS compile, `simv` VPD run, SAIF runtime args, and guarded gate-level DC/ICC commands. Missing generated `genesis_vlog.vf`, Genesis2, DesignWare/GTech libraries, Synopsys licenses, or DC/ICC inputs are execution blockers and must appear as diagnostics or optional external dependencies.
+
+Use `scripts/autoverifix_vcs_flow.py --task-root <AutoVeriFix-task-dir> --task <name> --dry-run --json` for AutoVeriFix-style tasks. The plan must show `vcs -full64 -sverilog +v2k`, `./simv -l <task>_sim.log -cm line+cond+fsm`, `urg -dir simv.vdb -report full_report -format both`, and missing `task.v` or `testbench.v` as blockers. Add `--fsdb waves.fsdb --verdi-check fsdbreport --report-signal /tb/clk` only when a non-GUI Verdi-family readback is part of the acceptance path. `--execute` may run the planned commands in order, parse `Mismatches: 0 in N samples`, and stop on the first failing step; the LLM/API repair loop remains a guarded external dependency and is not executed by this script.
+
+Use `scripts/aiss_vcs_flow.py --project-root <source_RTL> --target AHBtest --dry-run --json` for AISS-style VCS/VPD flows. Gate-level netlist targets must remain guarded until all referenced netlist/testbench files exist.
 
 For DPI-C flows like pysv-generated bindings, add generated SystemVerilog binding files to `sources`, put the compiled shared object in `sv_libs`, and set `LD_LIBRARY_PATH` through `env` when the runtime loader needs the shared-library directory. Dry-run must show `-sverilog -sv_lib <library>` in the VCS step and `./simv` in the simulation step.
 

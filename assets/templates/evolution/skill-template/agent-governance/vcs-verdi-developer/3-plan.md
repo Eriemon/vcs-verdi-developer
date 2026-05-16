@@ -22,7 +22,7 @@ Use this planning pattern when a task spans implementation, validation, release 
 Plan in phases: scope and evidence boundaries, failing tests, implementation, local gates, release preparation, package regeneration, installation, and final commit. Revisit the plan whenever tooling creates commits or switches branches automatically. Keep acceptance criteria observable: current version, clean worktree, package receipt, installed skill version, and blocked evidence reasons.
 
 ## Key Decisions
-Version v0.5.0 was appropriate because the release renamed public scripts and references. Documentation was refreshed after package output and before final installation evidence.
+Version v0.5.1 is appropriate because the current installable release must match the corrected latest version while preserving the verified script, gate, and installation evidence. Documentation was refreshed after package output and before final installation evidence.
 
 ## Common Problems
 A release tool can commit before the last local fix, so package generation may need to be repeated. A handoff cadence can trigger additional governance work late in the task.

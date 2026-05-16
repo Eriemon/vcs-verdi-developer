@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-1f6feb"></a>
   <a href="pyproject.toml"><img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-2f81f7"></a>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.5.0-7c3aed">
+  <img alt="Version" src="https://img.shields.io/badge/version-v0.5.1-7c3aed">
   <a href="SKILL.md"><img alt="Agent Skill" src="https://img.shields.io/badge/agent-skill-16a34a"></a>
   <a href="references/vcs-verdi-flow.md"><img alt="Target" src="https://img.shields.io/badge/target-VCS%20%26%20Verdi-f59e0b"></a>
 </p>
@@ -65,7 +65,7 @@ EDA workflows are easy to mis-handle when an agent guesses environment readiness
 | `assets/` | Minimal fixtures, manifest-driven examples, evidence samples, include files, waveform templates, and evolution templates. |
 | `evals/` | Skill evaluation cases that define expected with-skill behavior. |
 | `docs/assets/` | Repository presentation graphics used by the public README pages. |
-| `RELEASE_RECEIPT.json` | Provenance record for the imported `v0.5.0` release package. |
+| `RELEASE_RECEIPT.json` | Provenance record for the imported `v0.5.1` release package. |
 
 ## Quick Start
 
@@ -80,6 +80,9 @@ python .\scripts\cocotb_vcs_flow.py --help
 python .\scripts\coverage_flow.py --help
 python .\scripts\run_regression.py --help
 python .\scripts\evidence_claim_gate.py --help
+python .\scripts\autoverifix_vcs_flow.py --help
+python .\scripts\aiss_vcs_flow.py --help
+python .\scripts\urg_troubleshoot.py --help
 ```
 
 Typical workflow:
@@ -89,7 +92,7 @@ Typical workflow:
 3. Use `scripts/cocotb_vcs_flow.py` when the task starts from a cocotb-style VCS/VPI flow and must stay non-GUI.
 4. Generate or review waveform layout RC files with `scripts/generate_rc.py`.
 5. Plan a minimal or manifest-driven VCS/Verdi smoke flow with `scripts/smoke_vcs_verdi.py --dry-run`.
-6. Use `scripts/coverage_flow.py`, `scripts/fsdb_tools.py`, `scripts/run_regression.py`, `scripts/collect_evidence.py`, and `scripts/evidence_claim_gate.py` when the task expands into coverage, waveform readback, batch execution, evidence collection, or factual readiness claims.
+6. Use `scripts/coverage_flow.py`, `scripts/autoverifix_vcs_flow.py`, `scripts/aiss_vcs_flow.py`, `scripts/fsdb_tools.py`, `scripts/run_regression.py`, `scripts/collect_evidence.py`, `scripts/urg_troubleshoot.py`, and `scripts/evidence_claim_gate.py` when the task expands into coverage, waveform readback, batch execution, evidence collection, URG failure diagnosis, or factual readiness claims.
 7. Execute only after the exact command plan and environment findings are reviewed.
 
 ## Scope
@@ -128,8 +131,8 @@ If this skill helps your research, teaching, or engineering workflow, please cit
   author       = {Jiyuan Liu and He Li},
   title        = {{VCS Verdi Developer}: An Agent Skill for Synopsys VCS and Verdi Workflows},
   year         = {2026},
-  version      = {0.5.0},
-  date         = {2026-05-15},
+  version      = {0.5.1},
+  date         = {2026-05-16},
   url          = {https://github.com/Eriemon/vcs-verdi-developer},
   license      = {Apache-2.0},
   note         = {Agent skill package for Synopsys VCS simulation, project import, cocotb planning, FSDB tooling, evidence gating, coverage diagnostics, and Verdi waveform-debug workflows}

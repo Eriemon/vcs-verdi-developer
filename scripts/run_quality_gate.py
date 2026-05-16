@@ -18,10 +18,12 @@ REQUIRED_SKILL_FILES = (
     "references/vcs-verdi-flow.md",
     "references/non-gui-flow.md",
     "references/capability-matrix.md",
+    "references/verdi-rc-format.md",
     "references/third-party-extraction.md",
     "references/review-checklist.md",
     "references/remote-eda-gate.md",
     "scripts/check_env.py",
+    "scripts/generate_rc.py",
     "scripts/smoke_vcs_verdi.py",
     "scripts/analyze_logs.py",
     "scripts/fsdb_tools.py",
@@ -50,6 +52,7 @@ REQUIRED_SKILL_FILES = (
 
 SCRIPT_MATRIX = (
     "check_env.py",
+    "generate_rc.py",
     "smoke_vcs_verdi.py",
     "analyze_logs.py",
     "fsdb_tools.py",
@@ -94,6 +97,32 @@ def _home_path(*parts: str) -> Path:
 
 def _script_if_exists(path: Path) -> str:
     return str(path) if path.exists() else str(path)
+
+
+def _is_nested_repository_workspace(repo_root: Path, skill_dir: Path) -> bool:
+    repository_dir = repo_root / "repository"
+    if not repository_dir.exists():
+        return False
+    try:
+        skill_dir.relative_to(repository_dir)
+    except ValueError:
+        return False
+    return skill_dir != repo_root
+
+
+def _package_probe_cmd(skill_dir: Path, target_dir: Path) -> list[str]:
+    probe = (
+        "import shutil, subprocess, sys, tempfile; "
+        "from pathlib import Path; "
+        "src = Path(sys.argv[1]).resolve(); "
+        "target = Path(sys.argv[2]).resolve(); "
+        "target.mkdir(parents=True, exist_ok=True); "
+        "temp_root = Path(tempfile.mkdtemp(prefix='vcs-verdi-probe-')); "
+        "probe_src = temp_root / src.name; "
+        "shutil.copytree(src, probe_src, ignore=shutil.ignore_patterns('.git', 'build', '__pycache__', '*.egg-info')); "
+        "subprocess.run([sys.executable, '-m', 'pip', 'install', '.', '--no-deps', '--upgrade', '--target', str(target)], cwd=probe_src, check=True)"
+    )
+    return [sys.executable, "-c", probe, str(skill_dir), str(target_dir)]
 
 
 def audit_skill(skill_dir: Path) -> dict:
@@ -164,6 +193,8 @@ def script_matrix_audit(skill_dir: Path) -> dict:
 def build_local_gate(repo_root: Path, *, skill_dir: Path | None = None) -> dict:
     repo_root = repo_root.resolve()
     skill_dir = (skill_dir or repo_root / "skills" / "vcs-verdi-developer").resolve()
+    skill_tests_dir = skill_dir / "tests"
+    nested_repository_workspace = _is_nested_repository_workspace(repo_root, skill_dir)
     quick_validate = _home_path(".codex", "skills", ".system", "skill-creator", "scripts", "quick_validate.py")
     agents_tools = _home_path(".codex", "skills", "agents-md-generator", "scripts")
     smoke_source = skill_dir / "assets" / "minimal_vcs" / "top.sv"
@@ -201,18 +232,36 @@ def build_local_gate(repo_root: Path, *, skill_dir: Path | None = None) -> dict:
     ref13_mp_pipeline_root = ref13_root / "mp_pipeline"
     ref13_mp_cache_root = ref13_root / "mp_cache"
     ref13_mp_verif_cov_root = ref13_root / "mp_verif" / "constr_rand_cov"
+    help_probe_scripts = (
+        ("generate_rc_help", "generate_rc.py"),
+        ("analyze_logs_help", "analyze_logs.py"),
+        ("fsdb_tools_help", "fsdb_tools.py"),
+        ("coverage_flow_help", "coverage_flow.py"),
+        ("patch_ucapi_overlay_help", "patch_ucapi_overlay.py"),
+        ("urg_runtime_probe_help", "urg_runtime_probe.py"),
+        ("urg_coverage_matrix_help", "urg_coverage_matrix.py"),
+        ("run_regression_help", "run_regression.py"),
+        ("collect_evidence_help", "collect_evidence.py"),
+        ("remote_eda_gate_help", "remote_eda_gate.py"),
+    )
     steps = [
         {
             "name": "unit_tests",
             "cmd": [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
-            "cwd": str(repo_root),
-            "required": True,
+            "cwd": str(skill_dir),
+            "required": skill_tests_dir.exists(),
         },
         {
             "name": "skill_quick_validate",
             "cmd": [sys.executable, _script_if_exists(quick_validate), str(skill_dir)],
             "cwd": str(repo_root),
             "required": quick_validate.exists(),
+        },
+        {
+            "name": "package_install_probe",
+            "cmd": _package_probe_cmd(skill_dir, repo_root / "build" / "vcs-verdi-install-probe"),
+            "cwd": str(skill_dir),
+            "required": True,
         },
         {
             "name": "agents_verify",
@@ -224,7 +273,7 @@ def build_local_gate(repo_root: Path, *, skill_dir: Path | None = None) -> dict:
             "name": "docs_verify",
             "cmd": [sys.executable, _script_if_exists(agents_tools / "manage_docs.py"), "verify", str(repo_root)],
             "cwd": str(repo_root),
-            "required": (agents_tools / "manage_docs.py").exists(),
+            "required": (agents_tools / "manage_docs.py").exists() and not nested_repository_workspace,
         },
         {
             "name": "env_probe",
@@ -600,6 +649,15 @@ def build_local_gate(repo_root: Path, *, skill_dir: Path | None = None) -> dict:
             "required": evidence_claims.exists(),
             "json_contains": {"status": "passed"},
         },
+        *[
+            {
+                "name": name,
+                "cmd": [sys.executable, str(skill_dir / "scripts" / script_name), "--help"],
+                "cwd": str(repo_root),
+                "required": True,
+            }
+            for name, script_name in help_probe_scripts
+        ],
         {
             "name": "ref12_cscd_import_dry_run",
             "cmd": [

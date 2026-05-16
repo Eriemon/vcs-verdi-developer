@@ -10,6 +10,9 @@ cd "$BUNDLE_ROOT"
 : "${VCS_HOME:?VCS_HOME must be set by the remote EDA host login shell}"
 : "${VERDI_HOME:?VERDI_HOME must be set by the remote EDA host login shell}"
 
+ORIGINAL_VCS_HOME="$VCS_HOME"
+ORIGINAL_VERDI_HOME="$VERDI_HOME"
+
 bash "$SCRIPT_DIR/make_shell_overlay.sh" "$VCS_HOME" "$RUN_DIR/vcs_overlay"
 bash "$SCRIPT_DIR/make_shell_overlay.sh" "$VERDI_HOME" "$RUN_DIR/verdi_overlay"
 
@@ -126,6 +129,15 @@ python3 "$SCRIPT_DIR/urg_coverage_matrix.py" \
   --json > "$RUN_DIR/urg_coverage_matrix.json"
 matrix_rc=$?
 
+python3 "$SCRIPT_DIR/urg_troubleshoot.py" \
+  --workdir "$RUN_DIR/coverage_sv" \
+  --vdb "$RUN_DIR/coverage_sv/simv.vdb" \
+  --vendor-vcs-home "$ORIGINAL_VCS_HOME" \
+  --overlay-vcs-home "$VCS_HOME" \
+  --timeout 120 \
+  --json > "$RUN_DIR/urg_troubleshoot.json"
+troubleshoot_rc=$?
+
 python3 - "$SCRIPT_DIR" "$RUN_DIR" > "$RUN_DIR/conversion.json" <<'PY'
 import importlib.util
 import json
@@ -144,7 +156,10 @@ conversion_rc=$?
 set -e
 
 job_rc=0
-for rc in "$smoke_rc" "$mixed_rc" "$coverage_smoke_rc" "$coverage_rc" "$probe_rc" "$matrix_rc" "$conversion_rc"; do
+# Diagnostic helpers like urg_runtime_probe and urg_troubleshoot should enrich
+# evidence, but they should not block the core non-GUI/truth gate once smoke,
+# coverage, matrix, and conversion have factually passed.
+for rc in "$smoke_rc" "$mixed_rc" "$coverage_smoke_rc" "$coverage_rc" "$matrix_rc" "$conversion_rc"; do
   if [ "$rc" -ne 0 ]; then
     job_rc="$rc"
     break
@@ -161,6 +176,7 @@ python3 "$SCRIPT_DIR/collect_evidence.py" \
   --ucapi-manifest "$VCS_HOME/ucapi_patch_manifest.json" \
   --urg-probe "$RUN_DIR/urg_runtime_probe.json" \
   --urg-matrix "$RUN_DIR/urg_coverage_matrix.json" \
+  --urg-troubleshoot "$RUN_DIR/urg_troubleshoot.json" \
   --check-env "$RUN_DIR/check_env.json" \
   --report "$RUN_DIR/smoke/report.txt" \
   --job-exit-code "$job_rc" \

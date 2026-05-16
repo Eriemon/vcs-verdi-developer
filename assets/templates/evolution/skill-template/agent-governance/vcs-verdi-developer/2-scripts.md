@@ -13,7 +13,7 @@
 - `docs/experience/history_experience/20260515-231403/2-scripts.md`
 
 ## Evidence Sources
-run_quality_gate.py, remote_eda_gate.py, run_remote_eda_smoke.sh, collect_evidence.py, test_skill_structure.py, and unit test output from the v0.5.0 closure.
+run_quality_gate.py, remote_eda_gate.py, run_remote_eda_smoke.sh, collect_evidence.py, test_skill_structure.py, and unit test output from the v0.5.1 closure.
 
 ## Applicable Scenario
 Use this script pattern when a skill needs deterministic wrappers around fragile external tools and must distinguish dry-run plans from real execution evidence.

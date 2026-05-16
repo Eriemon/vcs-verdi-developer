@@ -37,6 +37,15 @@ def which_tool(name: str, env: dict[str, str]) -> str:
     return ""
 
 
+def _normalize_tool_path(path: str, *, cwd: Path) -> str:
+    if not path:
+        return ""
+    candidate = Path(path)
+    if candidate.is_absolute():
+        return str(candidate)
+    return str((cwd / candidate).resolve(strict=False))
+
+
 def command_result(cmd: list[str], *, cwd: Path, env: dict[str, str], timeout: int = 10) -> dict:
     try:
         completed = subprocess.run(
@@ -122,17 +131,18 @@ def run_probe(
     env: dict[str, str] | None = None,
     strace_timeout: int = 0,
 ) -> dict:
-    vcs_home = Path(vcs_home)
-    workdir = Path(workdir)
-    vdb = Path(vdb)
-    report_dir = Path(report_dir)
+    vcs_home = Path(vcs_home).resolve(strict=False)
+    workdir = Path(workdir).resolve(strict=False)
+    vdb = Path(vdb).resolve(strict=False)
+    report_dir = Path(report_dir).resolve(strict=False)
+    report_dir.parent.mkdir(parents=True, exist_ok=True)
     probe_env = os.environ.copy()
     probe_env.update(env or {})
     probe_env["VCS_HOME"] = str(vcs_home)
     probe_env["PATH"] = str(vcs_home / "bin") + os.pathsep + probe_env.get("PATH", "")
 
-    which_urg = which_tool("urg", probe_env)
-    which_vcs = which_tool("vcs", probe_env)
+    which_urg = _normalize_tool_path(which_tool("urg", probe_env), cwd=workdir)
+    which_vcs = _normalize_tool_path(which_tool("vcs", probe_env), cwd=workdir)
     urg_path = Path(which_urg) if which_urg else vcs_home / "bin" / "urg"
     vcs_cmd = [which_vcs or "vcs"]
     urg1 = vcs_home / "linux64" / "bin" / "urg1"
@@ -156,6 +166,7 @@ def run_probe(
     }
     if strace_timeout > 0:
         strace_log = workdir / "urg_runtime_probe_strace.log"
+        strace_log.parent.mkdir(parents=True, exist_ok=True)
         strace_cmd = [
             "strace",
             "-f",

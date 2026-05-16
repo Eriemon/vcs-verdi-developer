@@ -642,6 +642,13 @@ def _edalize_param_groups(edam: dict) -> dict:
             groups[group].update(params[group])
         if isinstance(edam.get(group), dict):
             groups[group].update(edam[group])
+    if isinstance(params, dict):
+        for name, spec in params.items():
+            if name in groups or not isinstance(spec, dict):
+                continue
+            paramtype = str(spec.get("paramtype", "")).strip()
+            if paramtype in groups and "default" in spec:
+                groups[paramtype][name] = spec["default"]
     return groups
 
 

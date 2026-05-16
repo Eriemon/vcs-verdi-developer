@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 import zipfile
 from datetime import UTC, datetime
 from pathlib import Path
@@ -37,6 +38,7 @@ REQUIRED_MATRIX = ("minimal_smoke", "mixed_vhdl_sv", "coverage_urg", "fsdb_conve
 
 def build_bundle_plan(skill_dir: Path | str, *, remote_dir: str) -> dict:
     root = Path(skill_dir)
+    remote_dir = remote_dir.strip()
     files = []
     file_details = []
     missing = []
@@ -46,10 +48,22 @@ def build_bundle_plan(skill_dir: Path | str, *, remote_dir: str) -> dict:
         file_details.append({"rel": rel, "path": str(path), "exists": path.exists()})
         if not path.exists():
             missing.append(rel)
+    if not remote_dir:
+        return {
+            "status": "blocked",
+            "skill_dir": str(root),
+            "remote_dir": remote_dir,
+            "files": files,
+            "file_details": file_details,
+            "missing": missing,
+            "errors": ["remote_dir must not be empty"],
+            "remote_commands": [],
+        }
+    quoted_remote_dir = shlex.quote(remote_dir)
     remote_commands = [
-        f"mkdir -p {remote_dir}",
-        f"unzip -o remote-eda-vcs-verdi-bundle.zip -d {remote_dir}",
-        f"cd {remote_dir} && chmod +x scripts/*.sh && bash scripts/run_remote_eda_smoke.sh",
+        f"mkdir -p {quoted_remote_dir}",
+        f"unzip -o remote-eda-vcs-verdi-bundle.zip -d {quoted_remote_dir}",
+        f"cd {quoted_remote_dir} && chmod +x scripts/*.sh && bash scripts/run_remote_eda_smoke.sh",
     ]
     return {
         "status": "ready" if not missing else "blocked",
@@ -108,8 +122,6 @@ def _steps_map(raw_steps) -> dict:
 
 
 def _freshness(evidence: dict, *, max_age_hours: int | None, now_utc: str | None) -> tuple[bool, str]:
-    if evidence.get("fresh") is True:
-        return True, ""
     if max_age_hours is None:
         return True, ""
     timestamp = _parse_timestamp(str(evidence.get("timestamp_utc", "")))

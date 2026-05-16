@@ -33,6 +33,8 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - For ModelSim or Icarus projects, confirm converted manifests include top module, `SIMULATION` define, include dirs, expanded sources, missing source glob diagnostics, and pre-simulation hex artifact diagnostics.
 - For KVIPS APB/AHB/AXI4 projects, confirm `scripts/kvips_vcs_flow.py` marks UVM as guarded/optional, includes `-ntb_opts uvm-1.2`, filelist expansion, UVM plusargs, regression test lists, optional FSDB PLI, `fsdbreport`, and non-GUI `verdi -ssf -nologo -exit` checks.
 - For FP-Gen projects, confirm `scripts/fpgen_vcs_flow.py` separates Genesis2 generation, generated filelists, VCS/VPD simulation, SAIF runtime, and guarded DC/ICC gate-level commands, with missing generator/library/license inputs recorded as blockers.
+- For AutoVeriFix projects, confirm `scripts/autoverifix_vcs_flow.py` separates VCS compile, `simv`, scoreboard log parsing, URG coverage, optional `fsdbreport`, and guarded `verdi -ssf` checks; LLM/API repair loops must remain guarded external dependencies.
+- For AISS projects, confirm `scripts/aiss_vcs_flow.py` marks RTL simulation targets as local plans and missing gate-level netlist testbench or `dc_shell` synthesis inputs as guarded blockers, not pass evidence.
 - If `UVM_HOME`, `UVM_FLAGS`, `uvm.sv`, or `uvm_dpi.cc` are detected, confirm UVM is reported as `optional_external_dependencies` and is not counted as core non-GUI support.
 - For DPI-C flows, confirm dry-run includes `-sv_lib` in the VCS step, `LD_LIBRARY_PATH` when required, and `./simv` as the non-GUI execution step.
 - Execute only after missing tools are resolved.
@@ -45,7 +47,7 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - `scripts/analyze_logs.py` classifies compile, license, platform, PLI, and FSDB failures.
 - `scripts/fsdb_tools.py` checks FSDB artifacts, plans NPI-first FSDB info/list/read with CLI fallback, and plans or executes `fsdbreport`, `fsdb2vcd`, `vcd2fsdb`, and `vpd2fsdb`.
 - `scripts/coverage_flow.py` plans `-cm` metrics and URG report commands, and records execution evidence when `--execute` is used.
-- `scripts/patch_ucapi_overlay.py` scans or applies the guarded UCAPI workaround only inside validation overlays and never modifies a shared vendor install path directly.
+- `scripts/patch_ucapi_overlay.py` scans or applies the guarded UCAPI workaround only inside validation overlays and never modifies `/tools/synopsys`.
 - `scripts/urg_runtime_probe.py` records wrapper, `vcs -location`, loader, library hash, and optional strace diagnostics when URG fails.
 - `scripts/urg_coverage_matrix.py` records wrapper/direct `urg1` variants for line, cond, tgl, and line+cond+tgl; only a nonempty default `line+cond+tgl__urg__auto64` report can prove `coverage_urg`.
 - `scripts/import_vcs_project.py` imports simple VCS Makefile/filelist, ModelSim Tcl, and Icarus Makefile command patterns into a manifest candidate.
@@ -54,18 +56,22 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - `scripts/riscv_dv_flow.py` plans PicoRV32/RISCV-DV generator, VCS, simv, URG, and trace-compare flows without requiring UVM.
 - `scripts/kvips_vcs_flow.py` plans guarded KVIPS UVM VCS, FSDB, fsdbreport, and regression flows without promoting UVM into core support.
 - `scripts/fpgen_vcs_flow.py` plans FP-Gen Genesis2, VCS/VPD, SAIF, and guarded gate-level flows.
+- `scripts/autoverifix_vcs_flow.py` plans AutoVeriFix-style compile, simulation, log-scoreboard, URG, fsdbreport, and guarded Verdi checks.
+- `scripts/aiss_vcs_flow.py` plans AISS-style VCS/VPD RTL targets and guards incomplete netlist or DC synthesis targets.
 - The local gate includes non-UVM `ref/4-sigarch-rtl-project-template` importer dry-runs, a UVM-optional diagnostic importer dry-run, a `ref/5-pysv` style DPI `-sv_lib` dry-run, and `ref/6`/`ref/7`/`ref/8`/`ref/9` import or dry-run planning checks.
 - The local gate includes `ref/12-CSCD` and `ref/13-Computer-Organization` mp_setup, mp_pipeline, mp_cache, and mp_verif importer dry-runs for course-style VCS/Verdi Makefile patterns.
 - The local gate includes `ref/14-cocotb` adder VCS/VPI dry-run and mixed-language VHDL guard checks.
+- The local gate includes `ref/16-AutoVeriFix` coverage-loop dry-run and `ref/18-AISS-Phase-III` AHB/VPD plus guarded netlist dry-runs.
 - `scripts/collect_evidence.py` builds a single JSON evidence bundle from smoke, coverage, conversion, env, report, and artifact outputs.
 - `scripts/evidence_claim_gate.py` fails unsupported or unevidenced factual claims and allows unverified recommendations only as warnings.
 - `scripts/run_regression.py` batches manifest flows and reports JSON/JUnit-style results with per-case missing tool and artifact summaries.
 - `scripts/remote_eda_gate.py` validates detached remote EDA evidence, timestamp freshness, environment hints, step commands, matrix checks, and artifacts without syncing the local skill tree.
+- `scripts/remote_eda_gate.py` must package shell scripts with LF line endings so Linux remote runners do not fail with `/usr/bin/env: bash\r`.
 
 ## Quality Gate
 
 - Run `scripts/run_quality_gate.py --json` before release or readiness claims.
-- Confirm `local_confidence` and `eda_execution_confidence` are reported separately. A Windows-only local run may pass `local_confidence` while leaving EDA execution blocked by missing proprietary tools.
+- Confirm `local_confidence`, `delivery_execution_confidence`, and `truth_execution_confidence` are reported separately. A Windows-only local run may pass `local_confidence` while leaving delivery or truth confidence blocked by missing proprietary tools.
 - The local skill audit must target `vcs-verdi-developer`, not another installed skill's resource inventory.
 - The script matrix audit must pass; new supported capabilities require tests or dry-run coverage.
 - Factual readiness statements must either cite a supported local or remote evidence record or remain blocked/unsupported.
@@ -76,5 +82,11 @@ Use this checklist before reporting that a VCS/Verdi workflow is ready. It is th
 - Upload only a minimal runtime fixture or validation bundle into a named remote test directory.
 - Fresh factual EDA confidence requires the remote matrix to pass: minimal smoke, mixed VHDL/SV, coverage/URG, and FSDB conversion.
 - If full flow fails, collect wrapper shebangs, shell choice, return codes, logs, artifact status, and `DISPLAY`/VNC state before proposing fixes.
-- If `coverage_urg` fails, review `coverage_summary`, `urg_runtime_probe.json`, `urg_coverage_matrix.json`, and `ucapi_patch_scan.json` before enabling `VCS_VERDI_ALLOW_UCAPI_PATCH=1`; the workaround must remain overlay-only, loader-effective, and explicit opt-in.
+- If `coverage_urg` fails, review `coverage_summary`, `urg_runtime_probe.json`, `urg_coverage_matrix.json`, `urg_troubleshoot.json`, and `ucapi_patch_scan.json` before enabling `VCS_VERDI_ALLOW_UCAPI_PATCH=1`; the workaround must remain overlay-only, loader-effective, and explicit opt-in.
+- Confirm `urg_failure_signature.primary_repro_attempt`, `shell_layer_failure`, and `internal_crash_after_shell_fix` match the raw `urg_troubleshoot.json` attempts. If vendor wrapper shell failure is followed by identical overlay/direct internal crashes and `ucapi_patch_scan.status=no_match`, record `vendor_or_host_blocked` and stop guessing local fixes.
+- When `urg_troubleshoot.json` includes a system `gdb` probe for `overlay_direct_urg1_vcs_lib`, confirm whether `root_cause_signature=ucapi_license_checkout_segv` is present. If it is, treat `libsnpsmalloc.so -> libucapi.so -> scl_lc_checkout -> covdb_get_license` as the authoritative root cause, and treat any missing `libncursesw.so.5` message from Synopsys `cbug-gdb-64` as secondary diagnostic noise rather than the primary fault.
+- Confirm the automatic `VCS_USE_MALLOC=1` fallback is conditional, not unconditional. The retry must trigger only after the known URG internal stack-trace failure shape and must preserve `initial_attempt`, `fallback_applied`, and `fallback_env` evidence when it succeeds.
+- Confirm `run_remote_eda_smoke.sh` does not let diagnostic sidecars such as `urg_runtime_probe.py` or `urg_troubleshoot.py` drag `job_exit_code` to nonzero after smoke, mixed-language smoke, conversion, coverage, and matrix have factually passed.
+- Confirm a fresh clean-room zip bundle run on the selected Linux EDA host can reproduce the pass without hand-editing remote scripts after extraction.
+- If `ucapi_patch_scan.json` reports `no_match`, keep the failure as a vendor/toolchain blocker and do not enable the guarded patch path for that tool image.
 - If `coverage_urg` passes, confirm `urgReport/` is nonempty and `urg_coverage_matrix.default_variant` is `line+cond+tgl__urg__auto64` with `status=passed`.

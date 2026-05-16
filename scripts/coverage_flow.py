@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -11,10 +12,24 @@ from pathlib import Path
 
 
 DEFAULT_METRICS = ("line", "cond", "tgl")
+MALLOC_RETRY_REASONS = {
+    "urg internal ucapi/snpsmalloc failure",
+    "urg internal failure with ptrace-blocked stack annotation",
+    "urg stack annotator diagnostic blocked by ptrace after internal failure",
+}
 
 
 def coverage_metrics_arg(metrics: list[str] | tuple[str, ...] | None = None) -> str:
     return "+".join(metrics or DEFAULT_METRICS)
+
+
+def _preferred_urg_executable() -> str:
+    vcs_home = os.environ.get("VCS_HOME", "")
+    if vcs_home:
+        candidate = Path(vcs_home) / "bin" / "urg"
+        if candidate.exists():
+            return str(candidate)
+    return "urg"
 
 
 def _count_files(path: Path) -> int:
@@ -58,7 +73,7 @@ def build_coverage_plan(
     report = Path(report_dir) if report_dir is not None else root / "urgReport"
     vdb_has_mode64 = (vdb / ".mode64").exists()
     use_full64 = vdb_has_mode64 if full64 is None else full64
-    cmd = ["urg"]
+    cmd = [_preferred_urg_executable()]
     if use_full64:
         cmd.append("-full64")
     cmd.extend(["-dir", str(vdb), "-report", str(report)])
@@ -80,14 +95,14 @@ def build_coverage_plan(
 def diagnose_coverage_failure(output: str) -> str:
     if "Error-[URG-NLC]" in output or "No license key" in output:
         return "urg license missing: VCSTools_Net or VT_CoverageURG"
-    if "libncursesw.so.5" in output:
-        return "urg runtime missing libncursesw.so.5"
-    if "libucapi.so" in output or "libsnpsmalloc.so" in output:
-        return "urg internal ucapi/snpsmalloc failure"
     if "Stack trace follows" in output:
         return "urg internal failure with ptrace-blocked stack annotation"
     if "ptrace: Operation not permitted" in output:
         return "urg stack annotator diagnostic blocked by ptrace after internal failure"
+    if "libncursesw.so.5" in output:
+        return "urg runtime missing libncursesw.so.5"
+    if "libucapi.so" in output or "libsnpsmalloc.so" in output:
+        return "urg internal ucapi/snpsmalloc failure"
     return ""
 
 
@@ -144,14 +159,13 @@ def execution_command(cmd: list[str]) -> list[str]:
     return cmd
 
 
-def execute_coverage_plan(plan: dict, *, timeout: int = 300) -> dict:
+def _execute_once(plan: dict, *, cmd: list[str], tool: dict, timeout: int, env: dict[str, str]) -> dict:
     started = time.monotonic()
-    cmd = execution_command(plan["cmd"])
-    tool = urg_tool_info(plan["cmd"])
     try:
         completed = subprocess.run(
             cmd,
             cwd=plan["workdir"],
+            env=env,
             text=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -192,6 +206,36 @@ def execute_coverage_plan(plan: dict, *, timeout: int = 300) -> dict:
             "stderr_tail": _tail(exc.stderr or f"timeout after {timeout}s"),
             "coverage": coverage_status(plan["workdir"], plan.get("report_dir")),
         }
+
+
+def _should_retry_with_vcs_use_malloc(result: dict, *, env: dict[str, str]) -> bool:
+    if env.get("VCS_USE_MALLOC") == "1":
+        return False
+    if result.get("status") != "failed":
+        return False
+    return result.get("reason", "") in MALLOC_RETRY_REASONS
+
+
+def execute_coverage_plan(plan: dict, *, timeout: int = 300) -> dict:
+    cmd = execution_command(plan["cmd"])
+    tool = urg_tool_info(plan["cmd"])
+    base_env = dict(os.environ)
+    result = _execute_once(plan, cmd=cmd, tool=tool, timeout=timeout, env=base_env)
+    if not _should_retry_with_vcs_use_malloc(result, env=base_env):
+        return result
+    retry_env = base_env.copy()
+    retry_env["VCS_USE_MALLOC"] = "1"
+    retry = _execute_once(plan, cmd=cmd, tool=tool, timeout=timeout, env=retry_env)
+    retry["fallback_applied"] = True
+    retry["fallback_env"] = {"VCS_USE_MALLOC": "1"}
+    retry["initial_attempt"] = {
+        "status": result.get("status"),
+        "reason": result.get("reason"),
+        "returncode": result.get("returncode"),
+        "stdout_tail": result.get("stdout_tail", ""),
+        "stderr_tail": result.get("stderr_tail", ""),
+    }
+    return retry
 
 
 def main() -> int:

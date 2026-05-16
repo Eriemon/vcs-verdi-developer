@@ -15,6 +15,7 @@
     {
       "claim_id": "claim-cocotb-vcs-nongui-plan",
       "claim_type": "factual",
+      "claim_scope": "delivery_mainline",
       "support_status": "supported",
       "evidence_ids": ["ev-cocotb-vcs-unit", "ev-local-quality-gate"],
       "text": "The skill can generate a non-GUI cocotb VCS/VPI dry-run plan for Verilog/SystemVerilog examples."
@@ -22,6 +23,7 @@
     {
       "claim_id": "claim-official-boundary",
       "claim_type": "factual",
+      "claim_scope": "boundary",
       "support_status": "supported",
       "evidence_ids": ["ev-local-quality-gate"],
       "text": "The skill does not claim complete coverage of every official Synopsys VCS/Verdi option."

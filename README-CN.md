@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-1f6feb"></a>
   <a href="pyproject.toml"><img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-2f81f7"></a>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.5.0-7c3aed">
+  <img alt="Version" src="https://img.shields.io/badge/version-v0.5.1-7c3aed">
   <a href="SKILL.md"><img alt="Agent Skill" src="https://img.shields.io/badge/agent-skill-16a34a"></a>
   <a href="references/vcs-verdi-flow.md"><img alt="Target" src="https://img.shields.io/badge/target-VCS%20%26%20Verdi-f59e0b"></a>
 </p>
@@ -65,7 +65,7 @@ EDA 工作流很容易因为环境判断、GUI 假设或 dump/debug 步骤处理
 | `assets/` | 最小夹具、manifest 示例、evidence 样例、include 文件、波形模板和 evolution 模板。 |
 | `evals/` | 定义 with-skill 预期行为的评测样例。 |
 | `docs/assets/` | 仓库 README 页面使用的展示图。 |
-| `RELEASE_RECEIPT.json` | 导入的 `v0.5.0` 发布包来源记录。 |
+| `RELEASE_RECEIPT.json` | 导入的 `v0.5.1` 发布包来源记录。 |
 
 ## 快速开始
 
@@ -80,6 +80,9 @@ python .\scripts\cocotb_vcs_flow.py --help
 python .\scripts\coverage_flow.py --help
 python .\scripts\run_regression.py --help
 python .\scripts\evidence_claim_gate.py --help
+python .\scripts\autoverifix_vcs_flow.py --help
+python .\scripts\aiss_vcs_flow.py --help
+python .\scripts\urg_troubleshoot.py --help
 ```
 
 推荐顺序：
@@ -89,7 +92,7 @@ python .\scripts\evidence_claim_gate.py --help
 3. 如果起点是 cocotb 风格的 VCS/VPI 流程，用 `scripts/cocotb_vcs_flow.py` 做非 GUI 规划。
 4. 用 `scripts/generate_rc.py` 生成或复核波形布局 RC。
 5. 用 `scripts/smoke_vcs_verdi.py --dry-run` 规划最小或 manifest 驱动的 VCS/Verdi smoke 流程。
-6. 当任务扩展到 coverage、波形读回、批量执行、证据收集或 factual readiness claim 时，使用 `scripts/coverage_flow.py`、`scripts/fsdb_tools.py`、`scripts/run_regression.py`、`scripts/collect_evidence.py` 和 `scripts/evidence_claim_gate.py`。
+6. 当任务扩展到 coverage、波形读回、批量执行、证据收集、URG 故障诊断或 factual readiness claim 时，使用 `scripts/coverage_flow.py`、`scripts/autoverifix_vcs_flow.py`、`scripts/aiss_vcs_flow.py`、`scripts/fsdb_tools.py`、`scripts/run_regression.py`、`scripts/collect_evidence.py`、`scripts/urg_troubleshoot.py` 和 `scripts/evidence_claim_gate.py`。
 7. 只有在命令计划和环境结论都被确认后，才执行真实流程。
 
 ## 适用边界
@@ -128,8 +131,8 @@ Jiyuan Liu 和 He Li 隶属于东南大学电子科学与工程学院。
   author       = {Jiyuan Liu and He Li},
   title        = {{VCS Verdi Developer}: An Agent Skill for Synopsys VCS and Verdi Workflows},
   year         = {2026},
-  version      = {0.5.0},
-  date         = {2026-05-15},
+  version      = {0.5.1},
+  date         = {2026-05-16},
   url          = {https://github.com/Eriemon/vcs-verdi-developer},
   license      = {Apache-2.0},
   note         = {Agent skill package for Synopsys VCS simulation, project import, cocotb planning, FSDB tooling, evidence gating, coverage diagnostics, and Verdi waveform-debug workflows}

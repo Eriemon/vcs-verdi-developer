@@ -13,7 +13,7 @@
 - `docs/experience/history_experience/20260515-231403/1-workflow.md`
 
 ## Evidence Sources
-Current v0.5.0 handoff, development notes, changelog, local quality gate output, release package receipt, and skill payload scan tests.
+Current v0.5.1 handoff, development notes, changelog, local quality gate output, release package receipt, and skill payload scan tests.
 
 ## Applicable Scenario
 Use this template when a skill repository must turn a broad user confidence request into a bounded, factual release claim while preserving AGENTS and docs governance.

@@ -2,10 +2,23 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import os
 from datetime import UTC, datetime
 from pathlib import Path
+
+
+def _load_check_env_sanitizer():
+    check_env_path = Path(__file__).resolve().parent / "check_env.py"
+    spec = importlib.util.spec_from_file_location("check_env", check_env_path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module._sanitize_env_value
+
+
+_sanitize_env_value = _load_check_env_sanitizer()
 
 
 ENV_KEYS = (
@@ -90,6 +103,9 @@ def collect_evidence(
             report_text = ""
     environment = {key: os.environ.get(key, "") for key in ENV_KEYS}
     environment.update(env or {})
+    redacted_environment = {
+        key: _sanitize_env_value(key, environment.get(key, ""), expose_paths=False, expose_values=False) for key in ENV_KEYS
+    }
     mixed_status = _matrix_status(mixed)
     if mixed_status["status"] == "not_executed" and smoke.get("plan", {}).get("vhdl_sources"):
         mixed_status = {"status": smoke.get("status", "unknown"), "returncode": None, "reason": ""}
@@ -97,7 +113,7 @@ def collect_evidence(
         "timestamp_utc": timestamp_utc or datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "fresh": True,
         "job_exit_code": job_exit_code,
-        "environment": environment,
+        "environment": redacted_environment,
         "check_env": check_env,
         "steps": smoke.get("results", []),
         "artifacts": {

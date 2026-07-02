@@ -1,8 +1,8 @@
 {
   "skill_name": "vcs-verdi-developer",
-  "version": "v0.5.1",
+  "version": "v0.5.4",
   "source_path": "skills/vcs-verdi-developer",
-  "generated_at": "2026-05-16T14:34:46",
+  "generated_at": "2026-07-02T14:55:22",
   "current_branch": "master",
   "local_branches": [
     "master",
@@ -17,19 +17,70 @@
   "validation_level": "strong",
   "provenance_mode": "repository-dist",
   "sanitization": {
-    "enabled": false,
-    "scope": "not-configured",
-    "mode": "not-configured",
-    "files": []
+    "enabled": true,
+    "scope": "broad",
+    "mode": "auto-redact-dist-copy",
+    "files": [],
+    "receipt_required": true
+  },
+  "release_content_policy": {
+    "policy_version": "2026-05-26-v2",
+    "top_level_file_mode": "allow-nonforbidden-files",
+    "allowed_top_level_files": [
+      "README.md",
+      "SKILL.md",
+      "VERSION"
+    ],
+    "allowed_top_level_dirs": [
+      "agents",
+      "assets",
+      "config",
+      "evals",
+      "integration",
+      "references",
+      "runtime",
+      "scripts"
+    ],
+    "forbidden_exact_names": [
+      ".mypy_cache",
+      ".pytest_cache",
+      ".ruff_cache",
+      "__pycache__",
+      "_smoke_runs",
+      "reports",
+      "runs",
+      "test",
+      "tests"
+    ],
+    "forbidden_prefixes": [
+      "smoke"
+    ],
+    "forbidden_suffixes": [
+      ".pyc",
+      ".pyo"
+    ],
+    "included_file_count": 117,
+    "included_top_level_entries": [
+      "SKILL.md",
+      "VERSION",
+      "agents",
+      "assets",
+      "evals",
+      "references",
+      "scripts"
+    ],
+    "unexpected_top_level_entries": [],
+    "forbidden_source_paths": [],
+    "forbidden_release_paths": []
   },
   "files": [
     {
       "path": "agents/openai.yaml",
-      "sha256": "e76250db85bced94836e30850c57eec280c3e7fd6aadb0641fffe5b4b9a4d6f2"
+      "sha256": "7729152c9aebb47851028784680746a9fe266d7542834dddefc2d7b958686366"
     },
     {
       "path": "assets/evidence/non_gui_claims.json",
-      "sha256": "f91441c9805b6ab7bba7fd2aab91d580aff42f7d65a4b5107c3042e13b442cf4"
+      "sha256": "09915158eba3744d18104232ee032573af6f65e1bf1178c7e717d5bf84bf6d36"
     },
     {
       "path": "assets/minimal_vcs/core.vhd",
@@ -41,7 +92,7 @@
     },
     {
       "path": "assets/minimal_vcs/dump_ucli.tcl",
-      "sha256": "a36dc22fab88d5c2398247d6454d4173f1c8da1df083062a1052568704610f9b"
+      "sha256": "e3b2360029c496650289aa034344fb248f49f3c141c5f32388d84d557231ec48"
     },
     {
       "path": "assets/minimal_vcs/include/.keep",
@@ -61,31 +112,7 @@
     },
     {
       "path": "assets/minimal_vcs/top.sv",
-      "sha256": "429300b6bab1bc27b2d519bd912809d07e465bb8e8bdb1eb235109d3d09f62b4"
-    },
-    {
-      "path": "assets/templates/evolution/evolution-index.json",
-      "sha256": "0a56ffcf37dd74e0c0cc75ceac34821bcf3df1d87730004f67fad238ac7feb36"
-    },
-    {
-      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/1-workflow.md",
-      "sha256": "1a5248593583306c0badb6af09ab66058c67148e6214df5efd36b91f67fd2fa7"
-    },
-    {
-      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/2-scripts.md",
-      "sha256": "bfd6a5592cee9632635bb185fbf8731312246190e762d37b12911bea14be9859"
-    },
-    {
-      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/3-plan.md",
-      "sha256": "95e590dee621210ba36ab7b9c7424e04201d85f060615c9735a255d5db563762"
-    },
-    {
-      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/4-design-ui.md",
-      "sha256": "b2c3ce5639b92535216e791a7467f970e042223255c3eedf3236c3b7e7c21c3c"
-    },
-    {
-      "path": "assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/template-index.json",
-      "sha256": "48d7cdf684b9694273f5981029f7149a8ea66a6e24edb1d0e88ea43e2800ee05"
+      "sha256": "f35a605c1a54f4839f6c417aae31680dc837bca3323f7a562e589c495665dcde"
     },
     {
       "path": "assets/waves/scn_base.lst",
@@ -93,7 +120,7 @@
     },
     {
       "path": "assets/waves/scn_basic.lst",
-      "sha256": "276207f32fb9da1edc2122e07d822e3cf650de767f874e9648d4587638000e21"
+      "sha256": "82658e9108d2675ef5e163afa090ec35e53af9887fc5910e6a798805919342b2"
     },
     {
       "path": "assets/waves/scn_mipsfpga.lst",
@@ -105,147 +132,2073 @@
     },
     {
       "path": "evals/evals.json",
-      "sha256": "fd5b4a41072174bf43a705dcbdae85b659e60bfc965447b06666d74038d6befd"
+      "sha256": "44ba69286c85dfb9c9bee91c80a190f49457307a0e9419e81f732f324e186e9c"
     },
     {
       "path": "references/capability-matrix.md",
-      "sha256": "88d67a9b93f9e5b09b5b2c63f8e15fda128c066ed1b46c56b3c77c93a10d1303"
+      "sha256": "c17a8209b3d89689fc328bbea7096ac09746cfb2e1636cb4523205c59f49043a"
     },
     {
       "path": "references/non-gui-flow.md",
-      "sha256": "57bf97bc8bfe38f06f1eaedc72b5803aecbab87883582b67568bc78cb5dfd446"
+      "sha256": "91f27e3dfdb9f20907e33141aa8bc7b012508cb163050ae07ebcee33e77d587c"
     },
     {
       "path": "references/remote-eda-gate.md",
-      "sha256": "688a9f08d28ea8390dd406e41937cbccac0603c281dfd6439edb456f477a16ce"
+      "sha256": "5a0ccfba44d2b1105b9cc9345b0488464c3d68a454f26a1a91c3cefe1c392709"
     },
     {
       "path": "references/remote-eda-validation.md",
-      "sha256": "72069acd09ebe25d009aa140635751cbb946ee7429374e9c79e1e75249df1238"
+      "sha256": "ae30b006e8c641cfd1be773a2a2efb4acf6ea4c1268f2e89c8903b629e7ec738"
     },
     {
       "path": "references/review-checklist.md",
-      "sha256": "d2cbc2af0d83f62bbcfa9d6af5412ae6b59f896b518134196a1eec1f2c113241"
+      "sha256": "92425aad2c3c1df013779b7b3e5a1978ae9161b7876d31e9187f31dc18cd035e"
     },
     {
       "path": "references/third-party-extraction.md",
-      "sha256": "1bd13369e0a7101133a4931f4b33f3a07264f278b3fff836b3cb1f5646f4a026"
+      "sha256": "a6114072b9320fa4cb00d6163d3cb7611c6b2f68d7a0dd227b70ef6b3490b46f"
     },
     {
       "path": "references/vcs-verdi-flow.md",
-      "sha256": "82a811111e407a390643530af15140ad84125ba8ac86916b719fd287f55adf01"
+      "sha256": "a4e2e7d5f4d8ef427c069374068725c3bb9e953ad74b176e226589ff43773305"
     },
     {
       "path": "references/verdi-interaction.md",
-      "sha256": "e87272d558754bcfb7d4aa598d0c0e36eead5dbd5fb38ae3d92860cfb63971ca"
+      "sha256": "24d1c2f3eec72438583a6dd44c83f07de807d8fb12591070b988de308735b433"
     },
     {
       "path": "references/verdi-rc-format.md",
-      "sha256": "03f3c689a0d9b2e57d8bbc305587edb5b0ebddb4b0c02a354449f902e18a6a73"
+      "sha256": "84592bda1db383471325aa3ae0e59a46c688a8c315c89fc153b15513366a22f6"
     },
     {
-      "path": "scripts/aiss_vcs_flow.py",
-      "sha256": "10e78f83b475c1201ecc15f69b8e83984ff8a3fd04d0c42618a4ebd2e3b9cbca"
+      "path": "scripts/bat/coverage/coverage_flow.bat",
+      "sha256": "c670ae7a0cbc704acf719d20cccb5596dd7b0f31dc76d57d92ee42f826584f2f"
     },
     {
-      "path": "scripts/analyze_logs.py",
-      "sha256": "ee53a855be6e50ffc903fcddfc3ca14218d05785a48bb67d4fb48f454617f17e"
+      "path": "scripts/bat/coverage/patch_ucapi_overlay.bat",
+      "sha256": "f784c05d29f516753919e0599b51079526fc118b184fcdf97b1b4ccba455d3af"
     },
     {
-      "path": "scripts/autoverifix_vcs_flow.py",
-      "sha256": "7a1eca8743bbef4b3ecc46b4d004f36e64f3a23017ad1b14129efb7852c0d136"
+      "path": "scripts/bat/coverage/urg_coverage_matrix.bat",
+      "sha256": "f008ca28ff930aaa708ea837ca882401e973f4b5893a4a2e9a06c4b9440c4939"
     },
     {
-      "path": "scripts/check_env.py",
-      "sha256": "5f2639f996fc0dc4b93db7aec4f79cfde3a0038ac1f9df8ec5f0bb2a9a186f10"
+      "path": "scripts/bat/coverage/urg_runtime_probe.bat",
+      "sha256": "40e1c2f5681051adb43e2e5138b7bcc18b80288035c268c9beddbec6b1b2f3de"
     },
     {
-      "path": "scripts/cocotb_vcs_flow.py",
-      "sha256": "7394a65b7eb53d47d9f36b952efffd916c245d4bbda144ddae2231f5470f8528"
+      "path": "scripts/bat/coverage/urg_troubleshoot.bat",
+      "sha256": "ad1962187432016cb1068c7c045f3136a95b30176c7feb844fbbe8913c51d644"
     },
     {
-      "path": "scripts/collect_evidence.py",
-      "sha256": "33083357c8669a78735a2a817157ad18fbc3e6eac178e970ddfa531cc429b32c"
+      "path": "scripts/bat/diagnosis/analyze_logs.bat",
+      "sha256": "1e9ffee9ea677625a1cd1ae3adf5d3d493d522486a4d43a3ec889fdb3fb1f990"
     },
     {
-      "path": "scripts/coverage_flow.py",
-      "sha256": "4f9b4a1711549f2c65ac7c6561e6829988c62ca52acf85c359fe5a6000085c21"
+      "path": "scripts/bat/diagnosis/fsdb_tools.bat",
+      "sha256": "1621a77f4810cc4d3873af5620bf5945efa71963278db8e6192ed2ac0887e905"
     },
     {
-      "path": "scripts/evidence_claim_gate.py",
-      "sha256": "a7efc35c9a0e091e1cb09a281c9f8c9dc9f2ca35999d6831dfc31e5945416030"
+      "path": "scripts/bat/env/check_env.bat",
+      "sha256": "a7b62f5ea7cf7bc181e9c2ad913b9640ae55cf0ee43222ba1822bcd9a654b7b3"
     },
     {
-      "path": "scripts/fpgen_vcs_flow.py",
-      "sha256": "18a9346cc082e0e01b7a942384e203294ccc5b0bee4b81ba1151d439592d146f"
+      "path": "scripts/bat/evidence/collect_evidence.bat",
+      "sha256": "e7009b5469220edcae6f713f0dbb8f9c28ffd4eee58c53cd109f315be9967dcb"
     },
     {
-      "path": "scripts/fsdb_tools.py",
-      "sha256": "86e7122cdb7e92f5613e824dc940b38c0c4ef8c6af81f840d09b32a410ad4c8e"
+      "path": "scripts/bat/evidence/evidence_claim_gate.bat",
+      "sha256": "3a8367e43452660114b0baa4e2f7b68bc71be171afeaadb6163c98ff39dcc264"
     },
     {
-      "path": "scripts/generate_rc.py",
-      "sha256": "3d06d8a2b52ae6825ceaeb77417db709b4260f12ba92d4d18d7c2f3d0bb233ce"
+      "path": "scripts/bat/flows/aiss_vcs_flow.bat",
+      "sha256": "7045e9bf555f50535950c7d6dfc96d9f1a50616ab982d4f627697718805f2941"
     },
     {
-      "path": "scripts/import_vcs_project.py",
-      "sha256": "a4ad1a7df0705fabe9740294976650c3d374aa200ed575dd88145179c8e81856"
+      "path": "scripts/bat/flows/autoverifix_vcs_flow.bat",
+      "sha256": "2013e2098481a1de033df4aa9972cc7ccdb292699184c60fcdf27ce9639f0af7"
     },
     {
-      "path": "scripts/kvips_vcs_flow.py",
-      "sha256": "f31328afdcb928b7db09cb410019e3bb3de5035d732a521ab62bd79b3e43b95e"
+      "path": "scripts/bat/flows/cocotb_vcs_flow.bat",
+      "sha256": "0e86afbfe25a45eace76b02483f202bc755e1c092075ba407cfefadfba938609"
     },
     {
-      "path": "scripts/make_shell_overlay.sh",
-      "sha256": "e579f097584498a4fabdda594b81269a8b8e3cbe4e83f4d50d433822826a1538"
+      "path": "scripts/bat/flows/fpgen_vcs_flow.bat",
+      "sha256": "b6e0ca11af74e1db3f5ae4b05a0893e51ad7e97d7e2f90140926f6f02ac3a2b4"
     },
     {
-      "path": "scripts/patch_ucapi_overlay.py",
-      "sha256": "6d8551f0bba9a1a3c11fd81f79a4f93b696727fff28cf063db70a696a3704f6e"
+      "path": "scripts/bat/flows/kvips_vcs_flow.bat",
+      "sha256": "687d745519270f46ff288c4fe8e630b81257c00f9aea22c8bd9770ddf9de7469"
     },
     {
-      "path": "scripts/remote_eda_gate.py",
-      "sha256": "78c58d7aea268d3f0542569ecaaffc06bd3bcfa3dc94c1d9f39a461bf3e5f98d"
+      "path": "scripts/bat/flows/riscv_dv_flow.bat",
+      "sha256": "ec86873a73d406ad29cc70868a2d726ce3a4374d2c897452f2523d589aed21db"
     },
     {
-      "path": "scripts/riscv_dv_flow.py",
-      "sha256": "d65556e6bb555a0895eea9d8680c9e055d3615e744c73ff9dbacb202bcc4387d"
+      "path": "scripts/bat/import/import_vcs_project.bat",
+      "sha256": "0a7864ad9ce79f809122de52affb5b4434162d1913b4dd9358a0af14e7b1fbb3"
     },
     {
-      "path": "scripts/run_quality_gate.py",
-      "sha256": "ee1ee23a4601ba83fcb86f6d2e81ca39adb9810b1ad58c40984bb05e8509c830"
+      "path": "scripts/bat/quality/run_quality_gate.bat",
+      "sha256": "916c3997f723578b242bc12599f888e89a1621e2736bbc930eed20e7300735c9"
     },
     {
-      "path": "scripts/run_regression.py",
-      "sha256": "c0c6f265fc694bd51f06a2b2a4db056c60f62936eeebb54c36ca8a67e099cc2e"
+      "path": "scripts/bat/rc/generate_rc.bat",
+      "sha256": "0c947a49a3fbc9b9f025b5f9abd679953ae08c10bfb31a1846cb1384a0317035"
     },
     {
-      "path": "scripts/run_remote_eda_smoke.sh",
-      "sha256": "838983e8476277c41067987875ad245288612891b78cff672b93ce21dbe347d0"
+      "path": "scripts/bat/regression/run_regression.bat",
+      "sha256": "eb26d5fba0e03179af80c272a340b67d571f480e47ea877128e06e6b6d7c82e8"
     },
     {
-      "path": "scripts/smoke_vcs_verdi.py",
-      "sha256": "ed853650ca7c22e07525328af9902a3d6f073656072eeedf9e4e0a47132cf5a7"
+      "path": "scripts/bat/remote/remote_eda_gate.bat",
+      "sha256": "fe7cdbdd154bb538553ac8649a265f45a76dfa3ccdb1928c1dd3816aac1afe43"
     },
     {
-      "path": "scripts/urg_coverage_matrix.py",
-      "sha256": "a6e0c190a6c6aa75d3a33200fecdaac8715e9cc7e7d3e269167a08a080e82c90"
+      "path": "scripts/bat/validation/vcs_verdi_check.bat",
+      "sha256": "9dacae5a65abb8433999021c29f9eda28f71be7011a8e995f282ee1a74fdd86e"
     },
     {
-      "path": "scripts/urg_runtime_probe.py",
-      "sha256": "c03ad406a57358118ce85f981e9b2d8e5a16d109b3aa5fbbef8da2fa3244ed1b"
+      "path": "scripts/powershell/coverage/coverage_flow.ps1",
+      "sha256": "75a84f686c1b9339b75291bff7386812399933fec400abee68f12e5003b103c3"
     },
     {
-      "path": "scripts/urg_troubleshoot.py",
-      "sha256": "dd5ab030291d930d6aca5fe0e5202811bd8b6175402584a21a4da75f79116737"
+      "path": "scripts/powershell/coverage/patch_ucapi_overlay.ps1",
+      "sha256": "c0f41c10f55b005d10b7d04fe7dd818c494bddb7c37bb527357b32597fc5cbe5"
+    },
+    {
+      "path": "scripts/powershell/coverage/urg_coverage_matrix.ps1",
+      "sha256": "e08149fa52501e48df92161b31129aebad35b55bbe9d0c93dd9899310d8167db"
+    },
+    {
+      "path": "scripts/powershell/coverage/urg_runtime_probe.ps1",
+      "sha256": "9e4a03e6c11853efd40536f57dfc21ba524a1db2773678e01d198c008668f0da"
+    },
+    {
+      "path": "scripts/powershell/coverage/urg_troubleshoot.ps1",
+      "sha256": "4bb940e9b1a83ed60039af1a90c3463591c94e6c717d955cb991650ea703ccb7"
+    },
+    {
+      "path": "scripts/powershell/diagnosis/analyze_logs.ps1",
+      "sha256": "c585aaf027cc062e54cfdab69bf8263ef8b6bf5582b8cd03151258b158769fde"
+    },
+    {
+      "path": "scripts/powershell/diagnosis/fsdb_tools.ps1",
+      "sha256": "4bddd6fd0ce0bf0015d8e6cc1c2bfb5b9bbb57d1a33f32123b6eae6017827042"
+    },
+    {
+      "path": "scripts/powershell/env/check_env.ps1",
+      "sha256": "baf88e62d7e7f0ca5dcc8f300c3422efc5df468b3fe21fe7dcd2c2eac33d2e6d"
+    },
+    {
+      "path": "scripts/powershell/evidence/collect_evidence.ps1",
+      "sha256": "343a83e773df4e44cce497125eb5f7ec201867a7a217b84cbe69b48fd8d5c3c8"
+    },
+    {
+      "path": "scripts/powershell/evidence/evidence_claim_gate.ps1",
+      "sha256": "d488db11b67a6b06add43d9cb91cb107881a079d907b6e733a64cfec08964111"
+    },
+    {
+      "path": "scripts/powershell/flows/aiss_vcs_flow.ps1",
+      "sha256": "ba7158f0ca55e62719f743abe4564799b2f9aeb5f0c1eb34f318d9e792f226f6"
+    },
+    {
+      "path": "scripts/powershell/flows/autoverifix_vcs_flow.ps1",
+      "sha256": "9fcd8e99d7e6b5e26954168525bf2397ead0414668f5f332774d434c7e5be616"
+    },
+    {
+      "path": "scripts/powershell/flows/cocotb_vcs_flow.ps1",
+      "sha256": "5b7196fd85d7c68ae56e0997b354f7085c8a647f0eef1187dd1760d0a06e4eb6"
+    },
+    {
+      "path": "scripts/powershell/flows/fpgen_vcs_flow.ps1",
+      "sha256": "ebea3e6aeefa4b3c6108eaa384af96ecf6be2184e4fb8d28b1c537e3f9292682"
+    },
+    {
+      "path": "scripts/powershell/flows/kvips_vcs_flow.ps1",
+      "sha256": "d3cba727a57fc3c2741d6167811c95e9942852507cdedabae3f652c0363e2765"
+    },
+    {
+      "path": "scripts/powershell/flows/riscv_dv_flow.ps1",
+      "sha256": "dfb2d027461bcc0b537733063c3d61314e561c92392e4ecf6f676f456915208f"
+    },
+    {
+      "path": "scripts/powershell/import/import_vcs_project.ps1",
+      "sha256": "ac4f35777f6c2c54cf149e8ea5ae634c0eb7ad083fe9394e68aea3fe6ff29d4f"
+    },
+    {
+      "path": "scripts/powershell/quality/run_quality_gate.ps1",
+      "sha256": "c31f1147bc54f65dda1728d17d29eae57b3d3aeeb629d69be964249e74afb329"
+    },
+    {
+      "path": "scripts/powershell/rc/generate_rc.ps1",
+      "sha256": "0d9520b162ff711b090d0ea5389e9e761bcdd340a4884f02fce8f893f18d65c5"
+    },
+    {
+      "path": "scripts/powershell/regression/run_regression.ps1",
+      "sha256": "70b5aabe655ba954fec971ec8c4c0325d1dd7e19faac7b8c0637d6772deb99f3"
+    },
+    {
+      "path": "scripts/powershell/remote/remote_eda_gate.ps1",
+      "sha256": "b9fd702fd5edb4a74bf70e8cee4856be6d78987155a7c688194951e6ac5ed89f"
+    },
+    {
+      "path": "scripts/powershell/validation/vcs_verdi_check.ps1",
+      "sha256": "57f5a8832bfc88324b00f01b5d8a295fb0bca92cff37ab35372105ea722819f8"
+    },
+    {
+      "path": "scripts/python/coverage/coverage_flow.py",
+      "sha256": "67ec59594df298ae33056b7894fc1fad3d673b288151250c198e24ac3bce2ab4"
+    },
+    {
+      "path": "scripts/python/coverage/patch_ucapi_overlay.py",
+      "sha256": "7b47e76de284f6f51738474eed720eacbbae18b57f61497a32d3572d57e89f35"
+    },
+    {
+      "path": "scripts/python/coverage/urg_coverage_matrix.py",
+      "sha256": "fada589b0c3626de871b72e161e489f776f602fd134121b686a2ee04578486d3"
+    },
+    {
+      "path": "scripts/python/coverage/urg_runtime_probe.py",
+      "sha256": "7e41dc45d8e6ab1058704e7cadca4602cbd802420718e78497d5e7a1f1963a9d"
+    },
+    {
+      "path": "scripts/python/coverage/urg_troubleshoot.py",
+      "sha256": "0940a39dee8e83291a80c6ac1d6839ddfb09fd0b91711b5561d2f590051eeca1"
+    },
+    {
+      "path": "scripts/python/coverage/urg_troubleshoot_attempts.json",
+      "sha256": "0a9a8aa13fe232a69eeba934761dfdeaf14d641e874a9adf4e1ef17356f7ee6a"
+    },
+    {
+      "path": "scripts/python/diagnosis/analyze_logs.py",
+      "sha256": "03b7008d5547c72c0f6a906c617f3396e5eb529db8746754fd9b4df1792ba80c"
+    },
+    {
+      "path": "scripts/python/diagnosis/fsdb_tools.py",
+      "sha256": "a4b75b8e2756696d93091537e07a6ab34740e6d24cea4a7acc9d8166633185df"
+    },
+    {
+      "path": "scripts/python/env/check_env.py",
+      "sha256": "59dbe6063bff65e3ac5ace86777149cc1d40ddfb647f0f808562e1e37bfaad08"
+    },
+    {
+      "path": "scripts/python/evidence/collect_evidence.py",
+      "sha256": "541151184b2dd6d39366674c17bd0e8d19840d9ca700fc494dc321c9199e5496"
+    },
+    {
+      "path": "scripts/python/evidence/evidence_claim_gate.py",
+      "sha256": "dd379ef0b22517b555602e60ae191512b1852465cff68a9f8e38dd1b9671f7c0"
+    },
+    {
+      "path": "scripts/python/flows/aiss_vcs_flow.py",
+      "sha256": "4f552a7aa94529ba27abacaa056b7bcb3ff7312a9ed6a69593f408512c30a796"
+    },
+    {
+      "path": "scripts/python/flows/autoverifix_vcs_flow.py",
+      "sha256": "7a125ce30e68ba39b12884b69c2be95f2d3db7172808aa9032c4cd42202f66f5"
+    },
+    {
+      "path": "scripts/python/flows/cocotb_vcs_flow.py",
+      "sha256": "8924206c29c13fd72f0041c60230f9e4287bd2b8e0014e49ba656515c5a1a2fc"
+    },
+    {
+      "path": "scripts/python/flows/fpgen_vcs_flow.py",
+      "sha256": "322738b0e3ed3f0b9ce0c58df77faf53ab88dac2969500938c33111657ca463b"
+    },
+    {
+      "path": "scripts/python/flows/kvips_vcs_flow.py",
+      "sha256": "46413a326fa1facc7ef80e0e6dc0c70f86ac2aaa81503f22318e23aa708acc43"
+    },
+    {
+      "path": "scripts/python/flows/riscv_dv_flow.py",
+      "sha256": "e1c6ee0ed7d6de5869ebcc52b892c487f80ce4afaedf378490a2398e73874dea"
+    },
+    {
+      "path": "scripts/python/import/import_vcs_project.py",
+      "sha256": "1568eaee52e54379cae5b15518488e80e583a129c4a69e1f81374c4ac5a0dc71"
+    },
+    {
+      "path": "scripts/python/quality/run_quality_gate.py",
+      "sha256": "f155b86e3f418ef4704579daed1d6dcaf6c486f978a9571578c2d142e02bed65"
+    },
+    {
+      "path": "scripts/python/rc/generate_rc.py",
+      "sha256": "819c05e33851ae34140e485816f6b4f5bfce7f0788507df3c94eb445063a5f1a"
+    },
+    {
+      "path": "scripts/python/regression/run_regression.py",
+      "sha256": "227351252be98d29046c5b56155351f16afaeeb3faedf94e929d8a1e5c58afa4"
+    },
+    {
+      "path": "scripts/python/remote/remote_eda_gate.py",
+      "sha256": "74871507a14559aa4e182918fa6e1e5c533ddda8bb5e1aacc29aa0b45dfd0002"
+    },
+    {
+      "path": "scripts/python/validation/vcs_verdi_check.py",
+      "sha256": "627a478429bc849d0f76e0ef7a21a66791e7eac05faf829f3d36d9d24a525c7b"
+    },
+    {
+      "path": "scripts/shell/coverage/coverage_flow.sh",
+      "sha256": "00197e5b4892dbc17f237616cfa8ed3ba7fced2df52c307bca346c8e04c57565"
+    },
+    {
+      "path": "scripts/shell/coverage/patch_ucapi_overlay.sh",
+      "sha256": "1c7555d769a7d2fc555a7848af300f525948fe16c6c902cbfe7ca3abb9bf3828"
+    },
+    {
+      "path": "scripts/shell/coverage/urg_coverage_matrix.sh",
+      "sha256": "5d56124d8636d4f3a2264a8e0a0fde190949d3f0d802e0f20828ad327ee385c8"
+    },
+    {
+      "path": "scripts/shell/coverage/urg_runtime_probe.sh",
+      "sha256": "c400d02aada4054687e56f2c7d1385a292c78a7eb5d7826ae208cb2faeeb0c89"
+    },
+    {
+      "path": "scripts/shell/coverage/urg_troubleshoot.sh",
+      "sha256": "3dca92d48a7db0978ddd08f32464410f3a80f441e512bbf99d97f7b0b2caf59c"
+    },
+    {
+      "path": "scripts/shell/diagnosis/analyze_logs.sh",
+      "sha256": "1633142e6e2cdba6d2dcd4d8e7ca5fcbe61f912937fa20cfed2753d0a4c52fc0"
+    },
+    {
+      "path": "scripts/shell/diagnosis/fsdb_tools.sh",
+      "sha256": "63e26f028b8b3b376b645fc3a9d4329434c1f22fb757acc864935b2a3406b0c4"
+    },
+    {
+      "path": "scripts/shell/env/check_env.sh",
+      "sha256": "8e58d381e326b1525744a19063353460b68e305a539e4fadbd95678c7eac96aa"
+    },
+    {
+      "path": "scripts/shell/evidence/collect_evidence.sh",
+      "sha256": "6798058dcc4320a90804511d3c263ddf9f5bb543fc05797ca2f5475fc7820eed"
+    },
+    {
+      "path": "scripts/shell/evidence/evidence_claim_gate.sh",
+      "sha256": "f062b2373fca1172269d29bf08ec065112e7bff820acd252250f01c412bbcefb"
+    },
+    {
+      "path": "scripts/shell/flows/aiss_vcs_flow.sh",
+      "sha256": "e5b2470e7c05925deb279f051395decf370340219d4fd7bccbaace8fed521778"
+    },
+    {
+      "path": "scripts/shell/flows/autoverifix_vcs_flow.sh",
+      "sha256": "27a3604a146c793d34c391c03076aecd43d58c0c18a25ebc26b8220923f5417f"
+    },
+    {
+      "path": "scripts/shell/flows/cocotb_vcs_flow.sh",
+      "sha256": "cfb59963df8694ebc84a0f9de9df19947fe1207885bc590cf070c172fcc7789d"
+    },
+    {
+      "path": "scripts/shell/flows/fpgen_vcs_flow.sh",
+      "sha256": "e6e3a0c9db0167cb6f34b0cecc068e4f11d4c989d46f1145f93d1e5fc683446c"
+    },
+    {
+      "path": "scripts/shell/flows/kvips_vcs_flow.sh",
+      "sha256": "42a0a5b830a03dabd2266c967c6c4c472aa5642d7358078784f29ab4ab7c9ae3"
+    },
+    {
+      "path": "scripts/shell/flows/riscv_dv_flow.sh",
+      "sha256": "91dc5fdc2c2f7ebf51dbec638691d77f5b82e508f7980864f4ec4d804ae39ba0"
+    },
+    {
+      "path": "scripts/shell/import/import_vcs_project.sh",
+      "sha256": "27971a1dc4a508b20a0cddd80f193a841fcfece04a5f97528a1d099c02968e45"
+    },
+    {
+      "path": "scripts/shell/quality/run_quality_gate.sh",
+      "sha256": "2d76a2130d89d21a4bd77bd35dd0cdc4316a3759803dc3de4f5117e8c3d5b9e6"
+    },
+    {
+      "path": "scripts/shell/rc/generate_rc.sh",
+      "sha256": "a94a907ea24d88dc472c23889758020166901d985f2c2a8d053d6287d10e83d1"
+    },
+    {
+      "path": "scripts/shell/regression/run_regression.sh",
+      "sha256": "a090e8188e0145234bd915a47852662500678b2c3789246dc6271bcc4e0d0f23"
+    },
+    {
+      "path": "scripts/shell/remote/make_shell_overlay.sh",
+      "sha256": "4522a015e82aa50045296dc8bc7d285c84a22db82b8df1bb5425b356e39e75df"
+    },
+    {
+      "path": "scripts/shell/remote/remote_eda_gate.sh",
+      "sha256": "d1a24a9a685dae5c2a57097f6d01cb4fd0d4ed585c10153df07e17056193166b"
+    },
+    {
+      "path": "scripts/shell/remote/run_remote_eda_smoke.sh",
+      "sha256": "ccbde74a099b00559ef50171445e68a882c0ee645cc66db6a38c59e58c542e7d"
+    },
+    {
+      "path": "scripts/shell/validation/vcs_verdi_check.sh",
+      "sha256": "c9e3d14d1cd1bb2702f9b92e3725b5a9dbaeecc08d2e6a882c9a0bfb29b31ce6"
     },
     {
       "path": "SKILL.md",
-      "sha256": "6d50599911aebe625f58fff09b5c05782f5231304169b58ca7b8ef284dd6e388"
+      "sha256": "311d71d991473f0f624cceaf4c2bbe4be21c95e8aee1c687976d4c6bffcacf84"
     },
     {
       "path": "VERSION",
-      "sha256": "eb8d59c0680eb3f8813d4c7254f5cd6dbb0160cb24efa20e92bdda11d548c2e8"
+      "sha256": "15048083805c4cf4e6f27e56adfff0d57225c6611d83bdba5a61ff63459dc803"
+    }
+  ],
+  "other_version_artifacts": [
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/agents/openai.yaml",
+      "sha256": "7729152c9aebb47851028784680746a9fe266d7542834dddefc2d7b958686366"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/evidence/non_gui_claims.json",
+      "sha256": "1ac64372363ea6af91750b46f0750fb0b89456e8f6f188a7dca1e75b825ab215"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/minimal_vcs/core.vhd",
+      "sha256": "88a31e014f19a54ae0c8f3e39afe62b1fd29751a22b2757d13df7822a1ba15ff"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/minimal_vcs/coverage_top.sv",
+      "sha256": "bbe766a67e19211e0c9653a7bcf0d8c69da33c8942c1e1bb14b496870b4f696b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/minimal_vcs/dump_ucli.tcl",
+      "sha256": "a36dc22fab88d5c2398247d6454d4173f1c8da1df083062a1052568704610f9b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/minimal_vcs/include/.keep",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/minimal_vcs/include/sim_defs.svh",
+      "sha256": "9c0b8abcf52ff41d5a79ceb608a2e17d420afb2295a83c892074d60922eb0ae2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/minimal_vcs/manifest_matrix.json",
+      "sha256": "3415c5d0ce0604e7c9748f303df8c7d9fc2f14f38ca130c517194a1dc7fe71c2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/minimal_vcs/rtl.f",
+      "sha256": "33559355026895c6649d982eed6c0fd7b50071c364b8ea7711e1990bcbb433ea"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/minimal_vcs/top.sv",
+      "sha256": "f35a605c1a54f4839f6c417aae31680dc837bca3323f7a562e589c495665dcde"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/templates/evolution/evolution-index.json",
+      "sha256": "0a56ffcf37dd74e0c0cc75ceac34821bcf3df1d87730004f67fad238ac7feb36"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/1-workflow.md",
+      "sha256": "d5ca434dc8cd79fb47ed012359deb93f4abf7da4c79f724191422c47aac9676c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/2-scripts.md",
+      "sha256": "d2f27d2169b4852443ffe6c5cf30506516b71546db88dcbec715fcfcae573fa2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/3-plan.md",
+      "sha256": "b8e3eb3ef1b4658f5e5df1f94ab745d515db9578c2db2abc38ea37b357b02117"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/4-design-ui.md",
+      "sha256": "349ddf3d61e9a5b208c1ba31feb06c4304e6b1ffc6931f964595eea2bda0f07d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/templates/evolution/skill-template/agent-governance/vcs-verdi-developer/template-index.json",
+      "sha256": "48d7cdf684b9694273f5981029f7149a8ea66a6e24edb1d0e88ea43e2800ee05"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/waves/scn_base.lst",
+      "sha256": "5142827a1b697594611c92fde2e0b2cde3749a3a377458b777d1079160762e21"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/waves/scn_basic.lst",
+      "sha256": "82658e9108d2675ef5e163afa090ec35e53af9887fc5910e6a798805919342b2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/waves/scn_mipsfpga.lst",
+      "sha256": "5bd88543109a4b285e75144aba73ac5c5745cd8f268ca065935a38ad2933bd9f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/assets/waves/scn_picorv32.lst",
+      "sha256": "1a5fa26976f08d7a0e2043885a14787cfb83d85edf062cc95abc9e29808cf0de"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/evals/evals.json",
+      "sha256": "fd5b4a41072174bf43a705dcbdae85b659e60bfc965447b06666d74038d6befd"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/capability-matrix.md",
+      "sha256": "78400899d2d5a80d591879d18101febc996ebfd1f64b2e55cebf249fae9da8be"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/non-gui-flow.md",
+      "sha256": "07f76edbcd9c554ff7ed051937c198a0d3794bcefc8e8c2f2abe4267351a7143"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/remote-eda-gate.md",
+      "sha256": "6cd3a5f2704be5ab65e2479687568703d5d43057b5e829701e99bdf116c3e243"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/remote-eda-validation.md",
+      "sha256": "72069acd09ebe25d009aa140635751cbb946ee7429374e9c79e1e75249df1238"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/review-checklist.md",
+      "sha256": "93101f72f9f59e77d3f4bc5cea113faac6e7b73f924c19ea18ff842cdfa93973"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/third-party-extraction.md",
+      "sha256": "1bd13369e0a7101133a4931f4b33f3a07264f278b3fff836b3cb1f5646f4a026"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/vcs-verdi-flow.md",
+      "sha256": "82a811111e407a390643530af15140ad84125ba8ac86916b719fd287f55adf01"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/verdi-interaction.md",
+      "sha256": "9e9da46625ffe8690f5300310e597718001069b69d6cb01ddc3a4f16ec365755"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/references/verdi-rc-format.md",
+      "sha256": "20bc239f00d4fa564c1d9e4882827f90d1a0e59f333483d2e642bd328460b969"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/RELEASE_RECEIPT.json",
+      "sha256": "38dde865a3a52c8cf09f47f9a0654318455c2dbe6de0a3cc44e1d3c4c70b2bf4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/aiss_vcs_flow.py",
+      "sha256": "ee53f0fd1dfd46842f98198a6986cad35912f6cbece8781bf7cc8d7ac263ccb2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/analyze_logs.py",
+      "sha256": "ee53a855be6e50ffc903fcddfc3ca14218d05785a48bb67d4fb48f454617f17e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/autoverifix_vcs_flow.py",
+      "sha256": "d3886538b6cdabfea712da50a88f0eb460307b05387db7a75049b5e163d7b55f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/check_env.py",
+      "sha256": "5f2639f996fc0dc4b93db7aec4f79cfde3a0038ac1f9df8ec5f0bb2a9a186f10"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/cocotb_vcs_flow.py",
+      "sha256": "7394a65b7eb53d47d9f36b952efffd916c245d4bbda144ddae2231f5470f8528"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/collect_evidence.py",
+      "sha256": "c522aaf8c2156e8d0b3d4b2ecc47e12ea89b259215c38d15298bcc61d5ad330a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/coverage_flow.py",
+      "sha256": "86a711379e3392727f6dfe3a10ac5d4d55c04ffbe245eca2ad346b1e2f28fc9d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/evidence_claim_gate.py",
+      "sha256": "e9614b4e89e7ee41195205b6228134a7d81dfd3cd518b92f041ac2acf6768046"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/fpgen_vcs_flow.py",
+      "sha256": "18a9346cc082e0e01b7a942384e203294ccc5b0bee4b81ba1151d439592d146f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/fsdb_tools.py",
+      "sha256": "86e7122cdb7e92f5613e824dc940b38c0c4ef8c6af81f840d09b32a410ad4c8e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/generate_rc.py",
+      "sha256": "a5b9c65d2cd380660dae7e7bcf3a45cffb906d2d41bedf4449692c70d576b73c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/import_vcs_project.py",
+      "sha256": "a4ad1a7df0705fabe9740294976650c3d374aa200ed575dd88145179c8e81856"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/kvips_vcs_flow.py",
+      "sha256": "f31328afdcb928b7db09cb410019e3bb3de5035d732a521ab62bd79b3e43b95e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/make_shell_overlay.sh",
+      "sha256": "b08b2ddccd414167b664f3909a8c9df3c698f2ac4fd5d26f80f7f0d47528b4ea"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/patch_ucapi_overlay.py",
+      "sha256": "6d8551f0bba9a1a3c11fd81f79a4f93b696727fff28cf063db70a696a3704f6e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/remote_eda_gate.py",
+      "sha256": "602cc18f7d822c16dc6de810b6d8322b8389db78c11f560f40dbb319cd31d36f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/riscv_dv_flow.py",
+      "sha256": "d65556e6bb555a0895eea9d8680c9e055d3615e744c73ff9dbacb202bcc4387d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/run_quality_gate.py",
+      "sha256": "bee903499ef1268f83f6d9da3f1682be42e347f7d1afc5485851b216ed92b612"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/run_regression.py",
+      "sha256": "c0c6f265fc694bd51f06a2b2a4db056c60f62936eeebb54c36ca8a67e099cc2e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/run_remote_eda_smoke.sh",
+      "sha256": "0826d322caee8c640255f666024590ee9906db09f6d04dc9dff9ccc425a58831"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/smoke_vcs_verdi.py",
+      "sha256": "ed853650ca7c22e07525328af9902a3d6f073656072eeedf9e4e0a47132cf5a7"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/urg_coverage_matrix.py",
+      "sha256": "0b2ac3306368fe3294a63235d9c42c64d4294ff263ece984769359a68f196381"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/urg_runtime_probe.py",
+      "sha256": "d42bb29073866ce0e1a37c0c5b4637a3e9299c9bf3c3ac0cb5840cca0e854bfc"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/scripts/urg_troubleshoot.py",
+      "sha256": "88a929fef3f2a0df0397c2665df4b6d5438b0a5c2bab78a5c972cf3bd6021285"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/SKILL.md",
+      "sha256": "f429f613a2e8a7d649ca780c614887cf527292d10dbb18393bdec15bdd11c93b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0/VERSION",
+      "sha256": "d126dc59d212f56e77cb5d4bbd7bc222a6a6f171160a2330d74e4fd91d6b5442"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.0.zip",
+      "sha256": "ed0ac6be5baa00f43d5ce6a77489bff9e1919eba5f8367e6ace1962294464dc9"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/agents/openai.yaml",
+      "sha256": "7729152c9aebb47851028784680746a9fe266d7542834dddefc2d7b958686366"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/evidence/non_gui_claims.json",
+      "sha256": "09915158eba3744d18104232ee032573af6f65e1bf1178c7e717d5bf84bf6d36"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/minimal_vcs/core.vhd",
+      "sha256": "88a31e014f19a54ae0c8f3e39afe62b1fd29751a22b2757d13df7822a1ba15ff"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/minimal_vcs/coverage_top.sv",
+      "sha256": "bbe766a67e19211e0c9653a7bcf0d8c69da33c8942c1e1bb14b496870b4f696b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/minimal_vcs/dump_ucli.tcl",
+      "sha256": "a36dc22fab88d5c2398247d6454d4173f1c8da1df083062a1052568704610f9b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/minimal_vcs/include/.keep",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/minimal_vcs/include/sim_defs.svh",
+      "sha256": "9c0b8abcf52ff41d5a79ceb608a2e17d420afb2295a83c892074d60922eb0ae2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/minimal_vcs/manifest_matrix.json",
+      "sha256": "3415c5d0ce0604e7c9748f303df8c7d9fc2f14f38ca130c517194a1dc7fe71c2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/minimal_vcs/rtl.f",
+      "sha256": "33559355026895c6649d982eed6c0fd7b50071c364b8ea7711e1990bcbb433ea"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/minimal_vcs/top.sv",
+      "sha256": "f35a605c1a54f4839f6c417aae31680dc837bca3323f7a562e589c495665dcde"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/waves/scn_base.lst",
+      "sha256": "5142827a1b697594611c92fde2e0b2cde3749a3a377458b777d1079160762e21"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/waves/scn_basic.lst",
+      "sha256": "82658e9108d2675ef5e163afa090ec35e53af9887fc5910e6a798805919342b2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/waves/scn_mipsfpga.lst",
+      "sha256": "5bd88543109a4b285e75144aba73ac5c5745cd8f268ca065935a38ad2933bd9f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/assets/waves/scn_picorv32.lst",
+      "sha256": "1a5fa26976f08d7a0e2043885a14787cfb83d85edf062cc95abc9e29808cf0de"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/evals/evals.json",
+      "sha256": "44ba69286c85dfb9c9bee91c80a190f49457307a0e9419e81f732f324e186e9c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/capability-matrix.md",
+      "sha256": "4973ed9a41581377228741075e8780c7ab9586d22a703db5b20e7e278bda489c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/non-gui-flow.md",
+      "sha256": "91f27e3dfdb9f20907e33141aa8bc7b012508cb163050ae07ebcee33e77d587c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/remote-eda-gate.md",
+      "sha256": "5a0ccfba44d2b1105b9cc9345b0488464c3d68a454f26a1a91c3cefe1c392709"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/remote-eda-validation.md",
+      "sha256": "ae30b006e8c641cfd1be773a2a2efb4acf6ea4c1268f2e89c8903b629e7ec738"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/review-checklist.md",
+      "sha256": "b68accda640ce666ec2ca8582b80948a7b49749a34685fe0f67d573cb48d2606"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/third-party-extraction.md",
+      "sha256": "589b0158c2663027d1e54e97f311c41f75895a874b073c21d9264dce569246b0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/vcs-verdi-flow.md",
+      "sha256": "a4e2e7d5f4d8ef427c069374068725c3bb9e953ad74b176e226589ff43773305"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/verdi-interaction.md",
+      "sha256": "24d1c2f3eec72438583a6dd44c83f07de807d8fb12591070b988de308735b433"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/references/verdi-rc-format.md",
+      "sha256": "84592bda1db383471325aa3ae0e59a46c688a8c315c89fc153b15513366a22f6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/RELEASE_RECEIPT.json",
+      "sha256": "0f2b294da8f72b71de10c81c59473101605f9a39830649d324a9030ed871e511"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/coverage/coverage_flow.bat",
+      "sha256": "be9c712cbbce93d7ab4ffd96765cbe024f0820b1a531c355f5df6ffb7eb909b8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/coverage/patch_ucapi_overlay.bat",
+      "sha256": "0a6558862c12a71f130cc7258b97338bc14d5571c28a57716f2e8fdb9bcafa14"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/coverage/urg_coverage_matrix.bat",
+      "sha256": "d14e285cf2719088962f8ac87e8222061b2077d143db1676502ed10c948aefff"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/coverage/urg_runtime_probe.bat",
+      "sha256": "53ba0747877695ac63ba55bb86b2613a5d68d64de7a071578ae3f447aa891b9c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/coverage/urg_troubleshoot.bat",
+      "sha256": "368481ed79d87e9b686ca29587468800d0e4317fb8d4186254b162109de61632"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/diagnosis/analyze_logs.bat",
+      "sha256": "54a270ac35989999a860b88a276dbbc226c72d160edcaedef9702b2a434b4d26"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/diagnosis/fsdb_tools.bat",
+      "sha256": "91c9dea93b6d00292abaf2c4c1e4ae47f729ed94f9ce7347b60ac4404aafe3f4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/env/check_env.bat",
+      "sha256": "c81706db6f4c057ec71bcbc18e19ccd134e93bb493522e7ce2d7aac95cbe2769"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/evidence/collect_evidence.bat",
+      "sha256": "dbb6b359d7db030b4e2d02571beb86b8fb04b3364a30bc5e0d425c04d3d4bf56"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/evidence/evidence_claim_gate.bat",
+      "sha256": "67531797fc8c497eca41d41445a3581acff0e0e432b39b27b356cca95fedfe59"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/flows/aiss_vcs_flow.bat",
+      "sha256": "f908cddc9d7941291eed9c75f6567f0e2929ce79edaee73515418f781065103d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/flows/autoverifix_vcs_flow.bat",
+      "sha256": "b2e15f58de8399a874652756e24c3d4883fd4daee6f91ef8ab7d395af1d62426"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/flows/cocotb_vcs_flow.bat",
+      "sha256": "571989748e08bdfb70bfa33d237ee375e184abd1184ceeff251692726a030f32"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/flows/fpgen_vcs_flow.bat",
+      "sha256": "beaaf13f755fc290d717041f3bcae07efab20b08bcf7ba74df9af360c384b3aa"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/flows/kvips_vcs_flow.bat",
+      "sha256": "4da3c2f675b9337fa4bbbfbf8f0aff3a41794e1981fbaa35d33406fa0d2b5fe1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/flows/riscv_dv_flow.bat",
+      "sha256": "f46acbf7120a1d119847dffb127696df231f0d79258bbd3d73e1853b775e865a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/import/import_vcs_project.bat",
+      "sha256": "51e775448d44a8c81c4f1c5c73ec7bbe3a37223cca4cb06af1006cf7fe97847d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/quality/run_quality_gate.bat",
+      "sha256": "a1ec97a61c6d370bf874ede64396346c4517713e9e35326a69264556fbcb3aed"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/rc/generate_rc.bat",
+      "sha256": "090201162b4337075f7adfe0197934d403368f41e95aee8b9f708bb6089a1532"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/regression/run_regression.bat",
+      "sha256": "2a28db7454e0947325722c966fbdbe5435fea7dea996f7f538e46485c7bbda64"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/remote/remote_eda_gate.bat",
+      "sha256": "c1a137d82e456cc18c936f107bfc69b2f18aa7536e036b3a39d36601ef81a5c1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/bat/validation/vcs_verdi_check.bat",
+      "sha256": "3b72b6d18193e18e2514ec386a7855d2041f08a63a810cf2c426bc06bcaae8d1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/coverage/coverage_flow.ps1",
+      "sha256": "c2f3c4ba4920576bd2ed1a5b578bb8ca7a5f0fb97fb4af8c685d8d2092ca8aaf"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/coverage/patch_ucapi_overlay.ps1",
+      "sha256": "65307fd3a8a1d8eeb80d80862d8d603a2c0cf96a93b882e2560d5a9994e2824d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/coverage/urg_coverage_matrix.ps1",
+      "sha256": "db24432f193bcf36964bdf7cfffd7e6852d4dc555696cf44400073d3aed4619d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/coverage/urg_runtime_probe.ps1",
+      "sha256": "5ca7d2c5aa6dc91aac9213955ff185db3dabdfc8371fd504696c75a9f2aa9da9"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/coverage/urg_troubleshoot.ps1",
+      "sha256": "be1c3e4c8a938ef9233971fbe7eedc097c715dcd87dfd5f991c93c8dd7c3f68d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/diagnosis/analyze_logs.ps1",
+      "sha256": "45116b8c1514b8c47204e37a73a717c82ab6f778385a191e6d7c723c13191735"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/diagnosis/fsdb_tools.ps1",
+      "sha256": "024119e33d43625c66457252169c849bab06b0487ee94e858c68089296b96ae6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/env/check_env.ps1",
+      "sha256": "bad467b95ef4b84b8d4e3c7be2e5b48b6ea2f2410a08adf1acff898fe3819e13"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/evidence/collect_evidence.ps1",
+      "sha256": "7f8d8328fb7fdf26a1630e3018ce34a108ffc7b8eed0f8858d25d58ceaa22241"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/evidence/evidence_claim_gate.ps1",
+      "sha256": "0b6f79d401f5f1d3fa6d4cebe8e0cf77cb842373d2d2dc60b0f3d820e5def7c5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/flows/aiss_vcs_flow.ps1",
+      "sha256": "cc5ea42b2495f24272327a7726b46bb5fe6446de74672c328e26ca86d2efc3e8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/flows/autoverifix_vcs_flow.ps1",
+      "sha256": "ad1456c3d2088142bd2f9396db86fc8257d295487265562722c93fcb4d1068fb"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/flows/cocotb_vcs_flow.ps1",
+      "sha256": "0fb0ed5f13d4a74bf5c7d0e06a35c187c36bc6557f5dd4886cfcdb116df859d2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/flows/fpgen_vcs_flow.ps1",
+      "sha256": "a240c4556dbb68d19983e88e55ac4f5f1e15541efa0d449c1022fb13b5f37ff0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/flows/kvips_vcs_flow.ps1",
+      "sha256": "4558a3614cbd1998abceb763dcf259cd32c0f249fe16aed3c0c1c4f348e37a01"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/flows/riscv_dv_flow.ps1",
+      "sha256": "ae780dfe6575c1f5e674885af78ab28bed23adf1059894318f575b5e7a545bb1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/import/import_vcs_project.ps1",
+      "sha256": "11330df8d07d33dab57ad96c067fa36203e9a2229131ed9a05cc2ba48784a397"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/quality/run_quality_gate.ps1",
+      "sha256": "3fe7a21c2b9aec8a8108851b52230df93939e8f9cc0cd2b79d46a95fff36ccce"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/rc/generate_rc.ps1",
+      "sha256": "3cdbf19d2bca6d591bd2b1dc60f05f6d906c16c063973c2835bd8220e6eba28b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/regression/run_regression.ps1",
+      "sha256": "84807cc1dbb9c76aefdaae5509c3c58d05be92cc52e33fe4c4b7f929a811dcc0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/remote/remote_eda_gate.ps1",
+      "sha256": "d58bce555b3d284c2d1f31dbee3d258a607792a4ebd873e7000f250a2fc63657"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/powershell/validation/vcs_verdi_check.ps1",
+      "sha256": "7597459d839d413ca9c7465c98c3796bb43b05774c81f0f3ca9050ae1607c1e2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/coverage/coverage_flow.py",
+      "sha256": "e716df4af1231e4230c294f9e02d23662a9c52d80cf219ca995894a72d604fed"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/coverage/patch_ucapi_overlay.py",
+      "sha256": "d749c7d88823418121e9d4590191cf417dc395741d89ae09054dfc64b8f8c6a9"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/coverage/urg_coverage_matrix.py",
+      "sha256": "0e119ece990fb854fbc3ccec683147bb810236b14481e781791f1391f5e8e8c4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/coverage/urg_runtime_probe.py",
+      "sha256": "f893157159dc76bec814e8912406a6e212c00ef0bb9952c3578d52e0b2f2d0c1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/coverage/urg_troubleshoot.py",
+      "sha256": "7129f10f551cafc137aa016a6a0d006d8ebca6cbc80fa785d30fb464ddcc928d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/diagnosis/analyze_logs.py",
+      "sha256": "750ac64aa5a14e3488d6716c09575184fe8eb0d16c989c83d63d8eab0c16b53b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/diagnosis/fsdb_tools.py",
+      "sha256": "77ccb629cfa5b5410024b7a15f6cf54e66d84ce327b3b6110163f340f872548f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/env/check_env.py",
+      "sha256": "7402993940f18087aba10050d7730dbd201654f2fdf4a3c00ee339eee476b206"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/evidence/collect_evidence.py",
+      "sha256": "31c35ebaacccf2c40b37bfac8e9c407d0b766c964d67451c20abcf08161830a6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/evidence/evidence_claim_gate.py",
+      "sha256": "37a292351d53fd6080a054211157bb2eee5bf610ad3b0554ef615a3480cae684"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/flows/aiss_vcs_flow.py",
+      "sha256": "b1af7edc23401f5fc739d8350a7f015893650069a6bcc6639e8adb6f3f115318"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/flows/autoverifix_vcs_flow.py",
+      "sha256": "f9f47de9d6b9201aee4000a67ccb4b5ef602bfef48a9a02e73caa0e48ecd9f91"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/flows/cocotb_vcs_flow.py",
+      "sha256": "1d71c48e5bc7c36199883943537154ab64aebc53766371ddc9f8a44f08922533"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/flows/fpgen_vcs_flow.py",
+      "sha256": "39d391335e684bf335ead8b4f5d45517f9466dfce1a8675f48b1e6fd031a967e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/flows/kvips_vcs_flow.py",
+      "sha256": "9301cb70f29bfc58e4fb81df495f99ebd196adf40255b0e616a44e95f0be321a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/flows/riscv_dv_flow.py",
+      "sha256": "074d4843695d307dfbb9cae03aef187050f9f89d28f7b56f40b541149a117c0c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/import/import_vcs_project.py",
+      "sha256": "ef7841da373b85d62f05dc80368aafe7f8d8d4d19a343a7f133919f3aefc01b5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/quality/run_quality_gate.py",
+      "sha256": "b0db5c4b33e7959e89ad730a910eaefee3dc415eb4ee0d1319969fd263c94141"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/rc/generate_rc.py",
+      "sha256": "fe30ee8aaf7249994fde1c6e893ea3b517686e1787aa0de51977145bde5046b1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/regression/run_regression.py",
+      "sha256": "c8a10b5c4fbb9549fe69385161f0d23d2ef4277161321e43829e12ad6c34cd37"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/remote/remote_eda_gate.py",
+      "sha256": "8975c0e09bf05fbc52ebd0f1c78c99e4a334476acc220734f2b46e760c70e81e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/python/validation/vcs_verdi_check.py",
+      "sha256": "98b9aba2827cb6eed7b3844f3b890e456c77f04eda98b809c4110474bda756f1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/coverage/coverage_flow.sh",
+      "sha256": "efcce37d8d97cf34b75e780dc6e7f3a6dc459981145479db33d12c0fcf608b47"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/coverage/patch_ucapi_overlay.sh",
+      "sha256": "11fad0cb0b6d445de4d350e4a75b96021f7f619274ee191b32a471653b567f5e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/coverage/urg_coverage_matrix.sh",
+      "sha256": "5f194273c486b26271e9e4a57862d6843fdb15dae2ddeace1c59fbd4ec04f9d0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/coverage/urg_runtime_probe.sh",
+      "sha256": "94e02b52014eaed6a070d4d0d36571cfff044f002e42aab0b1c842c16a3d6a24"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/coverage/urg_troubleshoot.sh",
+      "sha256": "eba53022394187ef1ac0b81ed416cf59dc39a75d9dfa9b9afb7e950a4cc6adf0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/diagnosis/analyze_logs.sh",
+      "sha256": "4813b9cedfe319eca70cce41375daec5385a5ab163b798aa838c5ee934a1c687"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/diagnosis/fsdb_tools.sh",
+      "sha256": "24e0995e3e6f3493079371ee144a54513925fc3121412ded8546fa485a32ab5a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/env/check_env.sh",
+      "sha256": "feb960ec72275acefdb1bd762621de3bfbbd552e3812264e4efbc7cf46d1ba81"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/evidence/collect_evidence.sh",
+      "sha256": "adcb28ac64bd1cac274e7c9c762f9562422361ead7209a67a8c747489ae99bf6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/evidence/evidence_claim_gate.sh",
+      "sha256": "e6b433e5cf49b9585b716c66e20685ea5dbd0ee48a5b6ee349ab729a34ea7cff"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/flows/aiss_vcs_flow.sh",
+      "sha256": "3ef9f693904f2f538028275798d399e61fad38b7dab02b12584ae363f8b3c72e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/flows/autoverifix_vcs_flow.sh",
+      "sha256": "3724822848eb8850d0c4be65ca21f4e7df780a7676ca33055c95a5a7c7c5133b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/flows/cocotb_vcs_flow.sh",
+      "sha256": "f50eee672c325fceb8b705fef2c224ba27fabc364358555491aac05d753832dd"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/flows/fpgen_vcs_flow.sh",
+      "sha256": "808eb6a6c053e59bf57429b35f27c9823afd6bda1804113bf51122dbed538fe1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/flows/kvips_vcs_flow.sh",
+      "sha256": "55b7f7436f51c591193348c4d636c1129f39211e0204281eefbde892a0ca4aee"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/flows/riscv_dv_flow.sh",
+      "sha256": "e10f87300e3b5f1f3d125a8e575cf4fe477fba7c917fd69d2b078f361c5bbb31"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/import/import_vcs_project.sh",
+      "sha256": "787572f298de8a972c83fc63fc4342ecf98cfee6f1bf9e3f4dec0e74bb91ba10"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/quality/run_quality_gate.sh",
+      "sha256": "0be14e008f3e41dbd03b238d1573c3f13827874135908df6ac35a4c8a90455a7"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/rc/generate_rc.sh",
+      "sha256": "1d946c76344425cb4dfb57b4343d05024042df6ceb086ccd4b7b5029db5cbc2d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/regression/run_regression.sh",
+      "sha256": "c01bd2b9a2d543c93df255b392c651ce5bf087692d8614622ae5031e89e9a71a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/remote/make_shell_overlay.sh",
+      "sha256": "b08b2ddccd414167b664f3909a8c9df3c698f2ac4fd5d26f80f7f0d47528b4ea"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/remote/remote_eda_gate.sh",
+      "sha256": "5da2269f6fc0ae9cd5418b76cd26545b58afe65329f6074e3258d6935a5c927b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/remote/run_remote_eda_smoke.sh",
+      "sha256": "697c0d4e079d1376d8f8b2aaf39345d0fa2c083c17e13d41178b978e71ca0be6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/scripts/shell/validation/vcs_verdi_check.sh",
+      "sha256": "4807f9477b44d6fcf9a2c4e5c87c54e9e0aea48107e4a82cb6f04fc9ae317f3f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/SKILL.md",
+      "sha256": "5de3c44d2c8e1d3bb64baf52dce730df0b00d2b4baec08dc6f523c7193b47bcb"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1/VERSION",
+      "sha256": "a3431e342598da5bbd34eea5d916f26702c7ce4a3b6b9f743a763ec89fa4d058"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.1.zip",
+      "sha256": "2f9679f1b490180e1c28f4909fdcdd187e5091cb05ec24c8716c69f8ea7171b5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/agents/openai.yaml",
+      "sha256": "7729152c9aebb47851028784680746a9fe266d7542834dddefc2d7b958686366"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/evidence/non_gui_claims.json",
+      "sha256": "09915158eba3744d18104232ee032573af6f65e1bf1178c7e717d5bf84bf6d36"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/minimal_vcs/core.vhd",
+      "sha256": "88a31e014f19a54ae0c8f3e39afe62b1fd29751a22b2757d13df7822a1ba15ff"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/minimal_vcs/coverage_top.sv",
+      "sha256": "bbe766a67e19211e0c9653a7bcf0d8c69da33c8942c1e1bb14b496870b4f696b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/minimal_vcs/dump_ucli.tcl",
+      "sha256": "e3b2360029c496650289aa034344fb248f49f3c141c5f32388d84d557231ec48"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/minimal_vcs/include/.keep",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/minimal_vcs/include/sim_defs.svh",
+      "sha256": "9c0b8abcf52ff41d5a79ceb608a2e17d420afb2295a83c892074d60922eb0ae2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/minimal_vcs/manifest_matrix.json",
+      "sha256": "3415c5d0ce0604e7c9748f303df8c7d9fc2f14f38ca130c517194a1dc7fe71c2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/minimal_vcs/rtl.f",
+      "sha256": "33559355026895c6649d982eed6c0fd7b50071c364b8ea7711e1990bcbb433ea"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/minimal_vcs/top.sv",
+      "sha256": "f35a605c1a54f4839f6c417aae31680dc837bca3323f7a562e589c495665dcde"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/waves/scn_base.lst",
+      "sha256": "5142827a1b697594611c92fde2e0b2cde3749a3a377458b777d1079160762e21"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/waves/scn_basic.lst",
+      "sha256": "82658e9108d2675ef5e163afa090ec35e53af9887fc5910e6a798805919342b2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/waves/scn_mipsfpga.lst",
+      "sha256": "5bd88543109a4b285e75144aba73ac5c5745cd8f268ca065935a38ad2933bd9f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/assets/waves/scn_picorv32.lst",
+      "sha256": "1a5fa26976f08d7a0e2043885a14787cfb83d85edf062cc95abc9e29808cf0de"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/evals/evals.json",
+      "sha256": "44ba69286c85dfb9c9bee91c80a190f49457307a0e9419e81f732f324e186e9c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/capability-matrix.md",
+      "sha256": "c17a8209b3d89689fc328bbea7096ac09746cfb2e1636cb4523205c59f49043a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/non-gui-flow.md",
+      "sha256": "91f27e3dfdb9f20907e33141aa8bc7b012508cb163050ae07ebcee33e77d587c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/remote-eda-gate.md",
+      "sha256": "5a0ccfba44d2b1105b9cc9345b0488464c3d68a454f26a1a91c3cefe1c392709"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/remote-eda-validation.md",
+      "sha256": "ae30b006e8c641cfd1be773a2a2efb4acf6ea4c1268f2e89c8903b629e7ec738"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/review-checklist.md",
+      "sha256": "92425aad2c3c1df013779b7b3e5a1978ae9161b7876d31e9187f31dc18cd035e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/third-party-extraction.md",
+      "sha256": "a6114072b9320fa4cb00d6163d3cb7611c6b2f68d7a0dd227b70ef6b3490b46f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/vcs-verdi-flow.md",
+      "sha256": "a4e2e7d5f4d8ef427c069374068725c3bb9e953ad74b176e226589ff43773305"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/verdi-interaction.md",
+      "sha256": "24d1c2f3eec72438583a6dd44c83f07de807d8fb12591070b988de308735b433"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/references/verdi-rc-format.md",
+      "sha256": "84592bda1db383471325aa3ae0e59a46c688a8c315c89fc153b15513366a22f6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/RELEASE_RECEIPT.json",
+      "sha256": "c19cfedeb8fd713e401ef335e5dba381033b0147e8ba1a925e69bd9d84f9966f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/coverage/coverage_flow.bat",
+      "sha256": "c670ae7a0cbc704acf719d20cccb5596dd7b0f31dc76d57d92ee42f826584f2f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/coverage/patch_ucapi_overlay.bat",
+      "sha256": "f784c05d29f516753919e0599b51079526fc118b184fcdf97b1b4ccba455d3af"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/coverage/urg_coverage_matrix.bat",
+      "sha256": "f008ca28ff930aaa708ea837ca882401e973f4b5893a4a2e9a06c4b9440c4939"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/coverage/urg_runtime_probe.bat",
+      "sha256": "40e1c2f5681051adb43e2e5138b7bcc18b80288035c268c9beddbec6b1b2f3de"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/coverage/urg_troubleshoot.bat",
+      "sha256": "ad1962187432016cb1068c7c045f3136a95b30176c7feb844fbbe8913c51d644"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/diagnosis/analyze_logs.bat",
+      "sha256": "1e9ffee9ea677625a1cd1ae3adf5d3d493d522486a4d43a3ec889fdb3fb1f990"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/diagnosis/fsdb_tools.bat",
+      "sha256": "1621a77f4810cc4d3873af5620bf5945efa71963278db8e6192ed2ac0887e905"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/env/check_env.bat",
+      "sha256": "a7b62f5ea7cf7bc181e9c2ad913b9640ae55cf0ee43222ba1822bcd9a654b7b3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/evidence/collect_evidence.bat",
+      "sha256": "e7009b5469220edcae6f713f0dbb8f9c28ffd4eee58c53cd109f315be9967dcb"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/evidence/evidence_claim_gate.bat",
+      "sha256": "3a8367e43452660114b0baa4e2f7b68bc71be171afeaadb6163c98ff39dcc264"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/flows/aiss_vcs_flow.bat",
+      "sha256": "7045e9bf555f50535950c7d6dfc96d9f1a50616ab982d4f627697718805f2941"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/flows/autoverifix_vcs_flow.bat",
+      "sha256": "2013e2098481a1de033df4aa9972cc7ccdb292699184c60fcdf27ce9639f0af7"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/flows/cocotb_vcs_flow.bat",
+      "sha256": "0e86afbfe25a45eace76b02483f202bc755e1c092075ba407cfefadfba938609"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/flows/fpgen_vcs_flow.bat",
+      "sha256": "b6e0ca11af74e1db3f5ae4b05a0893e51ad7e97d7e2f90140926f6f02ac3a2b4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/flows/kvips_vcs_flow.bat",
+      "sha256": "687d745519270f46ff288c4fe8e630b81257c00f9aea22c8bd9770ddf9de7469"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/flows/riscv_dv_flow.bat",
+      "sha256": "ec86873a73d406ad29cc70868a2d726ce3a4374d2c897452f2523d589aed21db"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/import/import_vcs_project.bat",
+      "sha256": "0a7864ad9ce79f809122de52affb5b4434162d1913b4dd9358a0af14e7b1fbb3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/quality/run_quality_gate.bat",
+      "sha256": "916c3997f723578b242bc12599f888e89a1621e2736bbc930eed20e7300735c9"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/rc/generate_rc.bat",
+      "sha256": "0c947a49a3fbc9b9f025b5f9abd679953ae08c10bfb31a1846cb1384a0317035"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/regression/run_regression.bat",
+      "sha256": "eb26d5fba0e03179af80c272a340b67d571f480e47ea877128e06e6b6d7c82e8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/remote/remote_eda_gate.bat",
+      "sha256": "fe7cdbdd154bb538553ac8649a265f45a76dfa3ccdb1928c1dd3816aac1afe43"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/bat/validation/vcs_verdi_check.bat",
+      "sha256": "9dacae5a65abb8433999021c29f9eda28f71be7011a8e995f282ee1a74fdd86e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/coverage/coverage_flow.ps1",
+      "sha256": "75a84f686c1b9339b75291bff7386812399933fec400abee68f12e5003b103c3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/coverage/patch_ucapi_overlay.ps1",
+      "sha256": "c0f41c10f55b005d10b7d04fe7dd818c494bddb7c37bb527357b32597fc5cbe5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/coverage/urg_coverage_matrix.ps1",
+      "sha256": "e08149fa52501e48df92161b31129aebad35b55bbe9d0c93dd9899310d8167db"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/coverage/urg_runtime_probe.ps1",
+      "sha256": "9e4a03e6c11853efd40536f57dfc21ba524a1db2773678e01d198c008668f0da"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/coverage/urg_troubleshoot.ps1",
+      "sha256": "4bb940e9b1a83ed60039af1a90c3463591c94e6c717d955cb991650ea703ccb7"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/diagnosis/analyze_logs.ps1",
+      "sha256": "c585aaf027cc062e54cfdab69bf8263ef8b6bf5582b8cd03151258b158769fde"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/diagnosis/fsdb_tools.ps1",
+      "sha256": "4bddd6fd0ce0bf0015d8e6cc1c2bfb5b9bbb57d1a33f32123b6eae6017827042"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/env/check_env.ps1",
+      "sha256": "baf88e62d7e7f0ca5dcc8f300c3422efc5df468b3fe21fe7dcd2c2eac33d2e6d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/evidence/collect_evidence.ps1",
+      "sha256": "343a83e773df4e44cce497125eb5f7ec201867a7a217b84cbe69b48fd8d5c3c8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/evidence/evidence_claim_gate.ps1",
+      "sha256": "d488db11b67a6b06add43d9cb91cb107881a079d907b6e733a64cfec08964111"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/flows/aiss_vcs_flow.ps1",
+      "sha256": "ba7158f0ca55e62719f743abe4564799b2f9aeb5f0c1eb34f318d9e792f226f6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/flows/autoverifix_vcs_flow.ps1",
+      "sha256": "9fcd8e99d7e6b5e26954168525bf2397ead0414668f5f332774d434c7e5be616"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/flows/cocotb_vcs_flow.ps1",
+      "sha256": "5b7196fd85d7c68ae56e0997b354f7085c8a647f0eef1187dd1760d0a06e4eb6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/flows/fpgen_vcs_flow.ps1",
+      "sha256": "ebea3e6aeefa4b3c6108eaa384af96ecf6be2184e4fb8d28b1c537e3f9292682"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/flows/kvips_vcs_flow.ps1",
+      "sha256": "d3cba727a57fc3c2741d6167811c95e9942852507cdedabae3f652c0363e2765"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/flows/riscv_dv_flow.ps1",
+      "sha256": "dfb2d027461bcc0b537733063c3d61314e561c92392e4ecf6f676f456915208f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/import/import_vcs_project.ps1",
+      "sha256": "ac4f35777f6c2c54cf149e8ea5ae634c0eb7ad083fe9394e68aea3fe6ff29d4f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/quality/run_quality_gate.ps1",
+      "sha256": "c31f1147bc54f65dda1728d17d29eae57b3d3aeeb629d69be964249e74afb329"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/rc/generate_rc.ps1",
+      "sha256": "0d9520b162ff711b090d0ea5389e9e761bcdd340a4884f02fce8f893f18d65c5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/regression/run_regression.ps1",
+      "sha256": "70b5aabe655ba954fec971ec8c4c0325d1dd7e19faac7b8c0637d6772deb99f3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/remote/remote_eda_gate.ps1",
+      "sha256": "b9fd702fd5edb4a74bf70e8cee4856be6d78987155a7c688194951e6ac5ed89f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/powershell/validation/vcs_verdi_check.ps1",
+      "sha256": "57f5a8832bfc88324b00f01b5d8a295fb0bca92cff37ab35372105ea722819f8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/coverage/coverage_flow.py",
+      "sha256": "67ec59594df298ae33056b7894fc1fad3d673b288151250c198e24ac3bce2ab4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/coverage/patch_ucapi_overlay.py",
+      "sha256": "7b47e76de284f6f51738474eed720eacbbae18b57f61497a32d3572d57e89f35"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/coverage/urg_coverage_matrix.py",
+      "sha256": "fada589b0c3626de871b72e161e489f776f602fd134121b686a2ee04578486d3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/coverage/urg_runtime_probe.py",
+      "sha256": "7e41dc45d8e6ab1058704e7cadca4602cbd802420718e78497d5e7a1f1963a9d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/coverage/urg_troubleshoot.py",
+      "sha256": "0940a39dee8e83291a80c6ac1d6839ddfb09fd0b91711b5561d2f590051eeca1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/coverage/urg_troubleshoot_attempts.json",
+      "sha256": "0a9a8aa13fe232a69eeba934761dfdeaf14d641e874a9adf4e1ef17356f7ee6a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/diagnosis/analyze_logs.py",
+      "sha256": "03b7008d5547c72c0f6a906c617f3396e5eb529db8746754fd9b4df1792ba80c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/diagnosis/fsdb_tools.py",
+      "sha256": "156e691776f66dc3b30422de25f2ec41ff75724f7959893fa95d30c76450da71"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/env/check_env.py",
+      "sha256": "59dbe6063bff65e3ac5ace86777149cc1d40ddfb647f0f808562e1e37bfaad08"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/evidence/collect_evidence.py",
+      "sha256": "541151184b2dd6d39366674c17bd0e8d19840d9ca700fc494dc321c9199e5496"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/evidence/evidence_claim_gate.py",
+      "sha256": "dd379ef0b22517b555602e60ae191512b1852465cff68a9f8e38dd1b9671f7c0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/flows/aiss_vcs_flow.py",
+      "sha256": "4f552a7aa94529ba27abacaa056b7bcb3ff7312a9ed6a69593f408512c30a796"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/flows/autoverifix_vcs_flow.py",
+      "sha256": "7a125ce30e68ba39b12884b69c2be95f2d3db7172808aa9032c4cd42202f66f5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/flows/cocotb_vcs_flow.py",
+      "sha256": "8924206c29c13fd72f0041c60230f9e4287bd2b8e0014e49ba656515c5a1a2fc"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/flows/fpgen_vcs_flow.py",
+      "sha256": "322738b0e3ed3f0b9ce0c58df77faf53ab88dac2969500938c33111657ca463b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/flows/kvips_vcs_flow.py",
+      "sha256": "46413a326fa1facc7ef80e0e6dc0c70f86ac2aaa81503f22318e23aa708acc43"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/flows/riscv_dv_flow.py",
+      "sha256": "e1c6ee0ed7d6de5869ebcc52b892c487f80ce4afaedf378490a2398e73874dea"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/import/import_vcs_project.py",
+      "sha256": "1568eaee52e54379cae5b15518488e80e583a129c4a69e1f81374c4ac5a0dc71"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/quality/run_quality_gate.py",
+      "sha256": "f155b86e3f418ef4704579daed1d6dcaf6c486f978a9571578c2d142e02bed65"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/rc/generate_rc.py",
+      "sha256": "819c05e33851ae34140e485816f6b4f5bfce7f0788507df3c94eb445063a5f1a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/regression/run_regression.py",
+      "sha256": "227351252be98d29046c5b56155351f16afaeeb3faedf94e929d8a1e5c58afa4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/remote/remote_eda_gate.py",
+      "sha256": "51c5308dfc06a1936de86045f84c1b275b08323b7ade99a6ee5a2c4e67b9126f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/python/validation/vcs_verdi_check.py",
+      "sha256": "627a478429bc849d0f76e0ef7a21a66791e7eac05faf829f3d36d9d24a525c7b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/coverage/coverage_flow.sh",
+      "sha256": "00197e5b4892dbc17f237616cfa8ed3ba7fced2df52c307bca346c8e04c57565"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/coverage/patch_ucapi_overlay.sh",
+      "sha256": "1c7555d769a7d2fc555a7848af300f525948fe16c6c902cbfe7ca3abb9bf3828"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/coverage/urg_coverage_matrix.sh",
+      "sha256": "5d56124d8636d4f3a2264a8e0a0fde190949d3f0d802e0f20828ad327ee385c8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/coverage/urg_runtime_probe.sh",
+      "sha256": "c400d02aada4054687e56f2c7d1385a292c78a7eb5d7826ae208cb2faeeb0c89"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/coverage/urg_troubleshoot.sh",
+      "sha256": "3dca92d48a7db0978ddd08f32464410f3a80f441e512bbf99d97f7b0b2caf59c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/diagnosis/analyze_logs.sh",
+      "sha256": "1633142e6e2cdba6d2dcd4d8e7ca5fcbe61f912937fa20cfed2753d0a4c52fc0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/diagnosis/fsdb_tools.sh",
+      "sha256": "63e26f028b8b3b376b645fc3a9d4329434c1f22fb757acc864935b2a3406b0c4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/env/check_env.sh",
+      "sha256": "8e58d381e326b1525744a19063353460b68e305a539e4fadbd95678c7eac96aa"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/evidence/collect_evidence.sh",
+      "sha256": "6798058dcc4320a90804511d3c263ddf9f5bb543fc05797ca2f5475fc7820eed"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/evidence/evidence_claim_gate.sh",
+      "sha256": "f062b2373fca1172269d29bf08ec065112e7bff820acd252250f01c412bbcefb"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/flows/aiss_vcs_flow.sh",
+      "sha256": "e5b2470e7c05925deb279f051395decf370340219d4fd7bccbaace8fed521778"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/flows/autoverifix_vcs_flow.sh",
+      "sha256": "27a3604a146c793d34c391c03076aecd43d58c0c18a25ebc26b8220923f5417f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/flows/cocotb_vcs_flow.sh",
+      "sha256": "cfb59963df8694ebc84a0f9de9df19947fe1207885bc590cf070c172fcc7789d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/flows/fpgen_vcs_flow.sh",
+      "sha256": "e6e3a0c9db0167cb6f34b0cecc068e4f11d4c989d46f1145f93d1e5fc683446c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/flows/kvips_vcs_flow.sh",
+      "sha256": "42a0a5b830a03dabd2266c967c6c4c472aa5642d7358078784f29ab4ab7c9ae3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/flows/riscv_dv_flow.sh",
+      "sha256": "91dc5fdc2c2f7ebf51dbec638691d77f5b82e508f7980864f4ec4d804ae39ba0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/import/import_vcs_project.sh",
+      "sha256": "27971a1dc4a508b20a0cddd80f193a841fcfece04a5f97528a1d099c02968e45"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/quality/run_quality_gate.sh",
+      "sha256": "2d76a2130d89d21a4bd77bd35dd0cdc4316a3759803dc3de4f5117e8c3d5b9e6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/rc/generate_rc.sh",
+      "sha256": "a94a907ea24d88dc472c23889758020166901d985f2c2a8d053d6287d10e83d1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/regression/run_regression.sh",
+      "sha256": "a090e8188e0145234bd915a47852662500678b2c3789246dc6271bcc4e0d0f23"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/remote/make_shell_overlay.sh",
+      "sha256": "4522a015e82aa50045296dc8bc7d285c84a22db82b8df1bb5425b356e39e75df"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/remote/remote_eda_gate.sh",
+      "sha256": "d1a24a9a685dae5c2a57097f6d01cb4fd0d4ed585c10153df07e17056193166b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/remote/run_remote_eda_smoke.sh",
+      "sha256": "ccbde74a099b00559ef50171445e68a882c0ee645cc66db6a38c59e58c542e7d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/scripts/shell/validation/vcs_verdi_check.sh",
+      "sha256": "c9e3d14d1cd1bb2702f9b92e3725b5a9dbaeecc08d2e6a882c9a0bfb29b31ce6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/SKILL.md",
+      "sha256": "311d71d991473f0f624cceaf4c2bbe4be21c95e8aee1c687976d4c6bffcacf84"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2/VERSION",
+      "sha256": "3b2c8b97af8ff047053016b2fbea8d83dcbe5f80d18e6c27444654725f2a9eec"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.2.zip",
+      "sha256": "ccfd524e87fae77c24188fb660f2dfb376da7d56fd42b1f3d47775805c0d56f6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/agents/openai.yaml",
+      "sha256": "7729152c9aebb47851028784680746a9fe266d7542834dddefc2d7b958686366"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/evidence/non_gui_claims.json",
+      "sha256": "09915158eba3744d18104232ee032573af6f65e1bf1178c7e717d5bf84bf6d36"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/minimal_vcs/core.vhd",
+      "sha256": "88a31e014f19a54ae0c8f3e39afe62b1fd29751a22b2757d13df7822a1ba15ff"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/minimal_vcs/coverage_top.sv",
+      "sha256": "bbe766a67e19211e0c9653a7bcf0d8c69da33c8942c1e1bb14b496870b4f696b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/minimal_vcs/dump_ucli.tcl",
+      "sha256": "e3b2360029c496650289aa034344fb248f49f3c141c5f32388d84d557231ec48"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/minimal_vcs/include/.keep",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/minimal_vcs/include/sim_defs.svh",
+      "sha256": "9c0b8abcf52ff41d5a79ceb608a2e17d420afb2295a83c892074d60922eb0ae2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/minimal_vcs/manifest_matrix.json",
+      "sha256": "3415c5d0ce0604e7c9748f303df8c7d9fc2f14f38ca130c517194a1dc7fe71c2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/minimal_vcs/rtl.f",
+      "sha256": "33559355026895c6649d982eed6c0fd7b50071c364b8ea7711e1990bcbb433ea"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/minimal_vcs/top.sv",
+      "sha256": "f35a605c1a54f4839f6c417aae31680dc837bca3323f7a562e589c495665dcde"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/waves/scn_base.lst",
+      "sha256": "5142827a1b697594611c92fde2e0b2cde3749a3a377458b777d1079160762e21"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/waves/scn_basic.lst",
+      "sha256": "82658e9108d2675ef5e163afa090ec35e53af9887fc5910e6a798805919342b2"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/waves/scn_mipsfpga.lst",
+      "sha256": "5bd88543109a4b285e75144aba73ac5c5745cd8f268ca065935a38ad2933bd9f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/assets/waves/scn_picorv32.lst",
+      "sha256": "1a5fa26976f08d7a0e2043885a14787cfb83d85edf062cc95abc9e29808cf0de"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/evals/evals.json",
+      "sha256": "44ba69286c85dfb9c9bee91c80a190f49457307a0e9419e81f732f324e186e9c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/capability-matrix.md",
+      "sha256": "c17a8209b3d89689fc328bbea7096ac09746cfb2e1636cb4523205c59f49043a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/non-gui-flow.md",
+      "sha256": "91f27e3dfdb9f20907e33141aa8bc7b012508cb163050ae07ebcee33e77d587c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/remote-eda-gate.md",
+      "sha256": "5a0ccfba44d2b1105b9cc9345b0488464c3d68a454f26a1a91c3cefe1c392709"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/remote-eda-validation.md",
+      "sha256": "ae30b006e8c641cfd1be773a2a2efb4acf6ea4c1268f2e89c8903b629e7ec738"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/review-checklist.md",
+      "sha256": "92425aad2c3c1df013779b7b3e5a1978ae9161b7876d31e9187f31dc18cd035e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/third-party-extraction.md",
+      "sha256": "a6114072b9320fa4cb00d6163d3cb7611c6b2f68d7a0dd227b70ef6b3490b46f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/vcs-verdi-flow.md",
+      "sha256": "a4e2e7d5f4d8ef427c069374068725c3bb9e953ad74b176e226589ff43773305"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/verdi-interaction.md",
+      "sha256": "24d1c2f3eec72438583a6dd44c83f07de807d8fb12591070b988de308735b433"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/references/verdi-rc-format.md",
+      "sha256": "84592bda1db383471325aa3ae0e59a46c688a8c315c89fc153b15513366a22f6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/RELEASE_RECEIPT.json",
+      "sha256": "04063bc91ea0da26e0e1c06a5552458793e38f5750dde2b106f30a8daeb318a8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/coverage/coverage_flow.bat",
+      "sha256": "c670ae7a0cbc704acf719d20cccb5596dd7b0f31dc76d57d92ee42f826584f2f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/coverage/patch_ucapi_overlay.bat",
+      "sha256": "f784c05d29f516753919e0599b51079526fc118b184fcdf97b1b4ccba455d3af"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/coverage/urg_coverage_matrix.bat",
+      "sha256": "f008ca28ff930aaa708ea837ca882401e973f4b5893a4a2e9a06c4b9440c4939"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/coverage/urg_runtime_probe.bat",
+      "sha256": "40e1c2f5681051adb43e2e5138b7bcc18b80288035c268c9beddbec6b1b2f3de"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/coverage/urg_troubleshoot.bat",
+      "sha256": "ad1962187432016cb1068c7c045f3136a95b30176c7feb844fbbe8913c51d644"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/diagnosis/analyze_logs.bat",
+      "sha256": "1e9ffee9ea677625a1cd1ae3adf5d3d493d522486a4d43a3ec889fdb3fb1f990"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/diagnosis/fsdb_tools.bat",
+      "sha256": "1621a77f4810cc4d3873af5620bf5945efa71963278db8e6192ed2ac0887e905"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/env/check_env.bat",
+      "sha256": "a7b62f5ea7cf7bc181e9c2ad913b9640ae55cf0ee43222ba1822bcd9a654b7b3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/evidence/collect_evidence.bat",
+      "sha256": "e7009b5469220edcae6f713f0dbb8f9c28ffd4eee58c53cd109f315be9967dcb"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/evidence/evidence_claim_gate.bat",
+      "sha256": "3a8367e43452660114b0baa4e2f7b68bc71be171afeaadb6163c98ff39dcc264"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/flows/aiss_vcs_flow.bat",
+      "sha256": "7045e9bf555f50535950c7d6dfc96d9f1a50616ab982d4f627697718805f2941"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/flows/autoverifix_vcs_flow.bat",
+      "sha256": "2013e2098481a1de033df4aa9972cc7ccdb292699184c60fcdf27ce9639f0af7"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/flows/cocotb_vcs_flow.bat",
+      "sha256": "0e86afbfe25a45eace76b02483f202bc755e1c092075ba407cfefadfba938609"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/flows/fpgen_vcs_flow.bat",
+      "sha256": "b6e0ca11af74e1db3f5ae4b05a0893e51ad7e97d7e2f90140926f6f02ac3a2b4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/flows/kvips_vcs_flow.bat",
+      "sha256": "687d745519270f46ff288c4fe8e630b81257c00f9aea22c8bd9770ddf9de7469"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/flows/riscv_dv_flow.bat",
+      "sha256": "ec86873a73d406ad29cc70868a2d726ce3a4374d2c897452f2523d589aed21db"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/import/import_vcs_project.bat",
+      "sha256": "0a7864ad9ce79f809122de52affb5b4434162d1913b4dd9358a0af14e7b1fbb3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/quality/run_quality_gate.bat",
+      "sha256": "916c3997f723578b242bc12599f888e89a1621e2736bbc930eed20e7300735c9"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/rc/generate_rc.bat",
+      "sha256": "0c947a49a3fbc9b9f025b5f9abd679953ae08c10bfb31a1846cb1384a0317035"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/regression/run_regression.bat",
+      "sha256": "eb26d5fba0e03179af80c272a340b67d571f480e47ea877128e06e6b6d7c82e8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/remote/remote_eda_gate.bat",
+      "sha256": "fe7cdbdd154bb538553ac8649a265f45a76dfa3ccdb1928c1dd3816aac1afe43"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/bat/validation/vcs_verdi_check.bat",
+      "sha256": "9dacae5a65abb8433999021c29f9eda28f71be7011a8e995f282ee1a74fdd86e"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/coverage/coverage_flow.ps1",
+      "sha256": "75a84f686c1b9339b75291bff7386812399933fec400abee68f12e5003b103c3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/coverage/patch_ucapi_overlay.ps1",
+      "sha256": "c0f41c10f55b005d10b7d04fe7dd818c494bddb7c37bb527357b32597fc5cbe5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/coverage/urg_coverage_matrix.ps1",
+      "sha256": "e08149fa52501e48df92161b31129aebad35b55bbe9d0c93dd9899310d8167db"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/coverage/urg_runtime_probe.ps1",
+      "sha256": "9e4a03e6c11853efd40536f57dfc21ba524a1db2773678e01d198c008668f0da"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/coverage/urg_troubleshoot.ps1",
+      "sha256": "4bb940e9b1a83ed60039af1a90c3463591c94e6c717d955cb991650ea703ccb7"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/diagnosis/analyze_logs.ps1",
+      "sha256": "c585aaf027cc062e54cfdab69bf8263ef8b6bf5582b8cd03151258b158769fde"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/diagnosis/fsdb_tools.ps1",
+      "sha256": "4bddd6fd0ce0bf0015d8e6cc1c2bfb5b9bbb57d1a33f32123b6eae6017827042"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/env/check_env.ps1",
+      "sha256": "baf88e62d7e7f0ca5dcc8f300c3422efc5df468b3fe21fe7dcd2c2eac33d2e6d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/evidence/collect_evidence.ps1",
+      "sha256": "343a83e773df4e44cce497125eb5f7ec201867a7a217b84cbe69b48fd8d5c3c8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/evidence/evidence_claim_gate.ps1",
+      "sha256": "d488db11b67a6b06add43d9cb91cb107881a079d907b6e733a64cfec08964111"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/flows/aiss_vcs_flow.ps1",
+      "sha256": "ba7158f0ca55e62719f743abe4564799b2f9aeb5f0c1eb34f318d9e792f226f6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/flows/autoverifix_vcs_flow.ps1",
+      "sha256": "9fcd8e99d7e6b5e26954168525bf2397ead0414668f5f332774d434c7e5be616"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/flows/cocotb_vcs_flow.ps1",
+      "sha256": "5b7196fd85d7c68ae56e0997b354f7085c8a647f0eef1187dd1760d0a06e4eb6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/flows/fpgen_vcs_flow.ps1",
+      "sha256": "ebea3e6aeefa4b3c6108eaa384af96ecf6be2184e4fb8d28b1c537e3f9292682"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/flows/kvips_vcs_flow.ps1",
+      "sha256": "d3cba727a57fc3c2741d6167811c95e9942852507cdedabae3f652c0363e2765"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/flows/riscv_dv_flow.ps1",
+      "sha256": "dfb2d027461bcc0b537733063c3d61314e561c92392e4ecf6f676f456915208f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/import/import_vcs_project.ps1",
+      "sha256": "ac4f35777f6c2c54cf149e8ea5ae634c0eb7ad083fe9394e68aea3fe6ff29d4f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/quality/run_quality_gate.ps1",
+      "sha256": "c31f1147bc54f65dda1728d17d29eae57b3d3aeeb629d69be964249e74afb329"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/rc/generate_rc.ps1",
+      "sha256": "0d9520b162ff711b090d0ea5389e9e761bcdd340a4884f02fce8f893f18d65c5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/regression/run_regression.ps1",
+      "sha256": "70b5aabe655ba954fec971ec8c4c0325d1dd7e19faac7b8c0637d6772deb99f3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/remote/remote_eda_gate.ps1",
+      "sha256": "b9fd702fd5edb4a74bf70e8cee4856be6d78987155a7c688194951e6ac5ed89f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/powershell/validation/vcs_verdi_check.ps1",
+      "sha256": "57f5a8832bfc88324b00f01b5d8a295fb0bca92cff37ab35372105ea722819f8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/coverage/coverage_flow.py",
+      "sha256": "67ec59594df298ae33056b7894fc1fad3d673b288151250c198e24ac3bce2ab4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/coverage/patch_ucapi_overlay.py",
+      "sha256": "7b47e76de284f6f51738474eed720eacbbae18b57f61497a32d3572d57e89f35"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/coverage/urg_coverage_matrix.py",
+      "sha256": "fada589b0c3626de871b72e161e489f776f602fd134121b686a2ee04578486d3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/coverage/urg_runtime_probe.py",
+      "sha256": "7e41dc45d8e6ab1058704e7cadca4602cbd802420718e78497d5e7a1f1963a9d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/coverage/urg_troubleshoot.py",
+      "sha256": "0940a39dee8e83291a80c6ac1d6839ddfb09fd0b91711b5561d2f590051eeca1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/coverage/urg_troubleshoot_attempts.json",
+      "sha256": "0a9a8aa13fe232a69eeba934761dfdeaf14d641e874a9adf4e1ef17356f7ee6a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/diagnosis/analyze_logs.py",
+      "sha256": "03b7008d5547c72c0f6a906c617f3396e5eb529db8746754fd9b4df1792ba80c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/diagnosis/fsdb_tools.py",
+      "sha256": "a4b75b8e2756696d93091537e07a6ab34740e6d24cea4a7acc9d8166633185df"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/env/check_env.py",
+      "sha256": "59dbe6063bff65e3ac5ace86777149cc1d40ddfb647f0f808562e1e37bfaad08"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/evidence/collect_evidence.py",
+      "sha256": "541151184b2dd6d39366674c17bd0e8d19840d9ca700fc494dc321c9199e5496"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/evidence/evidence_claim_gate.py",
+      "sha256": "dd379ef0b22517b555602e60ae191512b1852465cff68a9f8e38dd1b9671f7c0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/flows/aiss_vcs_flow.py",
+      "sha256": "4f552a7aa94529ba27abacaa056b7bcb3ff7312a9ed6a69593f408512c30a796"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/flows/autoverifix_vcs_flow.py",
+      "sha256": "7a125ce30e68ba39b12884b69c2be95f2d3db7172808aa9032c4cd42202f66f5"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/flows/cocotb_vcs_flow.py",
+      "sha256": "8924206c29c13fd72f0041c60230f9e4287bd2b8e0014e49ba656515c5a1a2fc"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/flows/fpgen_vcs_flow.py",
+      "sha256": "322738b0e3ed3f0b9ce0c58df77faf53ab88dac2969500938c33111657ca463b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/flows/kvips_vcs_flow.py",
+      "sha256": "46413a326fa1facc7ef80e0e6dc0c70f86ac2aaa81503f22318e23aa708acc43"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/flows/riscv_dv_flow.py",
+      "sha256": "e1c6ee0ed7d6de5869ebcc52b892c487f80ce4afaedf378490a2398e73874dea"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/import/import_vcs_project.py",
+      "sha256": "1568eaee52e54379cae5b15518488e80e583a129c4a69e1f81374c4ac5a0dc71"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/quality/run_quality_gate.py",
+      "sha256": "f155b86e3f418ef4704579daed1d6dcaf6c486f978a9571578c2d142e02bed65"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/rc/generate_rc.py",
+      "sha256": "819c05e33851ae34140e485816f6b4f5bfce7f0788507df3c94eb445063a5f1a"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/regression/run_regression.py",
+      "sha256": "227351252be98d29046c5b56155351f16afaeeb3faedf94e929d8a1e5c58afa4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/remote/remote_eda_gate.py",
+      "sha256": "74871507a14559aa4e182918fa6e1e5c533ddda8bb5e1aacc29aa0b45dfd0002"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/python/validation/vcs_verdi_check.py",
+      "sha256": "627a478429bc849d0f76e0ef7a21a66791e7eac05faf829f3d36d9d24a525c7b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/coverage/coverage_flow.sh",
+      "sha256": "00197e5b4892dbc17f237616cfa8ed3ba7fced2df52c307bca346c8e04c57565"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/coverage/patch_ucapi_overlay.sh",
+      "sha256": "1c7555d769a7d2fc555a7848af300f525948fe16c6c902cbfe7ca3abb9bf3828"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/coverage/urg_coverage_matrix.sh",
+      "sha256": "5d56124d8636d4f3a2264a8e0a0fde190949d3f0d802e0f20828ad327ee385c8"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/coverage/urg_runtime_probe.sh",
+      "sha256": "c400d02aada4054687e56f2c7d1385a292c78a7eb5d7826ae208cb2faeeb0c89"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/coverage/urg_troubleshoot.sh",
+      "sha256": "3dca92d48a7db0978ddd08f32464410f3a80f441e512bbf99d97f7b0b2caf59c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/diagnosis/analyze_logs.sh",
+      "sha256": "1633142e6e2cdba6d2dcd4d8e7ca5fcbe61f912937fa20cfed2753d0a4c52fc0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/diagnosis/fsdb_tools.sh",
+      "sha256": "63e26f028b8b3b376b645fc3a9d4329434c1f22fb757acc864935b2a3406b0c4"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/env/check_env.sh",
+      "sha256": "8e58d381e326b1525744a19063353460b68e305a539e4fadbd95678c7eac96aa"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/evidence/collect_evidence.sh",
+      "sha256": "6798058dcc4320a90804511d3c263ddf9f5bb543fc05797ca2f5475fc7820eed"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/evidence/evidence_claim_gate.sh",
+      "sha256": "f062b2373fca1172269d29bf08ec065112e7bff820acd252250f01c412bbcefb"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/flows/aiss_vcs_flow.sh",
+      "sha256": "e5b2470e7c05925deb279f051395decf370340219d4fd7bccbaace8fed521778"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/flows/autoverifix_vcs_flow.sh",
+      "sha256": "27a3604a146c793d34c391c03076aecd43d58c0c18a25ebc26b8220923f5417f"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/flows/cocotb_vcs_flow.sh",
+      "sha256": "cfb59963df8694ebc84a0f9de9df19947fe1207885bc590cf070c172fcc7789d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/flows/fpgen_vcs_flow.sh",
+      "sha256": "e6e3a0c9db0167cb6f34b0cecc068e4f11d4c989d46f1145f93d1e5fc683446c"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/flows/kvips_vcs_flow.sh",
+      "sha256": "42a0a5b830a03dabd2266c967c6c4c472aa5642d7358078784f29ab4ab7c9ae3"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/flows/riscv_dv_flow.sh",
+      "sha256": "91dc5fdc2c2f7ebf51dbec638691d77f5b82e508f7980864f4ec4d804ae39ba0"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/import/import_vcs_project.sh",
+      "sha256": "27971a1dc4a508b20a0cddd80f193a841fcfece04a5f97528a1d099c02968e45"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/quality/run_quality_gate.sh",
+      "sha256": "2d76a2130d89d21a4bd77bd35dd0cdc4316a3759803dc3de4f5117e8c3d5b9e6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/rc/generate_rc.sh",
+      "sha256": "a94a907ea24d88dc472c23889758020166901d985f2c2a8d053d6287d10e83d1"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/regression/run_regression.sh",
+      "sha256": "a090e8188e0145234bd915a47852662500678b2c3789246dc6271bcc4e0d0f23"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/remote/make_shell_overlay.sh",
+      "sha256": "4522a015e82aa50045296dc8bc7d285c84a22db82b8df1bb5425b356e39e75df"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/remote/remote_eda_gate.sh",
+      "sha256": "d1a24a9a685dae5c2a57097f6d01cb4fd0d4ed585c10153df07e17056193166b"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/remote/run_remote_eda_smoke.sh",
+      "sha256": "ccbde74a099b00559ef50171445e68a882c0ee645cc66db6a38c59e58c542e7d"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/scripts/shell/validation/vcs_verdi_check.sh",
+      "sha256": "c9e3d14d1cd1bb2702f9b92e3725b5a9dbaeecc08d2e6a882c9a0bfb29b31ce6"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/SKILL.md",
+      "sha256": "311d71d991473f0f624cceaf4c2bbe4be21c95e8aee1c687976d4c6bffcacf84"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3/VERSION",
+      "sha256": "70c8308e781f6c292956d4787414eaa462e297647fb10c3ba543e119fe620ad9"
+    },
+    {
+      "path": "dist/vcs-verdi-developer-v0.5.3.zip",
+      "sha256": "c17e21814742ec391c2efe6f17691658906790c9ecf7df8ebfe1d817f66943a7"
     }
   ]
 }

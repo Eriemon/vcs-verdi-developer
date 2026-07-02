@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-1f6feb"></a>
   <a href="pyproject.toml"><img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-2f81f7"></a>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.5.1-7c3aed">
+  <img alt="Version" src="https://img.shields.io/badge/version-v0.5.4-7c3aed">
   <a href="SKILL.md"><img alt="Agent Skill" src="https://img.shields.io/badge/agent-skill-16a34a"></a>
   <a href="references/vcs-verdi-flow.md"><img alt="Target" src="https://img.shields.io/badge/target-VCS%20%26%20Verdi-f59e0b"></a>
 </p>
@@ -54,46 +54,56 @@ EDA workflows are easy to mis-handle when an agent guesses environment readiness
   <img src="docs/assets/workflow.svg" alt="VCS Verdi Developer workflow" width="100%">
 </p>
 
+## What's New In v0.5.4
+
+- Reorganized helper entry points into `scripts/python/`, `scripts/powershell/`, `scripts/shell/`, and `scripts/bat/`, with the Python tree acting as the canonical implementation and the platform wrappers mirroring it.
+- Expanded the scripted non-GUI flow surface for coverage, evidence, remote EDA gating, and smoke validation through dedicated `coverage/`, `evidence/`, `remote/`, and `validation/` script groups.
+- Retired the old public `assets/templates/evolution/` payload, removed tracked local validation assets from the public repository, and kept local-only validation copies outside the release payload.
+- Added a rebuilt-release path for public publishing so GitHub assets are generated from the reviewed repository state rather than uploading the raw staging archive.
+
 ## Repository Map
 
 | Path | Purpose |
 | --- | --- |
 | `SKILL.md` | Agent-facing routing, workflow, constraints, and safety boundaries. |
 | `agents/openai.yaml` | UI metadata for invoking the skill. |
-| `scripts/` | Deterministic helpers for environment checks, RC generation, smoke planning, project import, FSDB tooling, coverage diagnostics, regression, and remote wrappers. |
+| `scripts/` | Canonical Python implementations plus PowerShell, shell, and batch wrappers for environment checks, smoke validation, project import, coverage, evidence, regression, and remote EDA helpers. |
 | `references/` | VCS/Verdi flow rules, capability boundaries, non-GUI guidance, RC format notes, and validation gates. |
-| `assets/` | Minimal fixtures, manifest-driven examples, evidence samples, include files, waveform templates, and evolution templates. |
+| `assets/` | Minimal fixtures, evidence samples, include files, manifest matrices, and waveform templates used by the published skill runtime. |
 | `evals/` | Skill evaluation cases that define expected with-skill behavior. |
 | `docs/assets/` | Repository presentation graphics used by the public README pages. |
-| `RELEASE_RECEIPT.json` | Provenance record for the imported `v0.5.1` release package. |
+| `build_release.py` | Rebuilds the public GitHub release zip from the audited repository state while excluding local validation and private-only paths. |
+| `RELEASE_RECEIPT.json` | Provenance record for the imported staged `v0.5.4` package; GitHub release assets are rebuilt from this repository state before upload. |
+
+Pin the public release with tag `v0.5.4` or the rebuilt `erie-vcs-verdi-developer-v0.5.4.zip` asset from GitHub Releases.
+
+Release provenance note: the `v0.5.4` GitHub release asset is rebuilt from this repository after the staged package is imported, reviewed, and cleaned for public-release boundaries. The original archive under `tmp/` is local import input only and is never uploaded directly.
 
 ## Quick Start
 
 Place this repository in a Codex skill search path to use it as an agent skill. For local inspection and helper usage:
 
 ```powershell
-python .\scripts\check_env.py --json
-python .\scripts\generate_rc.py --help
-python .\scripts\smoke_vcs_verdi.py --help
-python .\scripts\import_vcs_project.py --help
-python .\scripts\cocotb_vcs_flow.py --help
-python .\scripts\coverage_flow.py --help
-python .\scripts\run_regression.py --help
-python .\scripts\evidence_claim_gate.py --help
-python .\scripts\autoverifix_vcs_flow.py --help
-python .\scripts\aiss_vcs_flow.py --help
-python .\scripts\urg_troubleshoot.py --help
+python .\scripts\python\env\check_env.py --json
+python .\scripts\python\validation\vcs_verdi_check.py --help
+python .\scripts\python\quality\run_quality_gate.py --json
+python .\scripts\python\import\import_vcs_project.py --help
+python .\scripts\python\flows\cocotb_vcs_flow.py --help
+python .\scripts\python\coverage\coverage_flow.py --help
+python .\scripts\python\evidence\evidence_claim_gate.py --help
+python .\scripts\python\remote\remote_eda_gate.py --help
 ```
+
+PowerShell, shell, and batch wrappers live under `scripts/powershell/`, `scripts/shell/`, and `scripts/bat/` when the same flow must be launched from a platform-native shell.
 
 Typical workflow:
 
-1. Probe readiness with `scripts/check_env.py --json`.
-2. Import or normalize project inputs with `scripts/import_vcs_project.py` when starting from Makefile, filelist, Edalize/CAPI2, or similar project metadata.
-3. Use `scripts/cocotb_vcs_flow.py` when the task starts from a cocotb-style VCS/VPI flow and must stay non-GUI.
-4. Generate or review waveform layout RC files with `scripts/generate_rc.py`.
-5. Plan a minimal or manifest-driven VCS/Verdi smoke flow with `scripts/smoke_vcs_verdi.py --dry-run`.
-6. Use `scripts/coverage_flow.py`, `scripts/autoverifix_vcs_flow.py`, `scripts/aiss_vcs_flow.py`, `scripts/fsdb_tools.py`, `scripts/run_regression.py`, `scripts/collect_evidence.py`, `scripts/urg_troubleshoot.py`, and `scripts/evidence_claim_gate.py` when the task expands into coverage, waveform readback, batch execution, evidence collection, URG failure diagnosis, or factual readiness claims.
-7. Execute only after the exact command plan and environment findings are reviewed.
+1. Probe readiness with `scripts/python/env/check_env.py --json`.
+2. Import or normalize project inputs with `scripts/python/import/import_vcs_project.py` when starting from Makefile, filelist, Edalize/CAPI2, or similar project metadata.
+3. Plan a minimal or manifest-driven VCS/Verdi smoke flow with `scripts/python/validation/vcs_verdi_check.py --dry-run`.
+4. Use `scripts/python/coverage/coverage_flow.py`, `scripts/python/evidence/collect_evidence.py`, `scripts/python/evidence/evidence_claim_gate.py`, `scripts/python/remote/remote_eda_gate.py`, and `scripts/python/quality/run_quality_gate.py` when the task expands into coverage, evidence collection, remote-host gating, or release/readiness review.
+5. Use the matching wrapper under `scripts/powershell/`, `scripts/shell/`, or `scripts/bat/` only when the execution shell matters more than the canonical Python entry point.
+6. Execute only after the exact command plan and environment findings are reviewed.
 
 ## Scope
 
@@ -104,6 +114,7 @@ VCS Verdi Developer is intentionally narrow:
 - It prefers scripted non-GUI validation first and treats GUI-driven Verdi usage as optional and environment-dependent.
 - It should not expose real license values, internal server details, private paths, or private infrastructure data.
 - It supports a guarded subset of import, cocotb, coverage, URG, FSDB, evidence, and remote validation workflows rather than the full Synopsys feature surface.
+- Local validation assets stay outside the public repository and rebuilt release zip; this public tree ships only the reviewed skill runtime, references, and public docs.
 
 ## Affiliation
 
@@ -131,8 +142,8 @@ If this skill helps your research, teaching, or engineering workflow, please cit
   author       = {Jiyuan Liu and He Li},
   title        = {{VCS Verdi Developer}: An Agent Skill for Synopsys VCS and Verdi Workflows},
   year         = {2026},
-  version      = {0.5.1},
-  date         = {2026-05-16},
+  version      = {0.5.4},
+  date         = {2026-07-02},
   url          = {https://github.com/Eriemon/vcs-verdi-developer},
   license      = {Apache-2.0},
   note         = {Agent skill package for Synopsys VCS simulation, project import, cocotb planning, FSDB tooling, evidence gating, coverage diagnostics, and Verdi waveform-debug workflows}

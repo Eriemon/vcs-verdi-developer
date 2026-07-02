@@ -7,7 +7,7 @@
     },
     {
       "evidence_id": "ev-local-quality-gate",
-      "source_id": "scripts/run_quality_gate.py",
+      "source_id": "scripts/python/quality/run_quality_gate.py",
       "evidence_type": "local-gate"
     }
   ],

@@ -20,7 +20,7 @@
       "id": "smoke-dry-run",
       "prompt": "Plan a minimal VCS compile, elaborate, simulate, FSDB, and Verdi load check.",
       "without_skill_expected_risk": "Runs tools immediately or omits logs/artifact checks.",
-      "with_skill_expected_behavior": "Uses smoke_vcs_verdi.py --dry-run by default and prints command plan, cwd, logs, wrapper diagnostics, missing tools, and artifact paths.",
+      "with_skill_expected_behavior": "Uses vcs_verdi_check.py --dry-run by default and prints command plan, cwd, logs, wrapper diagnostics, missing tools, and artifact paths.",
       "acceptance": "Dry-run exits 0 and includes compile, elaborate, simulate, verdi-load-check, diagnostics, and status=dry-run."
     },
     {
@@ -34,7 +34,7 @@
       "id": "manifest-nongui-flow",
       "prompt": "Plan a non-GUI mixed VHDL/SystemVerilog VCS simulation with defines, include dirs, plusargs, seed, FSDB, and fsdbreport.",
       "without_skill_expected_risk": "Hand-assembles commands, omits vhdlan or fsdbreport, and claims GUI readiness from a dry-run.",
-      "with_skill_expected_behavior": "Uses a JSON manifest with smoke_vcs_verdi.py --dry-run --json, checks vhdlan/vlogan/vcs/simv/fsdbreport order, and reports missing tools as blockers.",
+      "with_skill_expected_behavior": "Uses a JSON manifest with vcs_verdi_check.py --dry-run --json, checks vhdlan/vlogan/vcs/simv/fsdbreport order, and reports missing tools as blockers.",
       "acceptance": "Dry-run includes compile-vhdl, compile-verilog, elaborate, simulate, verdi-fsdbreport-check, plusargs, seed, command file, logs, and artifact targets."
     },
     {

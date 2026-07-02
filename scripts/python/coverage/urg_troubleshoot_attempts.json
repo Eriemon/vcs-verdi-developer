@@ -1,0 +1,123 @@
+[
+  {
+    "name": "vendor_wrapper_auto64",
+    "entry": "vendor_wrapper",
+    "full64": "auto64",
+    "metrics": "line+cond+tgl",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  },
+  {
+    "name": "vendor_wrapper_full64",
+    "entry": "vendor_wrapper",
+    "full64": "force64",
+    "metrics": "line+cond+tgl",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  },
+  {
+    "name": "vendor_copied_bash_wrapper_full64",
+    "entry": "vendor_wrapper",
+    "full64": "force64",
+    "metrics": "line+cond+tgl",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "copied_bash_wrapper"
+  },
+  {
+    "name": "overlay_wrapper_full64",
+    "entry": "overlay_wrapper",
+    "full64": "force64",
+    "metrics": "line+cond+tgl",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  },
+  {
+    "name": "overlay_wrapper_arch_linux",
+    "entry": "overlay_wrapper",
+    "full64": "force64",
+    "metrics": "line+cond+tgl",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "linux",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  },
+  {
+    "name": "overlay_direct_urg1_vcs_lib",
+    "entry": "overlay_urg1_direct",
+    "full64": "force64",
+    "metrics": "line+cond+tgl",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "direct_vcs_lib",
+    "shell_mode": "direct"
+  },
+  {
+    "name": "overlay_format_text",
+    "entry": "overlay_wrapper",
+    "full64": "force64",
+    "metrics": "line+cond+tgl",
+    "format_mode": "text",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  },
+  {
+    "name": "overlay_show_summary",
+    "entry": "overlay_wrapper",
+    "full64": "force64",
+    "metrics": "line+cond+tgl",
+    "format_mode": "",
+    "show_mode": "summary",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  },
+  {
+    "name": "overlay_metric_line",
+    "entry": "overlay_wrapper",
+    "full64": "force64",
+    "metrics": "line",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  },
+  {
+    "name": "overlay_metric_cond",
+    "entry": "overlay_wrapper",
+    "full64": "force64",
+    "metrics": "cond",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  },
+  {
+    "name": "overlay_metric_tgl",
+    "entry": "overlay_wrapper",
+    "full64": "force64",
+    "metrics": "tgl",
+    "format_mode": "",
+    "show_mode": "",
+    "arch_override": "",
+    "loader_mode": "default",
+    "shell_mode": "wrapper"
+  }
+]

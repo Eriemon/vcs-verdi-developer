@@ -8,6 +8,11 @@ __pycache__/
 
 _smoke_runs/
 reports/
+dist/
+downloads/
+logs/
+requests/
+.settings/
 build/
 tmp/
 temp/

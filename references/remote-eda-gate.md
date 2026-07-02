@@ -2,6 +2,13 @@
 
 This gate is required before claiming factual confidence for VCS/Verdi execution on any selected remote Linux EDA host.
 
+## Table of Contents
+
+- [Remote Directory](#remote-directory)
+- [Read-Only Probe](#read-only-probe)
+- [Required Execution](#required-execution)
+- [Remote EDA Environment Notes](#remote-eda-environment-notes)
+
 ## Remote Directory
 
 Use a dedicated temporary work directory such as:
@@ -35,13 +42,13 @@ Record missing tools, missing licenses, missing display, and `/bin/sh -h` behavi
 The smoke flow must run in this order:
 
 ```sh
-python3 smoke_vcs_verdi.py --dry-run --json \
+python3 vcs_verdi_check.py --dry-run --json \
   --source top.sv \
   --workdir ./run \
   --top top \
   --dump-name waves.fsdb
 
-python3 smoke_vcs_verdi.py --execute --clean --json \
+python3 vcs_verdi_check.py --execute --clean --json \
   --source top.sv \
   --workdir ./run \
   --top top \
@@ -70,7 +77,7 @@ Strict truth-gate evidence for `truth_execution_confidence=passed` additionally 
 
 A remote EDA host may expose the Synopsys environment only through a login shell. Use `bash -lc` for the reviewed full-flow runner so `VCS_HOME`, `VERDI_HOME`, `LM_LICENSE_FILE`, and `SNPSLMD_LICENSE_FILE` are present.
 
-If Synopsys wrappers start with `#!/bin/sh -h` or a Verdi wrapper fails under `/bin/sh`, create a temporary validation overlay with `scripts/make_shell_overlay.sh`. The overlay must live inside the remote validation directory, symlink unmodified tool files to the original install, and patch only copied shell-wrapper shebangs to bash. Do not modify `/tools/synopsys`.
+If Synopsys wrappers start with `#!/bin/sh -h` or a Verdi wrapper fails under `/bin/sh`, create a temporary validation overlay with `scripts/shell/remote/make_shell_overlay.sh`. The overlay must live inside the remote validation directory, symlink unmodified tool files to the original install, and patch only copied shell-wrapper shebangs to bash. Do not modify `/tools/synopsys`.
 
 For Verdi 2024.09 and newer, prefer the `VERDI_HOME` plus `-debug_access` FSDB flow. Use `--no-auto-pli` when legacy `-P novas.tab pli.a` causes deprecation errors and no FSDB is produced.
 
@@ -95,7 +102,7 @@ The direct non-fallback `urg_troubleshoot.py` paths may still reproduce the unde
 
 The release-grade verification step is stronger than a same-directory rerun: a clean-room zip extraction into a fresh remote validation directory must also pass with the same bundle contents. Treat that cold-start pass as the proof that the workaround belongs to the shipped skill rather than to hand-edited remote residue.
 
-`scripts/patch_ucapi_overlay.py` is a guarded workaround for a known URG `libucapi.so` crash pattern. The default full-flow runner only scans the VCS overlay and records `ucapi_patch_scan.json`. If the scan returns `no_match` while URG still emits an internal stack trace, the matrix must report `urg_internal_stack_trace_ucapi_patch_not_applicable` rather than implying a safe local patch exists. If a future scan returns `match`, apply the patch only when `VCS_VERDI_ALLOW_UCAPI_PATCH=1` is set, and only to copied overlay files or an overlay-local `ucapi_patch_lib` directory. `scripts/urg_runtime_probe.py` must then prove the patched library directory is loader-effective before any patched pass is accepted. Never patch `/tools/synopsys` or any other shared vendor install path.
+`scripts/python/coverage/patch_ucapi_overlay.py` is a guarded workaround for a known URG `libucapi.so` crash pattern. The default full-flow runner only scans the VCS overlay and records `ucapi_patch_scan.json`. If the scan returns `no_match` while URG still emits an internal stack trace, the matrix must report `urg_internal_stack_trace_ucapi_patch_not_applicable` rather than implying a safe local patch exists. If a future scan returns `match`, apply the patch only when `VCS_VERDI_ALLOW_UCAPI_PATCH=1` is set, and only to copied overlay files or an overlay-local `ucapi_patch_lib` directory. `scripts/python/coverage/urg_runtime_probe.py` must then prove the patched library directory is loader-effective before any patched pass is accepted. Never patch `/tools/synopsys` or any other shared vendor install path.
 
 ## Failure Evidence
 

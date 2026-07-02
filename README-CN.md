@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-1f6feb"></a>
   <a href="pyproject.toml"><img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-2f81f7"></a>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.5.1-7c3aed">
+  <img alt="Version" src="https://img.shields.io/badge/version-v0.5.4-7c3aed">
   <a href="SKILL.md"><img alt="Agent Skill" src="https://img.shields.io/badge/agent-skill-16a34a"></a>
   <a href="references/vcs-verdi-flow.md"><img alt="Target" src="https://img.shields.io/badge/target-VCS%20%26%20Verdi-f59e0b"></a>
 </p>
@@ -54,46 +54,55 @@ EDA 工作流很容易因为环境判断、GUI 假设或 dump/debug 步骤处理
   <img src="docs/assets/workflow-cn.svg" alt="VCS Verdi Developer 工作流" width="100%">
 </p>
 
+## v0.5.4 重点更新
+
+- 把脚本入口重组为 `scripts/python/`、`scripts/powershell/`、`scripts/shell/` 和 `scripts/bat/` 四层布局，其中 Python 树作为规范实现，其余平台 wrapper 与之保持一致。
+- 把 coverage、evidence、remote EDA gate 和 smoke validation 拆成独立脚本组，公开仓库里能直接看清不同能力面的入口和边界。
+- 退役旧的 `assets/templates/evolution/` 公共载荷，把被跟踪的本地验证资产移出公开仓库，只保留适合公开发布的 skill 运行时、参考资料和文档。
+- 增加了基于仓库状态重建 GitHub release 资产的路径，发布时不会直接上传 `tmp/` 下的原始 staging 压缩包。
+
 ## 仓库结构
 
 | 路径 | 作用 |
 | --- | --- |
 | `SKILL.md` | 面向 agent 的路由、流程、约束和安全边界。 |
 | `agents/openai.yaml` | skill 调用入口的 UI 元数据。 |
-| `scripts/` | 环境检查、RC 生成、smoke 规划、项目导入、FSDB 工具、coverage 诊断、回归与远程 wrapper 的确定性脚本。 |
+| `scripts/` | 规范 Python 实现，加上 PowerShell、shell 和 bat wrapper；覆盖环境检查、smoke 校验、项目导入、coverage、evidence、回归和远程 EDA 辅助流程。 |
 | `references/` | VCS/Verdi 流程规则、能力边界、non-GUI 指南、RC 格式说明和验证门禁。 |
-| `assets/` | 最小夹具、manifest 示例、evidence 样例、include 文件、波形模板和 evolution 模板。 |
+| `assets/` | 发布版 skill 使用的最小夹具、evidence 样例、include 文件、manifest 矩阵和波形模板。 |
 | `evals/` | 定义 with-skill 预期行为的评测样例。 |
 | `docs/assets/` | 仓库 README 页面使用的展示图。 |
-| `RELEASE_RECEIPT.json` | 导入的 `v0.5.1` 发布包来源记录。 |
+| `build_release.py` | 根据审查后的仓库状态重建公开 GitHub release zip，并排除本地验证与私有路径。 |
+| `RELEASE_RECEIPT.json` | 导入的 `v0.5.4` staging 发布包来源记录；GitHub release 资产会基于当前仓库状态重新构建后再上传。 |
+
+如果需要固定公开版本，请使用 `v0.5.4` tag 或 GitHub Releases 中重建得到的 `erie-vcs-verdi-developer-v0.5.4.zip` 资产。
+
+发布来源说明：`v0.5.4` 的 GitHub release 资产是在导入、审查并清理公开边界后，基于当前仓库状态重新构建的。`tmp/` 下的原始压缩包只作为本地导入输入，不会直接上传。
 
 ## 快速开始
 
 把本仓库放入 Codex skill 搜索路径即可作为 agent skill 使用。做本地检查或调用辅助脚本时：
 
 ```powershell
-python .\scripts\check_env.py --json
-python .\scripts\generate_rc.py --help
-python .\scripts\smoke_vcs_verdi.py --help
-python .\scripts\import_vcs_project.py --help
-python .\scripts\cocotb_vcs_flow.py --help
-python .\scripts\coverage_flow.py --help
-python .\scripts\run_regression.py --help
-python .\scripts\evidence_claim_gate.py --help
-python .\scripts\autoverifix_vcs_flow.py --help
-python .\scripts\aiss_vcs_flow.py --help
-python .\scripts\urg_troubleshoot.py --help
+python .\scripts\python\env\check_env.py --json
+python .\scripts\python\validation\vcs_verdi_check.py --help
+python .\scripts\python\quality\run_quality_gate.py --json
+python .\scripts\python\import\import_vcs_project.py --help
+python .\scripts\python\flows\cocotb_vcs_flow.py --help
+python .\scripts\python\coverage\coverage_flow.py --help
+python .\scripts\python\evidence\evidence_claim_gate.py --help
+python .\scripts\python\remote\remote_eda_gate.py --help
 ```
+
+如果需要贴合具体平台的原生 shell，也可以改用 `scripts/powershell/`、`scripts/shell/` 和 `scripts/bat/` 下与 Python 入口一一对应的 wrapper。
 
 推荐顺序：
 
-1. 先用 `scripts/check_env.py --json` 探测环境。
-2. 如果输入来自 Makefile、filelist、Edalize/CAPI2 或类似项目元数据，先用 `scripts/import_vcs_project.py` 做项目导入或归一化。
-3. 如果起点是 cocotb 风格的 VCS/VPI 流程，用 `scripts/cocotb_vcs_flow.py` 做非 GUI 规划。
-4. 用 `scripts/generate_rc.py` 生成或复核波形布局 RC。
-5. 用 `scripts/smoke_vcs_verdi.py --dry-run` 规划最小或 manifest 驱动的 VCS/Verdi smoke 流程。
-6. 当任务扩展到 coverage、波形读回、批量执行、证据收集、URG 故障诊断或 factual readiness claim 时，使用 `scripts/coverage_flow.py`、`scripts/autoverifix_vcs_flow.py`、`scripts/aiss_vcs_flow.py`、`scripts/fsdb_tools.py`、`scripts/run_regression.py`、`scripts/collect_evidence.py`、`scripts/urg_troubleshoot.py` 和 `scripts/evidence_claim_gate.py`。
-7. 只有在命令计划和环境结论都被确认后，才执行真实流程。
+1. 先用 `scripts/python/env/check_env.py --json` 探测环境。
+2. 如果输入来自 Makefile、filelist、Edalize/CAPI2 或类似项目元数据，先用 `scripts/python/import/import_vcs_project.py` 做项目导入或归一化。
+3. 用 `scripts/python/validation/vcs_verdi_check.py --dry-run` 规划最小或 manifest 驱动的 VCS/Verdi smoke 流程。
+4. 当任务扩展到 coverage、证据收集、远程主机门禁或发布复核时，使用 `scripts/python/coverage/coverage_flow.py`、`scripts/python/evidence/collect_evidence.py`、`scripts/python/evidence/evidence_claim_gate.py`、`scripts/python/remote/remote_eda_gate.py` 和 `scripts/python/quality/run_quality_gate.py`。
+5. 只有在命令计划和环境结论都被确认后，才执行真实流程；如果只是换调用壳层，优先复用对应的 PowerShell、shell 或 bat wrapper，而不是改动 Python 规范实现。
 
 ## 适用边界
 
@@ -104,6 +113,7 @@ VCS Verdi Developer 的边界是刻意收窄的：
 - 优先支持脚本化 non-GUI 验证，Verdi GUI 使用是可选能力，且取决于远程显示环境。
 - 不应暴露真实 license 值、内部服务器细节、私有路径或私有基础设施信息。
 - 它支持受控子集的 import、cocotb、coverage、URG、FSDB、evidence 和远程验证流程，而不是全部 Synopsys 特性。
+- 本地验证资产保留在公开仓库和 release zip 之外；公开版本只发布经审查的 skill 运行时、参考资料和用户文档。
 
 ## 机构说明
 
@@ -131,8 +141,8 @@ Jiyuan Liu 和 He Li 隶属于东南大学电子科学与工程学院。
   author       = {Jiyuan Liu and He Li},
   title        = {{VCS Verdi Developer}: An Agent Skill for Synopsys VCS and Verdi Workflows},
   year         = {2026},
-  version      = {0.5.1},
-  date         = {2026-05-16},
+  version      = {0.5.4},
+  date         = {2026-07-02},
   url          = {https://github.com/Eriemon/vcs-verdi-developer},
   license      = {Apache-2.0},
   note         = {Agent skill package for Synopsys VCS simulation, project import, cocotb planning, FSDB tooling, evidence gating, coverage diagnostics, and Verdi waveform-debug workflows}

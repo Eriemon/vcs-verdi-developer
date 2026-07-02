@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vcs-verdi-developer-skill"
-version = "0.5.1"
+version = "0.5.4"
 description = "Codex-ready skill for Synopsys VCS simulation, project import, cocotb planning, FSDB tooling, evidence gating, coverage diagnostics, and Verdi workflows."
 readme = "README.md"
 requires-python = ">=3.10"

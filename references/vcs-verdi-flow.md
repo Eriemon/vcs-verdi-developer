@@ -4,7 +4,7 @@ Use this reference when the user asks for compile, simulate, dump, or non-GUI Ve
 
 ## Minimal Order
 
-1. Check tools with `scripts/check_env.py --json`.
+1. Check tools with `scripts/python/env/check_env.py --json`.
 2. Compile VHDL with `vhdlan -full64` when VHDL sources are present.
 3. Compile Verilog/SystemVerilog with `vlogan -full64 -sverilog -kdb <sources>`.
 4. Elaborate with `vcs -full64 -kdb -sverilog -debug_access+all work.<top> -o <workdir>/simv`.
@@ -14,7 +14,7 @@ Use this reference when the user asks for compile, simulate, dump, or non-GUI Ve
 The helper script uses this command shape:
 
 ```sh
-python3 scripts/smoke_vcs_verdi.py --dry-run --json \
+python3 scripts/python/validation/vcs_verdi_check.py --dry-run --json \
   --source assets/minimal_vcs/top.sv \
   --workdir build/vcs-verdi-smoke \
   --top top \
@@ -31,12 +31,12 @@ If proprietary tools or license variables are missing, report the exact missing 
 
 ## Command Planning
 
-Use `scripts/smoke_vcs_verdi.py --dry-run` behavior by default. The dry-run report includes each step's cwd, log path, wrapper diagnostics, execution command, missing tools, and artifact targets. Execute only after reviewing the generated commands, especially on remote servers.
+Use `scripts/python/validation/vcs_verdi_check.py --dry-run` behavior by default. The dry-run report includes each step's cwd, log path, wrapper diagnostics, execution command, missing tools, and artifact targets. Execute only after reviewing the generated commands, especially on remote servers.
 
 When a project provides a VCS Makefile and filelist instead of a manifest, run:
 
 ```sh
-python3 scripts/import_vcs_project.py --makefile vcs/Makefile --filelist vcs/filelist.f --project-root . --json
+python3 scripts/python/import/import_vcs_project.py --makefile vcs/Makefile --filelist vcs/filelist.f --project-root . --json
 ```
 
 Review the generated manifest candidate before execution. The importer records original VCS args such as `-R` separately and keeps the default execution path split into compile, elaborate, simulate, artifact check, and fsdbreport.

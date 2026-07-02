@@ -1,6 +1,6 @@
 # Verdi RC Scenario Format
 
-`scripts/generate_rc.py` reads a config directory with `scn_base.lst` and `scn_<scenario>.lst`.
+`scripts/python/rc/generate_rc.py` reads a config directory with `scn_base.lst` and `scn_<scenario>.lst`.
 
 ## Base File
 
